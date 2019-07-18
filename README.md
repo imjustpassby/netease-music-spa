@@ -1,6 +1,6 @@
 # netease-spa
 
-> A Vue.js project
+> 模仿网易云音乐web网站
 
 ## Build Setup
 
