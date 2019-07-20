@@ -8,7 +8,7 @@
       ：maskClosable="false"
       @cancel="onCancel"
     >
-      <a-form layout="inline" :form="form" @submit="handleSubmit">
+      <a-form layout="horizontal" :form="form" @submit="handleSubmit">
         <a-form-item :validate-status="phoneError() ? 'error' : ''" :help="phoneError() || ''">
           <a-input
             v-decorator="[
@@ -41,6 +41,7 @@
             html-type="submit"
             :disabled="hasErrors(form.getFieldsError())"
             @click="login"
+            style="width:100%"
           >登录</a-button>
         </a-form-item>
       </a-form>

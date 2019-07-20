@@ -4,7 +4,8 @@ const getters = {
   bindings: state => state.user.bindings,
   uid: state => state.user.uid,
   nickname: state => state.user.nickname,
-  avatarUrl: state=> state.user.avatarUrl
+  avatarUrl: state => state.user.avatarUrl,
+  loginSuccess: state=> state.user.loginSuccess
 }
 
 export default getters

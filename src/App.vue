@@ -33,6 +33,7 @@ export default {
   text-align: center;
   color: #333333;
   font-size: 12px;
+  background-color: #f5f5f5;
 }
 html,
 body,

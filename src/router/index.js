@@ -6,6 +6,7 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'homePage',
       component: () => import('@/views/home/index')
     }
   ]

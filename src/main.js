@@ -8,9 +8,19 @@ import 'normalize.css/normalize.css'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import moment from 'moment'
+import '@/permission.js'
+
+import VueLazyLoad from 'vue-lazyload'
 Vue.prototype.$moment = moment;
+
 Vue.config.productionTip = false
+
 Vue.use(Antd)
+
+Vue.use(VueLazyLoad, {
+  error: require('../static/img/loading.gif'),
+  loading: require('../static/img/loading.gif')
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

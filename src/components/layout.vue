@@ -25,7 +25,12 @@
         </ul>
       </div>
       <div class="m-nav-login">
-        <button class="login-btn" @click="showLoginForm">登录</button>
+        <button v-if="!loginSuccess" class="underline-btn" @click="showLoginForm">登录</button>
+        <div v-else>
+          <button class="underline-btn" @click="logout">登出</button>
+          <button class="underline-btn">{{nickname}}</button>
+          <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
+        </div>
       </div>
     </div>
     <div class="m-subnav">
@@ -44,12 +49,13 @@
         </ul>
       </div>
     </div>
-    <login-form class="" v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
+    <login-form class v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
   </div>
 </template>
 
 <script>
-import LoginForm from './login.vue'
+import LoginForm from "./login.vue";
+import { mapGetters,mapActions } from "vuex";
 export default {
   name: "",
   props: [""],
@@ -113,38 +119,51 @@ export default {
     LoginForm
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      uid: "uid",
+      nickname: "nickname",
+      avatarUrl: "avatarUrl",
+      loginSuccess: "loginSuccess"
+    })
+  },
 
   watch: {},
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+  },
 
   methods: {
+    ...mapActions(["LOGOUT"]),
     clickTopLink(idx) {
       this.checkedTopLink = idx;
     },
     clickSubLink(idx) {
       this.checkedSubLink = idx;
     },
-    showLoginForm(){
+    showLoginForm() {
       this.loginShow = true;
     },
-    confirmLogin(){
+    confirmLogin() {
       this.loginShow = false;
+    },
+    async logout(){
+      await this.LOGOUT().then((result) => {
+        this.$message.success('已退出登录');
+      }).catch((err) => {
+        
+      });
     }
   }
 };
 </script>
 <style lang='scss' scoped>
 .g-topbar {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   z-index: 99;
   width: 100%;
-  height: 70px;
   background-color: #242424;
   color: 333;
 }
@@ -191,11 +210,18 @@ export default {
   .m-nav-login {
     width: 30%;
     position: relative;
-    .login-btn {
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin: 20px 2px;
+      float: right;
+    }
+    .underline-btn {
+      float: right;
+      margin: 0 2px;
+      height: 70px;
+      line-height: 70px;
       color: #ccc;
       background-color: rgba($color: #000000, $alpha: 0);
       outline: none;
