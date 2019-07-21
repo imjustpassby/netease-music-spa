@@ -8,6 +8,7 @@
       :listFolded="true"
       @playing="playing"
       @ended="next"
+      :theme="currentMusic.pic"
       ref="player"
     ></aplayer>
   </div>
@@ -48,6 +49,7 @@ export default {
 
   methods: {
     async getUrl() {
+      /* 获取歌的url 可以传多个id 用 ',' 隔开*/
       let songIds = [];
       for (const item of this.newSongs) {
         songIds.push(item.id);
@@ -65,6 +67,7 @@ export default {
       }
     },
     setMusicList() {
+      /* 设置播放列表 */
       let list = this.newSongs.map(item => {
         let artist = [];
         for (const ar of item.song.artists) {
@@ -82,7 +85,9 @@ export default {
       this.currentMusic = this.musicList[0];
     },
     playing() {
+      /* 点击列表的歌会切歌，获取musicPlayer当前播放的歌的信息 */
       this.currentMusic = this.$refs.player.currentMusic;
+      /* 找到对应的歌的index，更新currentIndex */
       let length = this.musicList.length;
       for (let i = 0; i < length; i++) {
         if(this.currentMusic.id === this.musicList[i].id){
@@ -92,13 +97,20 @@ export default {
       }
     },
     next() {
+      /* 确保currentIndex在list长度之内 */
       if (this.currentIndex === this.musicList.length - 1) {
         this.currentIndex = 0;
       } else {
         this.currentIndex += 1;
       }
-      // this.currentMusic = this.$refs.player.currentMusic;
+      /* 获取下一首歌的信息 */
       this.currentMusic = this.musicList[this.currentIndex];
+      /* 
+      踩坑计 
+      报错AbortError: The play() request was interrupted by a new load request
+      网上说load资源需要时间，确保play()在load()后发生
+      */
+     /* 调用musicPlayer组件方法，即下一首 */
       setTimeout(()=>{
         this.$refs.player.onSelectSong(this.currentMusic)
       },1000) 
