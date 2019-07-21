@@ -159,11 +159,17 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+::-webkit-scrollbar{
+  display: none;
+}
 .icon {
   width: 1em;
   height: 1em;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+.aplayer-icon-mode,.aplayer-volume-wrap{
+  display: none !important;
 }
 </style>

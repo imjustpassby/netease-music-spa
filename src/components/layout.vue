@@ -49,12 +49,14 @@
         </ul>
       </div>
     </div>
-    <login-form class v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
+    <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
+    <music-player class="music-player"></music-player>
   </div>
 </template>
 
 <script>
 import LoginForm from "./login.vue";
+import MusicPlayer from './musicPlayer.vue'
 import { mapGetters,mapActions } from "vuex";
 export default {
   name: "",
@@ -116,7 +118,8 @@ export default {
   },
 
   components: {
-    LoginForm
+    LoginForm,
+    MusicPlayer
   },
 
   computed: {
@@ -266,5 +269,11 @@ export default {
     background-color: #9b0909;
     border-radius: 20px;
   }
+}
+.music-player{
+  position: fixed;
+  bottom: -4px;
+  left: 0;
+  right: 0;
 }
 </style>
