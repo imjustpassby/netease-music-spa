@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import Vue from 'vue'
 // 创建axios实例
 const service = axios.create()
 
@@ -10,7 +10,7 @@ service.interceptors.request.use(
   },
   error => {
     // Do something with request error
-    console.log(error) // for debu
+    console.log(error) // for debug
     Promise.reject(error)
   }
 )
@@ -19,11 +19,13 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-    return res
+    return Promise.resolve(res);
   },
   error => {
     console.log('err' + error) // for debug
-    return Promise.reject(error)
+    Vue.prototype.$message.warning("请登录之后再体验该功能喔...");
+    return Promise.reject("请登录之后再体验该功能喔...");
+    // return Promise.reject(error)
   }
 )
 

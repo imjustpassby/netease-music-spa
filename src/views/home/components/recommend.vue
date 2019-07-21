@@ -2,60 +2,65 @@
   <div class="recommend">
     <a-row>
       <a-col :span="14" :offset="5">
-        <div class="recommend-item">
-          <div>
-            <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-              <use xlink:href="#icon-circle" />
-            </svg>推荐歌单
-            <button class="more">更多&gt;</button>
+        <a-skeleton active :loading="loading.personalized">
+          <div class="recommend-item">
+            <div>
+              <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
+                <use xlink:href="#icon-circle" />
+              </svg>推荐歌单
+              <button class="more">更多&gt;</button>
+            </div>
+            <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
+              <a-col
+                :span="4"
+                v-for="(item,index) in personalized"
+                :key="index"
+                style="margin:0 2px 16px 0"
+              >
+                <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
+                <p class="recommend-title">{{item.name}}</p>
+              </a-col>
+            </a-row>
           </div>
-          <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
-            <a-col
-              :span="4"
-              v-for="(item,index) in personalized"
-              :key="index"
-              style="margin:0 2px 16px 0"
-            >
-              <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
-              <p class="recommend-title">{{item.name}}</p>
-            </a-col>
-          </a-row>
-        </div>
+        </a-skeleton>
       </a-col>
     </a-row>
 
     <a-row>
       <a-col :span="14" :offset="5">
-        <div class="recommend-item">
-          <div>
-            <svg class="icon" aria-hidden="true" style="font-size:16px;margin-right:16px;">
-              <use xlink:href="#icon-circle" />
-            </svg>独家放送
+        <a-skeleton active :loading="loading.personalizedPrivateContent">
+          <div class="recommend-item">
+            <div>
+              <svg class="icon" aria-hidden="true" style="font-size:16px;margin-right:16px;">
+                <use xlink:href="#icon-circle" />
+              </svg>独家放送
+            </div>
+            <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
+              <a-col
+                :span="7"
+                v-for="(item,index) in personalizedPrivateContent"
+                :key="index"
+                style="margin-bottom: 16px"
+              >
+                <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
+                <p class="recommend-title">{{item.name}}</p>
+              </a-col>
+            </a-row>
           </div>
-          <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
-            <a-col
-              :span="7"
-              v-for="(item,index) in personalizedPrivateContent"
-              :key="index"
-              style="margin-bottom: 16px"
-            >
-              <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
-              <p class="recommend-title">{{item.name}}</p>
-            </a-col>
-          </a-row>
-        </div>
+        </a-skeleton>
       </a-col>
     </a-row>
 
     <a-row>
       <a-col :span="14" :offset="5">
-        <div class="recommend-item">
-          <div>
-            <svg class="icon" aria-hidden="true" style="font-size:16px;margin-right:16px;">
-              <use xlink:href="#icon-circle" />
-            </svg>最新音乐
-          </div>
-          <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
+        <a-skeleton active :loading="loading.personalizedNewSong">
+          <div class="recommend-item">
+            <div>
+              <svg class="icon" aria-hidden="true" style="font-size:16px;margin-right:16px;">
+                <use xlink:href="#icon-circle" />
+              </svg>最新音乐
+            </div>
+            <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
               <a-col :span="12" v-for="(item,index) in personalizedNewSong" :key="index">
                 <a-row type="flex" justify="start" class="recommend-new-songs">
                   <a-col :span="4" style="position:relative;">
@@ -90,53 +95,58 @@
                 </a-row>
               </a-col>
             </a-row>
-        </div>
+          </div>
+        </a-skeleton>
       </a-col>
     </a-row>
 
     <a-row>
       <a-col :span="14" :offset="5">
-        <div class="recommend-item">
-          <div>
-            <svg class="icon" aria-hidden="true" style="font-size:16px;margin-right:16px;">
-              <use xlink:href="#icon-circle" />
-            </svg>推荐MV
+        <a-skeleton active :loading="loading.personalizedMv">
+          <div class="recommend-item">
+            <div>
+              <svg class="icon" aria-hidden="true" style="font-size:16px;margin-right:16px;">
+                <use xlink:href="#icon-circle" />
+              </svg>推荐MV
+            </div>
+            <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
+              <a-col
+                :span="5"
+                v-for="(item,index) in personalizedMv"
+                :key="index"
+                style="margin-bottom: 16px"
+              >
+                <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
+                <p class="recommend-title">{{item.name}}</p>
+              </a-col>
+            </a-row>
           </div>
-          <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
-            <a-col
-              :span="5"
-              v-for="(item,index) in personalizedMv"
-              :key="index"
-              style="margin-bottom: 16px"
-            >
-              <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
-              <p class="recommend-title">{{item.name}}</p>
-            </a-col>
-          </a-row>
-        </div>
+        </a-skeleton>
       </a-col>
     </a-row>
 
     <a-row>
       <a-col :span="14" :offset="5">
-        <div class="recommend-item">
-          <div>
-            <svg class="icon" aria-hidden="true" style="font-size:16px;margin-right:16px;">
-              <use xlink:href="#icon-circle" />
-            </svg>主播电台
+        <a-skeleton active :loading="loading.personalizedDJProgram">
+          <div class="recommend-item">
+            <div>
+              <svg class="icon" aria-hidden="true" style="font-size:16px;margin-right:16px;">
+                <use xlink:href="#icon-circle" />
+              </svg>主播电台
+            </div>
+            <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
+              <a-col
+                :span="3"
+                v-for="(item,index) in personalizedDJProgram"
+                :key="index"
+                style="margin-bottom:16px"
+              >
+                <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
+                <p class="recommend-title">{{item.name}}</p>
+              </a-col>
+            </a-row>
           </div>
-          <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
-            <a-col
-              :span="3"
-              v-for="(item,index) in personalizedDJProgram"
-              :key="index"
-              style="margin-bottom:16px"
-            >
-              <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
-              <p class="recommend-title">{{item.name}}</p>
-            </a-col>
-          </a-row>
-        </div>
+        </a-skeleton>
       </a-col>
     </a-row>
   </div>
@@ -144,7 +154,6 @@
 
 <script>
 import {
-  getRecommendSongs,
   getPersonalizedMv,
   getPersonalized,
   getPersonalizedNewSong,
@@ -160,8 +169,14 @@ export default {
       personalized: [],
       personalizedNewSong: [],
       personalizedDJProgram: [],
-      programRecommend: [],
-      personalizedPrivateContent: []
+      personalizedPrivateContent: [],
+      loading: {
+        personalized: true,
+        personalizedPrivateContent: true,
+        personalizedNewSong: true,
+        personalizedMv: true,
+        personalizedDJProgram: true
+      }
     };
   },
 
@@ -174,17 +189,27 @@ export default {
   beforeMount() {},
 
   async mounted() {
-    let personalizedMv = await getPersonalizedMv();
     let personalized = await getPersonalized();
-    let personalizedNewSong = await getPersonalizedNewSong();
-    let personalizedDJProgram = await getPersonalizedDJProgram();
-    let personalizedPrivateContent = await getPersonalizedPrivateContent();
-    this.personalizedMv = personalizedMv.result;
     this.personalized = personalized.result;
     this.personalized.splice(10);
-    this.personalizedNewSong = personalizedNewSong.result;
-    this.personalizedDJProgram = personalizedDJProgram.result;
+    this.loading.personalized = false;
+
+    let personalizedPrivateContent = await getPersonalizedPrivateContent();
     this.personalizedPrivateContent = personalizedPrivateContent.result;
+    this.loading.personalizedPrivateContent = false;
+
+    let personalizedNewSong = await getPersonalizedNewSong();
+    this.personalizedNewSong = personalizedNewSong.result;
+    this.loading.personalizedNewSong = false;
+
+    let personalizedMv = await getPersonalizedMv();
+    this.personalizedMv = personalizedMv.result;
+    this.loading.personalizedMv = false;
+
+    let personalizedDJProgram = await getPersonalizedDJProgram();
+    this.personalizedDJProgram = personalizedDJProgram.result;
+    this.loading.personalizedDJProgram = false;
+
   },
 
   methods: {}

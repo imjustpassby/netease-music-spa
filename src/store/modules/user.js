@@ -8,51 +8,51 @@ import {
 
 const user = {
   state: {
-    account: window.localStorage.getItem('account'),
-    profile: window.localStorage.getItem('profile'),
-    bindings: window.localStorage.getItem('bindings'),
-    uid: window.localStorage.getItem('uid'),
-    nickname: window.localStorage.getItem('nickname'),
-    avatarUrl: window.localStorage.getItem('avatarUrl'),
-    loginSuccess: window.localStorage.getItem('loginSuccess') ? window.localStorage.getItem('loginSuccess') : false
+    account: window.sessionStorage.getItem('account'),
+    profile: window.sessionStorage.getItem('profile'),
+    bindings: window.sessionStorage.getItem('bindings'),
+    uid: window.sessionStorage.getItem('uid'),
+    nickname: window.sessionStorage.getItem('nickname'),
+    avatarUrl: window.sessionStorage.getItem('avatarUrl'),
+    loginSuccess: window.sessionStorage.getItem('loginSuccess') ? window.sessionStorage.getItem('loginSuccess') : false
   },
   mutations: {
     SET_ACCOUNT(state, account) {
       state.account = account;
-      window.localStorage.setItem('account', account);
+      window.sessionStorage.setItem('account', account);
     },
     SET_PROFILE(state, profile) {
       state.profile = profile;
-      window.localStorage.setItem('profile', profile);
+      window.sessionStorage.setItem('profile', profile);
     },
     SET_BINDINGS(state, bindings) {
       state.bindings = bindings;
-      window.localStorage.setItem('bindings', bindings);
+      window.sessionStorage.setItem('bindings', bindings);
     },
     SET_UID(state, uid) {
       state.uid = uid;
-      window.localStorage.setItem('uid', uid);
+      window.sessionStorage.setItem('uid', uid);
     },
     SET_NICKNAME(state, nickname) {
       state.nickname = nickname;
-      window.localStorage.setItem('nickname', nickname);
+      window.sessionStorage.setItem('nickname', nickname);
     },
     SET_AVATAR_URL(state, url) {
       state.avatarUrl = url;
-      window.localStorage.setItem('avatarUrl', url);
+      window.sessionStorage.setItem('avatarUrl', url);
     },
     SET_LOGIN_SUCCESS(state, isSuccess) {
       state.loginSuccess = isSuccess;
-      window.localStorage.setItem('loginSuccess', isSuccess);
+      window.sessionStorage.setItem('loginSuccess', isSuccess);
     },
     INIT_STATE(state) {
-      window.localStorage.setItem('account', '');
-      window.localStorage.setItem('profile', '');
-      window.localStorage.setItem('bindings', '');
-      window.localStorage.setItem('uid', '');
-      window.localStorage.setItem('nickname', '');
-      window.localStorage.setItem('avatarUrl', '');
-      window.localStorage.setItem('loginSuccess', '');
+      window.sessionStorage.setItem('account', '');
+      window.sessionStorage.setItem('profile', '');
+      window.sessionStorage.setItem('bindings', '');
+      window.sessionStorage.setItem('uid', '');
+      window.sessionStorage.setItem('nickname', '');
+      window.sessionStorage.setItem('avatarUrl', '');
+      window.sessionStorage.setItem('loginSuccess', '');
       state.account = {},
       state.profile = {},
       state.bindings = {},
