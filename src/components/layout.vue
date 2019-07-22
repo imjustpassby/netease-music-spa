@@ -109,7 +109,7 @@ export default {
         },
         {
           span: "主播电台",
-          link: "#"
+          link: "/dj-radios"
         },
         {
           span: "歌手",

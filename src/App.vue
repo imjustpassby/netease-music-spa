@@ -34,7 +34,6 @@ export default {
   color: #333333;
   font-size: 12px;
   background-color: #f5f5f5;
-  padding-bottom: 80px;
 }
 html,
 body,

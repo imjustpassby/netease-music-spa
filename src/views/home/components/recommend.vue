@@ -66,6 +66,9 @@ export default {
 </script>
 
 <style lang='scss'>
+.recommend{
+  padding-bottom: 80px;
+}
 .recommend-item {
   text-align: left;
   padding: 16px;

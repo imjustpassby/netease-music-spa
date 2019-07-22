@@ -23,6 +23,11 @@ export default new Router({
           path: 'playlist',
           name: 'playlist',
           component: () => import('@/views/playlist/index')
+        },
+        {
+          path: 'dj-radios',
+          name: "dj-radios",
+          component: () => import('@/views/dj/index')
         }
       ]
     }
