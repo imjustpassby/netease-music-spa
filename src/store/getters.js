@@ -5,7 +5,7 @@ const getters = {
   uid: state => state.user.uid,
   nickname: state => state.user.nickname,
   avatarUrl: state => state.user.avatarUrl,
-  loginSuccess: state=> state.user.loginSuccess
+  loginSuccess: state => state.user.loginSuccess
 }
 
 export default getters

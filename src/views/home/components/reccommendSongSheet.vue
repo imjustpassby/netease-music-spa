@@ -14,7 +14,9 @@
           :key="index"
           style="margin:0 2px 16px 0"
         >
-          <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
+          <div class="img-box">
+            <img v-lazy="item.picUrl" alt="img" />
+          </div>
           <p class="recommend-title">{{item.name}}</p>
         </a-col>
       </a-row>

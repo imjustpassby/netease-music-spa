@@ -6,9 +6,9 @@
       listMaxHeight="200px"
       :list="musicList"
       :listFolded="true"
+      theme="pic"
       @playing="playing"
       @ended="next"
-      :theme="currentMusic.pic"
       ref="player"
     ></aplayer>
   </div>
@@ -78,7 +78,8 @@ export default {
           src: item.songUrl,
           title: item.name,
           artist: artist.join("/"),
-          pic: item.song.album.blurPicUrl
+          pic: item.song.album.blurPicUrl,
+          theme: 'pic'
         };
       });
       this.musicList = list;

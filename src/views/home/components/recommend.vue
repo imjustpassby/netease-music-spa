@@ -85,7 +85,22 @@ export default {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0);
   }
+  .img-box{
+    width: 100%;
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
   .recommend-title {
+    margin-top: 7px;
     font-size: 14px;
     cursor: pointer;
     line-height: 1.5em;
