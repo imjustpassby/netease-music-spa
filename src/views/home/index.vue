@@ -1,6 +1,5 @@
 <template>
   <div>
-    <layout></layout>
     <banner></banner>
     <recommend></recommend>
   </div>

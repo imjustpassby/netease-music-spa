@@ -1,63 +1,66 @@
 <template>
-  <div class="g-topbar">
-    <div class="m-top">
-      <div class="logo">
-        <h1>
-          <router-link to="#">
-            <svg class="icon icon-netease" aria-hidden="true">
-              <use xlink:href="#icon-netease-music" />
-            </svg>网易云音乐
-          </router-link>
-        </h1>
-      </div>
-      <div class="m-nav">
-        <ul>
-          <li
-            v-for="(item,index) in topLink"
-            :key="index"
-            :class="checkedTopLink==index ?'isTopChecked' : ''"
-            @click="clickTopLink(index)"
-          >
-            <router-link :to="item.link">
-              <span>{{item.span}}</span>
+  <div>
+    <div class="g-topbar">
+      <div class="m-top">
+        <div class="logo">
+          <h1>
+            <router-link to="/">
+              <svg class="icon icon-netease" aria-hidden="true">
+                <use xlink:href="#icon-netease-music" />
+              </svg>网易云音乐
             </router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="m-nav-login">
-        <button v-if="!loginSuccess" class="underline-btn" @click="showLoginForm">登录</button>
-        <div v-else>
-          <button class="underline-btn" @click="logout">登出</button>
-          <button class="underline-btn">{{nickname}}</button>
-          <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
+          </h1>
+        </div>
+        <div class="m-nav">
+          <ul>
+            <li
+              v-for="(item,index) in topLink"
+              :key="index"
+              :class="checkedTopLink==index ?'isTopChecked' : ''"
+              @click="clickTopLink(index)"
+            >
+              <router-link :to="item.link">
+                <span>{{item.span}}</span>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+        <div class="m-nav-login">
+          <button v-if="!loginSuccess" class="underline-btn" @click="showLoginForm">登录</button>
+          <div v-else>
+            <button class="underline-btn" @click="logout">登出</button>
+            <button class="underline-btn">{{nickname}}</button>
+            <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="m-subnav">
-      <div class="m-subnav-list">
-        <ul>
-          <li
-            v-for="(item,index) in subLink"
-            :key="index"
-            :class="checkedSubLink==index ?'isSubChecked' : ''"
-            @click="clickSubLink(index)"
-          >
-            <router-link :to="item.link">
-              <em>{{item.span}}</em>
-            </router-link>
-          </li>
-        </ul>
+      <div class="m-subnav">
+        <div class="m-subnav-list">
+          <ul>
+            <li
+              v-for="(item,index) in subLink"
+              :key="index"
+              :class="checkedSubLink==index ?'isSubChecked' : ''"
+              @click="clickSubLink(index)"
+            >
+              <router-link :to="item.link">
+                <em>{{item.span}}</em>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
+      <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
+      <music-player class="music-player"></music-player>
     </div>
-    <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
-    <music-player class="music-player"></music-player>
+    <router-view />
   </div>
 </template>
 
 <script>
 import LoginForm from "./login.vue";
-import MusicPlayer from './musicPlayer.vue'
-import { mapGetters,mapActions } from "vuex";
+import MusicPlayer from "./musicPlayer.vue";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "",
   props: [""],
@@ -89,11 +92,11 @@ export default {
       subLink: [
         {
           span: "推荐",
-          link: "#"
+          link: "/"
         },
         {
           span: "排行榜",
-          link: "#"
+          link: "/ranking-list"
         },
         {
           span: "歌单",
@@ -135,8 +138,7 @@ export default {
 
   beforeMount() {},
 
-  mounted() {
-  },
+  mounted() {},
 
   methods: {
     ...mapActions(["LOGOUT"]),
@@ -152,12 +154,12 @@ export default {
     confirmLogin() {
       this.loginShow = false;
     },
-    async logout(){
-      await this.LOGOUT().then((result) => {
-        this.$message.success('已退出登录');
-      }).catch((err) => {
-        
-      });
+    async logout() {
+      await this.LOGOUT()
+        .then(result => {
+          this.$message.success("已退出登录");
+        })
+        .catch(err => {});
     }
   }
 };
@@ -270,7 +272,7 @@ export default {
     border-radius: 20px;
   }
 }
-.music-player{
+.music-player {
   position: fixed;
   bottom: -4px;
   left: 0;
