@@ -8,7 +8,7 @@
 
 <script>
 import Layout from "@/components/layout.vue";
-import Banner from "./components/banner.vue";
+import Banner from "@/components/banner.vue";
 import Recommend from "./components/recommend.vue"
 var _this = this;
 export default {

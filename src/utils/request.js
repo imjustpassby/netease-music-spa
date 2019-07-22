@@ -23,8 +23,13 @@ service.interceptors.response.use(
   },
   error => {
     console.log('err' + error) // for debug
-    Vue.prototype.$message.warning("请登录之后再体验该功能喔...");
-    return Promise.reject("请登录之后再体验该功能喔...");
+    if (error.response.status == 504) {
+      Vue.prototype.$message.warning("服务器错误...");
+    } else if (error.response.status == 301) {
+      Vue.prototype.$message.warning("请登录之后再体验该功能喔...");
+    }
+    
+    return Promise.reject(error);
     // return Promise.reject(error)
   }
 )
