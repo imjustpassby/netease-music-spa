@@ -28,6 +28,11 @@ export default new Router({
           path: 'dj-radios',
           name: "dj-radios",
           component: () => import('@/views/dj/index')
+        },
+        {
+          path: 'new-album',
+          name: 'new-album',
+          component: () => import('@/views/newAlbum/index')
         }
       ]
     }

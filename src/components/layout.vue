@@ -117,7 +117,7 @@ export default {
         },
         {
           span: "新碟上架",
-          link: "#"
+          link: "/new-album"
         }
       ],
       checkedSubLink: window.sessionStorage.getItem(

@@ -21,7 +21,8 @@ export function getPlayList(data) {
     withCredentials: true,
     params: {
       limit: 20,
-      cat: data? data:''
+      cat: data.cat ? data.cat : '',
+      offset: data.offset ? data.offset : 0
     }
   })
 }

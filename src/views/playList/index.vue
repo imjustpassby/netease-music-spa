@@ -12,7 +12,7 @@
               <a-menu-item
                 v-for="(sub,idx) in cate.list"
                 :key="idx"
-                @click="getList(sub.name)"
+                @click="getList({cat:sub.name},'cat')"
               >{{sub.name}}</a-menu-item>
             </a-sub-menu>
           </a-menu>
@@ -26,6 +26,8 @@
             </a-col>
           </a-row>
         </a-skeleton>
+
+        <a-pagination @change="onChangePage" :current="currentPage" :total="50" style="margin-top:10px" />
       </a-col>
     </a-row>
   </div>
@@ -61,6 +63,8 @@ export default {
           list: []
         }
       ],
+      cat: "全部",
+      currentPage: 1,
       loading: true
     };
   },
@@ -74,7 +78,7 @@ export default {
   beforeMount() {},
 
   async mounted() {
-    await this.getList();
+    await this.getList({ cat: "全部", offset: 0 });
     let categories = await getPlayListCatlist();
     for (const item of categories.sub) {
       this.categories[item.category].list.push(item);
@@ -83,8 +87,12 @@ export default {
   },
 
   methods: {
-    async getList(cat) {
-      let playlists = await getPlayList(cat);
+    async getList(data,cat) {
+      if(cat ==='cat'){
+        this.currentPage = 1;
+        this.cat = data.cat
+      }
+      let playlists = await getPlayList({cat: data.cat,offset:(this.currentPage-1)*20});
       this.playlists = playlists.playlists.map(item => {
         return {
           coverImgUrl: item.coverImgUrl,
@@ -92,6 +100,10 @@ export default {
           id: item.id
         };
       });
+    },
+    async onChangePage(cur){
+      this.currentPage = cur;
+      await this.getList({cat: this.cat,offset:(this.currentPage-1)*20},'page')
     }
   }
 };

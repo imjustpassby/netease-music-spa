@@ -1,6 +1,6 @@
 <template>
   <a-skeleton active :loading="loading">
-    <div class="dj-list">
+    <div class="dj-list" style="padding-bottom:80px;">
       <div class="dj-list-top-title">
         <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
           <use xlink:href="#icon-circle" />
@@ -62,29 +62,4 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.dj-list {
-  font-size: 16px;
-  margin-top: 16px;
-  height: 100%;
-  padding-bottom: 80px;
-  .dj-list-top-title {
-    text-align: left;
-    width: 100%;
-    font-size: 24px;
-    line-height: 1.5em;
-    border-bottom: 1px solid #dddddd;
-    margin-bottom: 16px;
-  }
-  .dj-list-item {
-    margin-top: 16px;
-    img {
-      cursor: pointer;
-    }
-  }
-  .dj-list-title {
-    font-size: 14px;
-    cursor: pointer;
-    line-height: 1.5em;
-  }
-}
 </style>
