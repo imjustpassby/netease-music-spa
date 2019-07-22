@@ -11,11 +11,18 @@ export default new Router({
       children: [
         {
           path: 'home',
+          name: 'home',
           component: () => import('@/views/home/index')
         },
         {
           path: 'ranking-list',
+          name: 'ranking-list',
           component: () => import('@/views/rankingList/index')
+        },
+        {
+          path: 'playlist',
+          name: 'playlist',
+          component: () => import('@/views/playlist/index')
         }
       ]
     }

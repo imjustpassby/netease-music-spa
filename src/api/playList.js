@@ -1,11 +1,25 @@
 import request from "@/utils/request.js"
 
+/*歌单分类（全部）  */
+export function getPlayListCatlist() {
+  return request({
+    url: '/api/playlist/catlist',
+    withCredentials: true
+  })
+}
+/* 热门歌单分类 */
+export function getPlayListHot() {
+  return request({
+    url: '/api/playlist/hot',
+    withCredentials: true
+  })
+}
 /*获取歌单 ( 网友精选碟 )  */
 export function getPlayList(data) {
   return request({
     url: '/api/top/playlist',
     withCredentials: true,
-    param: {
+    params: {
       limit: 20,
       cat: data? data:''
     }
@@ -16,7 +30,7 @@ export function getPlaylistHighQuality(data) {
   return request({
     url: '/api/playlist/highquality',
     withCredentials: true,
-    param: {
+    params: {
       before: data.before? data.before : ''
     }
   })
@@ -26,7 +40,7 @@ export function getRelatedPlaylist(data) {
   return request({
     url: '/api/related/playlist',
     withCredentials: true,
-    param: {
+    params: {
       id: data
     }
   })
@@ -36,7 +50,7 @@ export function getPlaylistDetail(data) {
   return request({
     url: '/api/playlist/detail',
     withCredentials: true,
-    param: {
+    params: {
       id: data
     }
   })

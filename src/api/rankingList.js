@@ -119,7 +119,7 @@ export function getRankingList(data) {
   return request({
     url: '/api/top/list',
     withCredentials: true,
-    param: {
+    params: {
       idx: data
     }
   })

@@ -88,7 +88,12 @@ export default {
           link: "#"
         }
       ],
-      checkedTopLink: 0,
+      checkedTopLink: window.sessionStorage.getItem(
+        "checkedSubLink",
+        this.checkedTopLink
+      )
+        ? window.sessionStorage.getItem("checkedSubLink", this.checkedTopLink)
+        : 0,
       subLink: [
         {
           span: "推荐",
@@ -100,7 +105,7 @@ export default {
         },
         {
           span: "歌单",
-          link: "#"
+          link: "/playlist"
         },
         {
           span: "主播电台",
@@ -115,7 +120,12 @@ export default {
           link: "#"
         }
       ],
-      checkedSubLink: 0,
+      checkedSubLink: window.sessionStorage.getItem(
+        "checkedSubLink",
+        this.checkedSubLink
+      )
+        ? window.sessionStorage.getItem("checkedSubLink", this.checkedSubLink)
+        : 0,
       loginShow: false
     };
   },
@@ -144,9 +154,11 @@ export default {
     ...mapActions(["LOGOUT"]),
     clickTopLink(idx) {
       this.checkedTopLink = idx;
+      window.sessionStorage.setItem("checkedTopLink", this.checkedTopLink);
     },
     clickSubLink(idx) {
       this.checkedSubLink = idx;
+      window.sessionStorage.setItem("checkedSubLink", this.checkedSubLink);
     },
     showLoginForm() {
       this.loginShow = true;

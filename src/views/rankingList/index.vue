@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import Layout from "@/components/layout.vue";
 import { getCoverImgUrl } from "@/api/rankingList.js";
 export default {
   name: "",
@@ -29,7 +28,6 @@ export default {
   },
 
   components: {
-    Layout
   },
 
   computed: {},
