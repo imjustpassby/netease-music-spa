@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import RecommendSongSheet from "./reccommendSongSheet.vue"
-import RecommendDj from "./recommendDj.vue"
-import RecommendMv from "./recommendMv.vue"
-import RecommendNewSong from "./recommendNewSong.vue"
-import RecommendPrivateContent from "./recommendPrivateContent.vue"
+import RecommendSongSheet from "./reccommendSongSheet.vue";
+import RecommendDj from "./recommendDj.vue";
+import RecommendMv from "./recommendMv.vue";
+import RecommendNewSong from "./recommendNewSong.vue";
+import RecommendPrivateContent from "./recommendPrivateContent.vue";
 export default {
   name: "",
   props: [""],
@@ -66,8 +66,22 @@ export default {
 </script>
 
 <style lang='scss'>
-.recommend{
+.recommend {
   padding-bottom: 80px;
+}
+.img-box {
+  width: 100%;
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
 }
 .recommend-item {
   text-align: left;
@@ -87,20 +101,6 @@ export default {
     text-decoration: underline;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0);
-  }
-  .img-box{
-    width: 100%;
-    position: relative;
-    height: 0;
-    padding-bottom: 100%;
-    img{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-    }
   }
   .recommend-title {
     margin-top: 7px;

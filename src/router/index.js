@@ -33,6 +33,11 @@ export default new Router({
           path: 'new-album',
           name: 'new-album',
           component: () => import('@/views/newAlbum/index')
+        },
+        {
+          path: 'artist',
+          name: 'artist',
+          component: () => import('@/views/artist/index')
         }
       ]
     }

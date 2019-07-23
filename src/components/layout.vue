@@ -113,7 +113,7 @@ export default {
         },
         {
           span: "歌手",
-          link: "#"
+          link: "/artist"
         },
         {
           span: "新碟上架",

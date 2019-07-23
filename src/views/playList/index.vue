@@ -21,13 +21,20 @@
         <a-skeleton active :loading="loading">
           <a-row type="flex" justify="space-around">
             <a-col :span="5" class="play-list-item" v-for="(item,index) in playlists" :key="index">
-              <img v-lazy="item.coverImgUrl" width="100%" alt="img" />
+              <div class="img-box">
+                <img v-lazy="item.coverImgUrl" width="100%" alt="img" />
+              </div>
               <p class="play-list-title">{{item.name}}</p>
             </a-col>
           </a-row>
         </a-skeleton>
 
-        <a-pagination @change="onChangePage" :current="currentPage" :total="50" style="margin-top:10px" />
+        <a-pagination
+          @change="onChangePage"
+          :current="currentPage"
+          :total="50"
+          style="margin-top:10px"
+        />
       </a-col>
     </a-row>
   </div>
@@ -87,12 +94,15 @@ export default {
   },
 
   methods: {
-    async getList(data,cat) {
-      if(cat ==='cat'){
+    async getList(data, cat) {
+      if (cat === "cat") {
         this.currentPage = 1;
-        this.cat = data.cat
+        this.cat = data.cat;
       }
-      let playlists = await getPlayList({cat: data.cat,offset:(this.currentPage-1)*20});
+      let playlists = await getPlayList({
+        cat: data.cat,
+        offset: (this.currentPage - 1) * 20
+      });
       this.playlists = playlists.playlists.map(item => {
         return {
           coverImgUrl: item.coverImgUrl,
@@ -101,9 +111,12 @@ export default {
         };
       });
     },
-    async onChangePage(cur){
+    async onChangePage(cur) {
       this.currentPage = cur;
-      await this.getList({cat: this.cat,offset:(this.currentPage-1)*20},'page')
+      await this.getList(
+        { cat: this.cat, offset: (this.currentPage - 1) * 20 },
+        "page"
+      );
     }
   }
 };
