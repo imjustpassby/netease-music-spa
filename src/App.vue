@@ -32,7 +32,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #333333;
-  font-size: 12px;
+  font-size: 14px;
   background-color: #f5f5f5;
 }
 html,
@@ -138,7 +138,7 @@ section {
   display: block;
 }
 body {
-  line-height: 1;
+  line-height: 1.3em;
 }
 ol,
 ul {

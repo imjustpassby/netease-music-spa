@@ -19,3 +19,14 @@ export function getAlbumNewest() {
     withCredentials: true
   })
 }
+
+/* 获取专辑详情 */
+export function getAlbum(data) {
+  return request({
+    url: '/api/album',
+    withCredentials: true,
+    params: {
+      id: data
+    }
+  })
+}

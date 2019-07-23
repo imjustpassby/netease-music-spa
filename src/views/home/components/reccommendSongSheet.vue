@@ -13,6 +13,7 @@
           v-for="(item,index) in personalized"
           :key="index"
           style="margin:0 2px 16px 0"
+          @click="goPlaylistDetail(item.id)"
         >
           <div class="img-box">
             <img v-lazy="item.picUrl" alt="img" />
@@ -51,7 +52,16 @@ export default {
     this.loading = false;
   },
 
-  methods: {}
+  methods: {
+    goPlaylistDetail(id){
+      this.$router.push({
+        path: '/playlist-detail',
+        query: {
+          id: id
+        }
+      })
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>

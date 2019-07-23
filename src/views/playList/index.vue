@@ -20,7 +20,13 @@
 
         <a-skeleton active :loading="loading">
           <a-row type="flex" justify="space-around">
-            <a-col :span="5" class="play-list-item" v-for="(item,index) in playlists" :key="index">
+            <a-col
+              :span="5"
+              class="play-list-item"
+              v-for="(item,index) in playlists"
+              :key="index"
+              @click="goPlaylistDetail(item.id)"
+            >
               <div class="img-box">
                 <img v-lazy="item.coverImgUrl" width="100%" alt="img" />
               </div>
@@ -117,6 +123,14 @@ export default {
         { cat: this.cat, offset: (this.currentPage - 1) * 20 },
         "page"
       );
+    },
+    goPlaylistDetail(id) {
+      this.$router.push({
+        path: "/playlist-detail",
+        query: {
+          id: id
+        }
+      });
     }
   }
 };

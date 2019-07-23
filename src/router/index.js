@@ -43,6 +43,16 @@ export default new Router({
           path: '/my',
           name: 'my',
           component: () => import('@/views/myMusic/index')
+        },
+        {
+          path: '/album-detail',
+          name: 'album-detail',
+          component: () => import('@/views/albumDetail/index')
+        },
+        {
+          path: '/playlist-detail',
+          name: 'playlist-detail',
+          component: () => import('@/views/playListDetail/index')
         }
       ]
     }

@@ -14,6 +14,7 @@
             class="album-list-item"
             v-for="(item,index) in albums"
             :key="index"
+            @click="goAlbumDetail(item.id)"
           >
             <img v-lazy="item.picUrl" width="100%" alt="img" />
             <p class="album-list-title">{{item.name}}</p>
@@ -59,6 +60,14 @@ export default {
           picUrl: item.picUrl
         };
       });
+    },
+    goAlbumDetail(id){
+      this.$router.push({
+        path: '/album-detail',
+        query: {
+          id: id
+        }
+      })
     }
   }
 };
