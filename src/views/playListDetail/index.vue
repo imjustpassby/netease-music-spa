@@ -13,6 +13,7 @@
                 <div class="playlist-creator">
                   <img v-lazy="playList.creator.avatarUrl" width="36px" alt />
                   <span>{{playList.creator.nickname}}&nbsp;&nbsp;于&nbsp;&nbsp;{{playList.createTime}}&nbsp;&nbsp;创建</span>
+                  <a-button @click.once="addMusicList" style="margin-left: 20px">加入播放列表</a-button>
                 </div>
                 <div class="tag">
                   <span>标签：</span>
@@ -35,6 +36,7 @@
 <script>
 import { getPlaylistDetail } from "@/api/playList.js";
 import { getSongUrl } from "@/api/song.js";
+import { mapMutations } from "vuex";
 export default {
   name: "",
   props: [""],
@@ -71,6 +73,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(["SET_MUSIC_LIST"]),
     async getListDetail(data) {
       //获取歌单信息
       let res = await getPlaylistDetail(data);
@@ -81,7 +84,7 @@ export default {
         "YYYY-M-DD"
       );
       this.playList.trackIds = res.playlist.trackIds;
-      this.playList.tracks = res.playlist.tracks.map(item=>{
+      this.playList.tracks = res.playlist.tracks.map(item => {
         let artist = [];
         for (const ar of item.ar) {
           artist.push(ar.name);
@@ -90,8 +93,8 @@ export default {
           title: item.name,
           id: item.id,
           artist: artist.join("/"),
-          pic: item.al.picUrl,
-        }
+          pic: item.al.picUrl
+        };
       });
       this.playList.tags = res.playlist.tags;
       this.playList.picUrl = res.playlist.coverImgUrl;
@@ -105,18 +108,20 @@ export default {
       });
       let res = await getSongUrl(ids.join(","));
       this.songList = res.data.map(item => {
-        return { url: item.url, id: item.id};
+        return { url: item.url, id: item.id };
       });
 
       let length = this.songList.length;
       for (let i = 0; i < length; i++) {
         for (let j = 0; j < length; j++) {
-          if ( this.songList[i].id == this.playList.tracks[j].id) {
-            this.playList.tracks[j].songUrl = this.songList[i].url;
+          if (this.songList[i].id == this.playList.tracks[j].id) {
+            this.playList.tracks[j].src = this.songList[i].url;
           }
         }
       }
-
+    },
+    addMusicList() {
+      this.SET_MUSIC_LIST(this.playList.tracks);
     }
   }
 };

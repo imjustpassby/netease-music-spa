@@ -6,7 +6,6 @@
       listMaxHeight="200px"
       :list="musicList"
       :listFolded="true"
-      theme="pic"
       @playing="playing"
       @ended="next"
       ref="player"
@@ -16,17 +15,16 @@
 
 <script>
 import Aplayer from "vue-aplayer";
-import { getPersonalizedNewSong } from "@/api/home.js";
-import { getSongUrl } from "@/api/song.js";
+import {mapGetters,mapMutations} from "vuex"
 export default {
   name: "",
   props: [""],
   data() {
     return {
-      currentMusic: {},
+      /* currentMusic: {},
       musicList: [],
       newSongs: [],
-      currentIndex: 0
+      currentIndex: 0 */
     };
   },
 
@@ -34,20 +32,23 @@ export default {
     Aplayer
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      currentMusic: "currentMusic",
+      musicList: "musicList",
+      currentIndex: "currentIndex"
+    })
+  },
 
   watch: {},
 
   beforeMount() {},
 
-  async mounted() {
-    let newSongs = await getPersonalizedNewSong();
-    this.newSongs = newSongs.result;
-    await this.getUrl();
-    this.setMusicList();
+  mounted() {
   },
 
   methods: {
+    ...mapMutations(["SET_CURRENT_INDEX","SET_CURRENT_MUSIC"]),
     async getUrl() {
       /* 获取歌的url 可以传多个id 用 ',' 隔开*/
       let songIds = [];
@@ -66,33 +67,15 @@ export default {
         }
       }
     },
-    setMusicList() {
-      /* 设置播放列表 */
-      let list = this.newSongs.map(item => {
-        let artist = [];
-        for (const ar of item.song.artists) {
-          artist.push(ar.name);
-        }
-        return {
-          id: item.id,
-          src: item.songUrl,
-          title: item.name,
-          artist: artist.join("/"),
-          pic: item.song.album.blurPicUrl,
-          theme: 'pic'
-        };
-      });
-      this.musicList = list;
-      this.currentMusic = this.musicList[0];
-    },
     playing() {
       /* 点击列表的歌会切歌，获取musicPlayer当前播放的歌的信息 */
-      this.currentMusic = this.$refs.player.currentMusic;
+      this.SET_CURRENT_MUSIC(this.$refs.player.currentMusic)
       /* 找到对应的歌的index，更新currentIndex */
       let length = this.musicList.length;
       for (let i = 0; i < length; i++) {
         if(this.currentMusic.id === this.musicList[i].id){
-          this.currentIndex = i;
+          // this.currentIndex = i;
+          this.SET_CURRENT_INDEX(i);
           return;
         }
       }
@@ -100,12 +83,12 @@ export default {
     next() {
       /* 确保currentIndex在list长度之内 */
       if (this.currentIndex === this.musicList.length - 1) {
-        this.currentIndex = 0;
+        this.SET_CURRENT_INDEX(0);
       } else {
-        this.currentIndex += 1;
+        this.SET_CURRENT_INDEX(this.currentIndex + 1)
       }
       /* 获取下一首歌的信息 */
-      this.currentMusic = this.musicList[this.currentIndex];
+      this.SET_CURRENT_MUSIC(this.musicList[this.currentIndex])
       /* 
       踩坑计 
       报错AbortError: The play() request was interrupted by a new load request

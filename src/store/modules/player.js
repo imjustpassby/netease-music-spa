@@ -9,10 +9,12 @@ const player = {
       state.currentMusic = song;
     },
     SET_MUSIC_LIST(state,list) {
-      state.musicList = list;
+      state.musicList = [...state.musicList,...list];
     },
     SET_CURRENT_INDEX(state, idx) {
       state.currentIndex = idx;
     }
   }
 }
+
+export default player
