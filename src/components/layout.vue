@@ -69,23 +69,11 @@ export default {
       topLink: [
         {
           span: "发现音乐",
-          link: "#"
+          link: "/home"
         },
         {
           span: "我的音乐",
-          link: "#"
-        },
-        {
-          span: "朋友",
-          link: "#"
-        },
-        {
-          span: "商城",
-          link: "#"
-        },
-        {
-          span: "音乐人",
-          link: "#"
+          link: "/my"
         }
       ],
       checkedTopLink: window.sessionStorage.getItem(
@@ -153,8 +141,17 @@ export default {
   methods: {
     ...mapActions(["LOGOUT"]),
     clickTopLink(idx) {
-      this.checkedTopLink = idx;
-      window.sessionStorage.setItem("checkedTopLink", this.checkedTopLink);
+      if (idx===0){
+        this.checkedTopLink = idx;
+        window.sessionStorage.setItem("checkedTopLink", this.checkedTopLink);
+      } else {
+        if (this.$store.getters.loginSuccess){
+          this.checkedTopLink = idx;
+          window.sessionStorage.setItem("checkedTopLink", this.checkedTopLink);
+          this.clickSubLink(-1);
+        }
+      }
+      
     },
     clickSubLink(idx) {
       this.checkedSubLink = idx;

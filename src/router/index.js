@@ -38,6 +38,11 @@ export default new Router({
           path: 'artist',
           name: 'artist',
           component: () => import('@/views/artist/index')
+        },
+        {
+          path: '/my',
+          name: 'my',
+          component: () => import('@/views/myMusic/index')
         }
       ]
     }
