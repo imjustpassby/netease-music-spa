@@ -3,7 +3,7 @@
     <aplayer
       :music="currentMusic"
       repeat="repeat-all"
-      listMaxHeight="200px"
+      listMaxHeight="500px"
       :list="musicList"
       :listFolded="true"
       @playing="playing"
@@ -16,6 +16,7 @@
 <script>
 import Aplayer from "vue-aplayer";
 import {mapGetters,mapMutations} from "vuex"
+import Bus from '@/utils/bus.js'
 export default {
   name: "",
   props: [""],
@@ -45,6 +46,10 @@ export default {
   beforeMount() {},
 
   mounted() {
+    Bus.$on('play',song=>{
+      console.log('now play'+song);
+      this.$refs.player.onSelectSong(song)
+    })
   },
 
   methods: {

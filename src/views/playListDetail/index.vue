@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="playlist-detail-container">
     <a-row>
       <a-col :span="14" :offset="5">
         <a-skeleton active :loading="loading">
@@ -28,6 +28,28 @@
           </div>
           <div class="album-tracks"></div>
         </a-skeleton>
+
+        <a-skeleton active :loading="loading">
+          <div>
+            <div class="list-title">
+              <span style="font-size:24px">歌曲列表</span>
+              <span>共{{playList.tracks.length}}首</span>
+            </div>
+            <a-table :dataSource="playList.tracks">
+              <a-table-column title key="action" width="10%">
+                <template slot-scope="text, record">
+                  <span>
+                    <svg class="icon play-icon" aria-hidden="true" @click="addMusic(record)">
+                      <use xlink:href="#icon-play1" />
+                    </svg>
+                  </span>
+                </template>
+              </a-table-column>
+              <a-table-column title="歌曲标题" data-index="title" width="50%" key="title" />
+              <a-table-column title="歌手" data-index="artist" key="artist" />
+            </a-table>
+          </div>
+        </a-skeleton>
       </a-col>
     </a-row>
   </div>
@@ -37,6 +59,7 @@
 import { getPlaylistDetail } from "@/api/playList.js";
 import { getSongUrl } from "@/api/song.js";
 import { mapMutations } from "vuex";
+import Bus from "@/utils/bus.js"
 export default {
   name: "",
   props: [""],
@@ -73,7 +96,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["SET_MUSIC_LIST"]),
+    ...mapMutations(["SET_MUSIC_LIST","ADD_MUSIC"]),
     async getListDetail(data) {
       //获取歌单信息
       let res = await getPlaylistDetail(data);
@@ -106,27 +129,49 @@ export default {
       this.playList.trackIds.forEach(item => {
         ids.push(item.id);
       });
+      /* 获取音乐url */
       let res = await getSongUrl(ids.join(","));
       this.songList = res.data.map(item => {
         return { url: item.url, id: item.id };
       });
-
+      /* 音乐url加入到playList.tracks */
       let length = this.songList.length;
       for (let i = 0; i < length; i++) {
         for (let j = 0; j < length; j++) {
           if (this.songList[i].id == this.playList.tracks[j].id) {
             this.playList.tracks[j].src = this.songList[i].url;
+            this.playList.tracks[j].key = j;
           }
         }
       }
     },
     addMusicList() {
       this.SET_MUSIC_LIST(this.playList.tracks);
+    },
+    addMusic(song){
+      this.ADD_MUSIC(song);
+      // console.log(song)
+      Bus.$emit('play',song);
     }
   }
 };
 </script>
 <style lang='scss' scoped>
+.playlist-detail-container {
+  padding-bottom: 80px;
+  .play-icon {
+    margin-left: 40%;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .list-title {
+    text-align: left;
+    margin-bottom: 10px;
+    & > span {
+      margin: 10px;
+    }
+  }
+}
 .playlist-detail {
   text-align: left;
   margin-top: 16px;

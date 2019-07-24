@@ -13,6 +13,9 @@ const player = {
     },
     SET_CURRENT_INDEX(state, idx) {
       state.currentIndex = idx;
+    },
+    ADD_MUSIC(state, song) {
+      state.musicList.push(song);
     }
   }
 }
