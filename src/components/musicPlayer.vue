@@ -47,7 +47,6 @@ export default {
 
   mounted() {
     Bus.$on('play',song=>{
-      console.log('now play'+song);
       this.$refs.player.onSelectSong(song)
     })
   },

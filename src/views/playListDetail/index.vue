@@ -36,7 +36,7 @@
               <span>共{{playList.tracks.length}}首</span>
             </div>
             <a-table :dataSource="playList.tracks">
-              <a-table-column title key="action" width="10%">
+              <a-table-column title key="action" width="5%">
                 <template slot-scope="text, record">
                   <span>
                     <svg class="icon play-icon" aria-hidden="true" @click="addMusic(record)">
@@ -46,7 +46,8 @@
                 </template>
               </a-table-column>
               <a-table-column title="歌曲标题" data-index="title" width="50%" key="title" />
-              <a-table-column title="歌手" data-index="artist" key="artist" />
+              <a-table-column title="歌手" data-index="artist" width="25%" key="artist" />
+              <a-table-column title="专辑" data-index="albumName" key="albumName" />
             </a-table>
           </div>
         </a-skeleton>
@@ -116,7 +117,9 @@ export default {
           title: item.name,
           id: item.id,
           artist: artist.join("/"),
-          pic: item.al.picUrl
+          pic: item.al.picUrl,
+          albumName: item.al.name,
+          albumId: item.al.id
         };
       });
       this.playList.tags = res.playlist.tags;

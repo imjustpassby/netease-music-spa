@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="album-detail-container">
     <a-row>
       <a-col :span="14" :offset="5">
         <a-skeleton active :loading="loading">
@@ -14,18 +14,41 @@
                   <p>
                     歌手：
                     <span v-for="(art,idx) in albumInfo.artists" :key="idx">
-                      {{art.name}}
-                      <span v-if="idx!== albumInfo.artists.length">/</span>
+                      {{art}}
+                      <span v-if="idx!== albumInfo.artists.length-1">/</span>
                     </span>
                   </p>
                   <p>发行时间：{{albumInfo.publishTime}}</p>
                   <p>发行公司：{{albumInfo.company}}</p>
                   <p>介绍：{{albumInfo.description}}</p>
+                  <a-button @click.once="addMusicList" style="margin-top: 20px">加入播放列表</a-button>
                 </div>
               </a-col>
             </a-row>
           </div>
-          <div class="album-tracks"></div>
+        </a-skeleton>
+
+        <a-skeleton active :loading="loading" class="album-tracks">
+          <div>
+            <div class="list-title">
+              <span style="font-size:24px">歌曲列表</span>
+              <span>共{{albumInfo.tracks.length}}首</span>
+            </div>
+            <a-table :dataSource="albumInfo.tracks">
+              <a-table-column title key="action" width="5%">
+                <template slot-scope="text, record">
+                  <span>
+                    <svg class="icon play-icon" aria-hidden="true" @click="addMusic(record)">
+                      <use xlink:href="#icon-play1" />
+                    </svg>
+                  </span>
+                </template>
+              </a-table-column>
+              <a-table-column title="歌曲标题" data-index="title" width="50%" key="title" />
+              <a-table-column title="歌手" data-index="artist" width="25%" key="artist" />
+              <a-table-column title="专辑" data-index="albumName" key="albumName" />
+            </a-table>
+          </div>
         </a-skeleton>
       </a-col>
     </a-row>
@@ -34,6 +57,9 @@
 
 <script>
 import { getAlbum } from "@/api/album.js";
+import { getSongUrl } from "@/api/song.js";
+import { mapMutations } from "vuex";
+import Bus from "@/utils/bus.js";
 export default {
   name: "",
   props: [""],
@@ -49,7 +75,7 @@ export default {
         type: "",
         publishTime: "",
         artists: [],
-        songs: []
+        tracks: []
       }
     };
   },
@@ -64,10 +90,12 @@ export default {
 
   async mounted() {
     await this.getAlbumInfo();
+    await this.getSong();
     this.loading = false;
   },
 
   methods: {
+    ...mapMutations(["SET_MUSIC_LIST", "ADD_MUSIC"]),
     async getAlbumInfo() {
       //获取专辑信息
       let res = await getAlbum(this.$route.query.id);
@@ -90,24 +118,78 @@ export default {
       this.albumInfo.publishTime = this.$moment(publishTime).format(
         "YYYY-M-DD"
       );
-      this.albumInfo.artists = artists;
-      let songs = res.songs.map(item => {
+      for (const ar of artists) {
+        this.albumInfo.artists.push(ar.name);
+      }
+
+      /* 获取专辑的歌曲 */
+      this.albumInfo.tracks = res.songs.map(item => {
+        let ars = [];
+        for (const art of item.ar) {
+          ars.push(art.name);
+        }
         return {
           id: item.id,
-          name: item.name,
-          artist: item.ar[0].name
+          title: item.name,
+          artist: ars.join("/"),
+          pic: item.al.picUrl,
+          albumName: item.al.name,
+          albumId: item.al.id
         };
       });
+    },
+    async getSong() {
+      let ids = [];
+      this.albumInfo.tracks.forEach(item => {
+        ids.push(item.id);
+      });
+      /* 获取音乐url */
+      let res = await getSongUrl(ids.join(","));
+      let songList = res.data.map(item => {
+        return { url: item.url, id: item.id };
+      });
+      /* 音乐url加入到playList.tracks */
+      let length = songList.length;
+      for (let i = 0; i < length; i++) {
+        for (let j = 0; j < length; j++) {
+          if (songList[i].id == this.albumInfo.tracks[j].id) {
+            this.albumInfo.tracks[j].src = songList[i].url;
+            this.albumInfo.tracks[j].key = j;
+          }
+        }
+      }
+    },
+    addMusicList() {
+      this.SET_MUSIC_LIST(this.albumInfo.tracks);
+    },
+    addMusic(song) {
+      this.ADD_MUSIC(song);
+      Bus.$emit("play", song);
     }
   }
 };
 </script>
 <style lang='scss' scoped>
-.album-detail{
+.album-detail-container{
+  padding-bottom: 80px;
+  .play-icon {
+    margin-left: 40%;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .list-title {
+    text-align: left;
+    margin-bottom: 10px;
+    & > span {
+      margin: 10px;
+    }
+  }
+}
+.album-detail {
   text-align: left;
   margin-top: 16px;
   padding-bottom: 80px;
-  h1{
+  h1 {
     font-size: 24px;
     margin: 16px 0;
   }

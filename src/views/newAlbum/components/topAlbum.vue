@@ -8,7 +8,7 @@
           </svg>全部新碟
         </div>
         <a-row type="flex" justify="space-around">
-          <a-col :span="5 " class="album-list-item" v-for="(item,index) in albums" :key="index">
+          <a-col :span="5 " class="album-list-item" v-for="(item,index) in albums" :key="index" @click="goAlbumDetail(item.id)">
             <img v-lazy="item.picUrl" width="100%" alt="img" />
             <p class="album-list-title">{{item.name}}</p>
           </a-col>
@@ -64,6 +64,14 @@ export default {
     async onChangePage(cur) {
       this.currentPage = cur;
       await this.getAlbums({ offset: (this.currentPage - 1) * 20 });
+    },
+    goAlbumDetail(id){
+      this.$router.push({
+        path: '/album-detail',
+        query: {
+          id: id
+        }
+      })
     }
   }
 };
