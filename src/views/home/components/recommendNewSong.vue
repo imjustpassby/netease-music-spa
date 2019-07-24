@@ -10,7 +10,7 @@
         <a-col :span="12" v-for="(item,index) in personalizedNewSong" :key="index">
           <a-row type="flex" justify="start" class="recommend-new-songs">
             <a-col :span="4" style="position:relative;">
-              <div>
+              <div @click="addMusic(item)">
                 <svg
                   class="icon play"
                   aria-hidden="true"
@@ -19,7 +19,7 @@
                   <use xlink:href="#icon-play" />
                 </svg>
                 <img
-                  v-lazy="item.song.album.blurPicUrl"
+                  v-lazy="item.pic"
                   height="68px"
                   alt="img"
                   style="margin:9px 0 0 9px;cursor: pointer;z-index:-1"
@@ -27,16 +27,8 @@
               </div>
             </a-col>
             <a-col :span="20">
-              <p class="recommend-title" style="line-height:43px;cursor:text">{{item.name}}</p>
-              <span
-                class="recommend-title"
-                v-for="(artist,index1) in item.song.artists"
-                :key="index1"
-                style="line-height:43px;cursor:text"
-              >
-                {{artist.name}}
-                <em v-if="index1<item.song.artists.length-1">/</em>
-              </span>
+              <p class="recommend-title" style="line-height:43px;cursor:text">{{item.title}}</p>
+              <span class="recommend-title" style="line-height:43px;cursor:text">{{item.artist}}</span>
             </a-col>
           </a-row>
         </a-col>
@@ -47,6 +39,9 @@
 
 <script>
 import { getPersonalizedNewSong } from "@/api/home.js";
+import { getSongUrl } from "@/api/song.js";
+import Bus from "@/utils/bus.js";
+import { mapMutations } from "vuex";
 export default {
   name: "",
   props: [""],
@@ -66,12 +61,50 @@ export default {
   beforeMount() {},
 
   async mounted() {
-    let personalizedNewSong = await getPersonalizedNewSong();
-    this.personalizedNewSong = personalizedNewSong.result;
+    await this.getNewSong();
     this.loading = false;
   },
 
-  methods: {}
+  methods: {
+    ...mapMutations(["ADD_MUSIC"]),
+    async getNewSong() {
+      let personalizedNewSong = await getPersonalizedNewSong();
+      this.personalizedNewSong = personalizedNewSong.result.map(item => {
+        let artist = [];
+        for (const ar of item.song.artists) {
+          artist.push(ar.name);
+        }
+        return {
+          title: item.name,
+          id: item.id,
+          artist: artist.join("/"),
+          pic: item.song.album.blurPicUrl,
+          albumName: item.song.album.name,
+          albumId: item.song.album.id
+        };
+      });
+    },
+    async getSong(id) {
+      /* 获取音乐url */
+      let res = await getSongUrl(id);
+      let songList = res.data.map(item => {
+        return { url: item.url, id: item.id };
+      });
+      let length = this.personalizedNewSong.length;
+      for (let j = 0; j < length; j++) {
+        if (this.personalizedNewSong[j].id === songList[0].id) {
+          this.personalizedNewSong[j].src = songList[0].url;
+          return;
+        }
+      }
+    },
+    async addMusic(song) {
+      this.ADD_MUSIC(song);
+      await this.getSong(song.id);
+      // console.log(song)
+      Bus.$emit("play", song);
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
