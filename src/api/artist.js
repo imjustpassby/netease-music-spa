@@ -143,3 +143,15 @@ export function getArtist(data) {
   })
 }
 
+/* 获取歌手专辑 */
+export function getArtistAlbum(data) {
+  return request({
+    url: '/api//artist/album',
+    withCredentials: true,
+    params: {
+      id: data.id,
+      limit: data.limit ? data.limit : 20,
+      offset: data.offset ? data.offset : 0
+    }
+  })
+}

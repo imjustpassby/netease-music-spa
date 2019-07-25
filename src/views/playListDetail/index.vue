@@ -9,11 +9,22 @@
                 <img v-lazy="playList.picUrl" width="100%" alt="歌单" />
               </a-col>
               <a-col :span="18" :offset="1">
-                <h1>歌单：{{playList.name}}</h1>
+                <svg class="icon" aria-hidden="true" style="font-size:100px; margin-right:16px;">
+                  <use xlink:href="#icon-qukugedan" />
+                </svg>
+                <h1>{{playList.name}}</h1>
                 <div class="playlist-creator">
                   <img v-lazy="playList.creator.avatarUrl" width="36px" alt />
                   <span>{{playList.creator.nickname}}&nbsp;&nbsp;于&nbsp;&nbsp;{{playList.createTime}}&nbsp;&nbsp;创建</span>
-                  <a-button @click.once="addMusicList" style="margin-left: 20px">加入播放列表</a-button>
+                  <a-button @click.once="addMusicList" style="margin-left: 20px">
+                    <svg
+                      class="icon"
+                      aria-hidden="true"
+                      style="font-size:16px; margin-right:16px;"
+                    >
+                      <use xlink:href="#icon-play1" />
+                    </svg>加入播放列表
+                  </a-button>
                 </div>
                 <div class="tag">
                   <span>标签：</span>
@@ -60,7 +71,7 @@
 import { getPlaylistDetail } from "@/api/playList.js";
 import { getSongUrl } from "@/api/song.js";
 import { mapMutations } from "vuex";
-import Bus from "@/utils/bus.js"
+import Bus from "@/utils/bus.js";
 export default {
   name: "",
   props: [""],
@@ -97,7 +108,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["SET_MUSIC_LIST","ADD_MUSIC"]),
+    ...mapMutations(["SET_MUSIC_LIST", "ADD_MUSIC"]),
     async getListDetail(data) {
       //获取歌单信息
       let res = await getPlaylistDetail(data);
@@ -151,10 +162,10 @@ export default {
     addMusicList() {
       this.SET_MUSIC_LIST(this.playList.tracks);
     },
-    addMusic(song){
+    addMusic(song) {
       this.ADD_MUSIC(song);
       // console.log(song)
-      Bus.$emit('play',song);
+      Bus.$emit("play", song);
     }
   }
 };
@@ -181,12 +192,15 @@ export default {
   padding-bottom: 80px;
   h1 {
     font-size: 24px;
+    display: inline;
+    position: relative;
+    top: -26px;
   }
   .playlist-creator {
     font-size: 14px;
     line-height: 3em;
     height: 40px;
-    margin: 16px 0;
+    margin: -16px 0 16px 0;
     img {
       margin-right: 16px;
       float: left;

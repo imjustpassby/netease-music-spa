@@ -9,8 +9,20 @@
                 <img v-lazy="albumInfo.picUrl" width="100%" alt="专辑" />
               </a-col>
               <a-col :span="18" :offset="1">
-                <h1>专辑：{{albumInfo.name}}</h1>
-                <div>
+                <svg class="icon" aria-hidden="true" style="font-size:46px; margin-right:16px;">
+                  <use xlink:href="#icon-zhuanji" />
+                </svg>
+                <h1>{{albumInfo.name}}</h1>
+                <a-button @click.once="addMusicList" class="add-playlist-btn">
+                    <svg
+                      class="icon"
+                      aria-hidden="true"
+                      style="font-size:16px; margin-right:16px;"
+                    >
+                      <use xlink:href="#icon-play1" />
+                    </svg>加入播放列表
+                  </a-button>
+                <div class="album-detail-info">
                   <p>
                     歌手：
                     <span v-for="(art,idx) in albumInfo.artists" :key="idx">
@@ -20,8 +32,7 @@
                   </p>
                   <p>发行时间：{{albumInfo.publishTime}}</p>
                   <p>发行公司：{{albumInfo.company}}</p>
-                  <p>介绍：{{albumInfo.description}}</p>
-                  <a-button @click.once="addMusicList" style="margin-top: 20px">加入播放列表</a-button>
+                  <p style="white-space: pre-wrap;">介绍：{{albumInfo.description}}</p>
                 </div>
               </a-col>
             </a-row>
@@ -170,7 +181,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.album-detail-container{
+.album-detail-container {
   padding-bottom: 80px;
   .play-icon {
     margin-left: 40%;
@@ -192,6 +203,18 @@ export default {
   h1 {
     font-size: 24px;
     margin: 16px 0;
+    display: inline;
+    position: relative;
+    top: -8px;
+  }
+  .add-playlist-btn{
+    position: relative;
+    top: -10px;
+    left: 10px;
+  }
+  .album-detail-info{
+    height: 200px;
+    overflow: hidden;
   }
 }
 </style>

@@ -54,16 +54,38 @@
               </a-col>
             </a-row>
             <a-row type="flex" justify="space-between" class="tab-option">
-              <a-col :span="5" class="tab-option-item tab-option-item-active">热门单曲</a-col>
-              <a-col :span="5" class="tab-option-item">所有专辑</a-col>
-              <a-col :span="5" class="tab-option-item">MV</a-col>
-              <a-col :span="5" class="tab-option-item">艺人介绍</a-col>
+              <a-col
+                :span="5"
+                class="tab-option-item"
+                :class="tabIndex ===1 ? 'tab-option-item-active' : ''"
+                @click="clickTab(1)"
+              >热门单曲</a-col>
+              <a-col
+                :span="5"
+                class="tab-option-item"
+                :class="tabIndex ===2 ? 'tab-option-item-active' : ''"
+                @click="clickTab(2)"
+              >所有专辑</a-col>
+              <a-col
+                :span="5"
+                class="tab-option-item"
+                :class="tabIndex ===3 ? 'tab-option-item-active' : ''"
+                @click="clickTab(3)"
+              >MV</a-col>
+              <a-col
+                :span="5"
+                class="tab-option-item"
+                :class="tabIndex ===4 ? 'tab-option-item-active' : ''"
+                @click="clickTab(4)"
+              >艺人介绍</a-col>
             </a-row>
             <a-row style="margin-top:16px">
               <a-col span="24">
-                <hot-song :hotSongs="hotSongs"></hot-song>
+                <hot-song v-if="tabIndex === 1" :hotSongs="hotSongs"></hot-song>
+                <artist-album v-if="tabIndex === 2" :albumSize="artist.albumSize"></artist-album>
+                <artist-mv v-if="tabIndex === 3"></artist-mv>
+                <artist-description v-if="tabIndex === 4"></artist-description>
               </a-col>
-              
             </a-row>
           </div>
         </a-skeleton>
@@ -73,7 +95,10 @@
 </template>
 
 <script>
-import HotSong from "./components/hotSong.vue"
+import HotSong from "./components/hotSong.vue";
+import ArtistAlbum from "./components/artistAlbum.vue"
+import ArtistMv from "./components/artistMv.vue"
+import ArtistDescription from "./components/artistDescription.vue"
 import { getArtist } from "@/api/artist.js";
 
 export default {
@@ -82,13 +107,17 @@ export default {
   data() {
     return {
       loading: true,
+      tabIndex: 1,
       artist: {},
       hotSongs: []
     };
   },
 
   components: {
-    HotSong
+    HotSong,
+    ArtistAlbum,
+    ArtistMv,
+    ArtistDescription
   },
 
   computed: {},
@@ -122,6 +151,13 @@ export default {
           key: item.id
         };
       });
+    },
+    clickTab(idx){
+      if (idx === this.tabIndex){
+        return
+      } else {
+        this.tabIndex = idx;
+      }
     }
   }
 };
@@ -159,7 +195,7 @@ export default {
       text-align: center;
       cursor: pointer;
     }
-    .tab-option-item-active{
+    .tab-option-item-active {
       background-color: #fafafa;
       border-bottom: 2px solid #d81e06;
     }
