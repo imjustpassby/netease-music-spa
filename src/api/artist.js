@@ -155,3 +155,14 @@ export function getArtistAlbum(data) {
     }
   })
 }
+
+/* 获取歌手描述 */
+export function getArtistDesc(data) {
+  return request({
+    url: '/api/artist/desc',
+    withCredentials: true,
+    params: {
+      id: data
+    }
+  })
+}

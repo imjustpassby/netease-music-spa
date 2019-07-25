@@ -83,8 +83,8 @@
               <a-col span="24">
                 <hot-song v-if="tabIndex === 1" :hotSongs="hotSongs"></hot-song>
                 <artist-album v-if="tabIndex === 2" :albumSize="artist.albumSize"></artist-album>
-                <artist-mv v-if="tabIndex === 3"></artist-mv>
-                <artist-description v-if="tabIndex === 4"></artist-description>
+                <artist-mv v-if="tabIndex === 3" ></artist-mv>
+                <artist-description v-if="tabIndex === 4" :artistName="artist.name"></artist-description>
               </a-col>
             </a-row>
           </div>
