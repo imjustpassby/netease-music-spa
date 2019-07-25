@@ -131,3 +131,15 @@ export function getTopArtists(data) {
     }
   })
 }
+
+/* 获取歌手单曲,传入歌手 id, 可获得歌手部分信息和热门歌曲  */
+export function getArtist(data) {
+  return request({
+    url: '/api/artists',
+    withCredentials: true,
+    params: {
+      id: data
+    }
+  })
+}
+

@@ -24,7 +24,7 @@
             :key="index"
           >
             <div class="img-box">
-              <img v-lazy="item.picUrl" width="100%" alt="img" />
+              <img v-lazy="item.picUrl" width="100%" alt="img" @click="goArtistDetail(item.id)"/>
             </div>
             <p class="artist-list-title">{{item.name}}</p>
           </a-col>
@@ -55,7 +55,7 @@
             :key="index"
           >
             <div class="img-box">
-              <img v-lazy="item.picUrl" width="100%" alt="img" />
+              <img v-lazy="item.picUrl" width="100%" alt="img" @click="goArtistDetail(item.id)"/>
             </div>
             <p class="artist-list-title">{{item.name}}</p>
           </a-col>
@@ -112,6 +112,14 @@ export default {
       this.hotSinger = hotSinger.artists.map(item => {
         return { id: item.id, name: item.name, picUrl: item.picUrl };
       });
+    },
+    goArtistDetail(id){
+      this.$router.push({
+        path: '/artist-detail',
+        query: {
+          id: id
+        }
+      })
     }
   }
 };
@@ -127,5 +135,19 @@ export default {
     cursor: pointer;
     line-height: 1.5em;
   }
+  .img-box {
+  width: 100%;
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
 }
 </style>

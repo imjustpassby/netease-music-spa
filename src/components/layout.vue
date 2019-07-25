@@ -53,7 +53,10 @@
       <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
       <music-player class="music-player"></music-player>
     </div>
-    <router-view />
+    <transition name="fade-transform" mode="out-in">
+      <router-view />
+    </transition>
+    
   </div>
 </template>
 

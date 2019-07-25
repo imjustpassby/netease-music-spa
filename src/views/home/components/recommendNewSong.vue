@@ -27,8 +27,8 @@
               </div>
             </a-col>
             <a-col :span="20">
-              <p class="recommend-title" style="line-height:43px;cursor:text">{{item.title}}</p>
-              <span class="recommend-title" style="line-height:43px;cursor:text">{{item.artist}}</span>
+              <p class="recommend-title" style="line-height:2em;cursor:text">{{item.title}}</p>
+              <span class="recommend-title" style="line-height:2em;cursor:text">{{item.artist}}</span>
             </a-col>
           </a-row>
         </a-col>
@@ -101,7 +101,6 @@ export default {
     async addMusic(song) {
       this.ADD_MUSIC(song);
       await this.getSong(song.id);
-      // console.log(song)
       Bus.$emit("play", song);
     }
   }

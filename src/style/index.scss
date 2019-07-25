@@ -1,0 +1,42 @@
+@import './reset.scss';
+@import './transition.scss';
+
+@font-face {
+  font-family: "webfont";
+  font-display: swap;
+  src: url("//at.alicdn.com/t/webfont_0k851y8ee3z.eot"); /* IE9*/
+  src: url("//at.alicdn.com/t/webfont_0k851y8ee3z.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("//at.alicdn.com/t/webfont_0k851y8ee3z.woff2")
+      format("woff2"),
+    url("//at.alicdn.com/t/webfont_0k851y8ee3z.woff") format("woff"),
+    /* chrome、firefox */ url("//at.alicdn.com/t/webfont_0k851y8ee3z.ttf")
+      format("truetype"),
+    /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+      url("//at.alicdn.com/t/webfont_0k851y8ee3z.svg#Alibaba-PuHuiTi-Regular")
+      format("svg"); /* iOS 4.1- */
+}
+#app {
+  font-family: "webfont", "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #333333;
+  font-size: 14px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.aplayer-icon-mode,.aplayer-volume-wrap{
+  display: none !important;
+}

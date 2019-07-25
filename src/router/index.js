@@ -53,6 +53,11 @@ export default new Router({
           path: '/playlist-detail',
           name: 'playlist-detail',
           component: () => import('@/views/playListDetail/index')
+        },
+        {
+          path: '/artist-detail',
+          name: 'artist-detail',
+          component: () => import('@/views/artistDetail/index')
         }
       ]
     }
