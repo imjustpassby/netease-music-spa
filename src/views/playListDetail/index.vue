@@ -69,7 +69,7 @@
 
 <script>
 import { getPlaylistDetail } from "@/api/playList.js";
-import { getSongUrl } from "@/api/song.js";
+import { getSongUrl, getLyric } from "@/api/song.js";
 import { mapMutations } from "vuex";
 import Bus from "@/utils/bus.js";
 export default {
@@ -155,6 +155,9 @@ export default {
           if (this.songList[i].id == this.playList.tracks[j].id) {
             this.playList.tracks[j].src = this.songList[i].url;
             this.playList.tracks[j].key = j;
+            
+            /* let lyric = await getLyric(this.songList[i].id);
+            this.playList.tracks[j].lrc = lyric.lrc.lyric; */
           }
         }
       }
@@ -162,9 +165,10 @@ export default {
     addMusicList() {
       this.SET_MUSIC_LIST(this.playList.tracks);
     },
-    addMusic(song) {
+    async addMusic(song) {
+      let lyric = await getLyric(song.id);
+      song.lrc = lyric.lrc.lyric;
       this.ADD_MUSIC(song);
-      // console.log(song)
       Bus.$emit("play", song);
     }
   }

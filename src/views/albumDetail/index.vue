@@ -68,7 +68,7 @@
 
 <script>
 import { getAlbum } from "@/api/album.js";
-import { getSongUrl } from "@/api/song.js";
+import { getSongUrl,getLyric } from "@/api/song.js";
 import { mapMutations } from "vuex";
 import Bus from "@/utils/bus.js";
 export default {
@@ -166,6 +166,8 @@ export default {
           if (songList[i].id == this.albumInfo.tracks[j].id) {
             this.albumInfo.tracks[j].src = songList[i].url;
             this.albumInfo.tracks[j].key = j;
+            // let lyric = await getLyric(songList[i].id);
+            // this.albumInfo.tracks[j].lrc = lyric.lrc.lyric;
           }
         }
       }
@@ -173,7 +175,9 @@ export default {
     addMusicList() {
       this.SET_MUSIC_LIST(this.albumInfo.tracks);
     },
-    addMusic(song) {
+    async addMusic(song) {
+      let lyric = await getLyric(song.id);
+      song.lrc = lyric.lrc.lyric;
       this.ADD_MUSIC(song);
       Bus.$emit("play", song);
     }

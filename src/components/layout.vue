@@ -147,6 +147,7 @@ export default {
       if (idx===0){
         this.checkedTopLink = idx;
         window.sessionStorage.setItem("checkedTopLink", this.checkedTopLink);
+        this.clickSubLink(0);
       } else {
         if (this.$store.getters.loginSuccess){
           this.checkedTopLink = idx;
@@ -289,5 +290,6 @@ export default {
   bottom: -4px;
   left: 0;
   right: 0;
+  z-index: 99;
 }
 </style>

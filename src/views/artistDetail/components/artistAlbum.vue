@@ -8,9 +8,14 @@
           class="album-list-item"
           v-for="(item,index) in albums"
           :key="index"
-          @click="goAlbumDetail(item.id)"
         >
-          <img v-lazy="item.picUrl" width="100%" alt="img" />
+          <img
+            v-lazy="item.picUrl"
+            width="100%"
+            alt="img"
+            style="cursor:pointer"
+            @click="goAlbumDetail(item.id)"
+          />
           <p class="album-list-title">{{item.name}}</p>
           <p class="album-list-title">{{item.publishTime}}</p>
         </a-col>
@@ -18,12 +23,12 @@
       <a-row type="flex" justify="space-around">
         <a-col>
           <a-pagination
-          @change="onChangePage"
-          :current="currentPage"
-          :total="albumSize"
-          :defaultPageSize="20"
-          style="margin-top:10px"
-        />
+            @change="onChangePage"
+            :current="currentPage"
+            :total="albumSize"
+            :defaultPageSize="20"
+            style="margin-top:10px"
+          />
         </a-col>
       </a-row>
     </div>

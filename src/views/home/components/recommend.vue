@@ -117,7 +117,7 @@ export default {
       width: 60%;
       left: 17px;
       top: 17px;
-      z-index: 99;
+      z-index: 9;
       cursor: pointer;
     }
   }

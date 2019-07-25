@@ -39,7 +39,7 @@
 
 <script>
 import { getPersonalizedNewSong } from "@/api/home.js";
-import { getSongUrl } from "@/api/song.js";
+import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
 import { mapMutations } from "vuex";
 export default {
@@ -87,6 +87,7 @@ export default {
     async getSong(id) {
       /* 获取音乐url */
       let res = await getSongUrl(id);
+      let lyric = await getLyric(id);
       let songList = res.data.map(item => {
         return { url: item.url, id: item.id };
       });
@@ -94,6 +95,7 @@ export default {
       for (let j = 0; j < length; j++) {
         if (this.personalizedNewSong[j].id === songList[0].id) {
           this.personalizedNewSong[j].src = songList[0].url;
+          this.personalizedNewSong[j].lrc = lyric.lrc.lyric;
           return;
         }
       }

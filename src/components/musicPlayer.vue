@@ -6,6 +6,7 @@
       listMaxHeight="500px"
       :list="musicList"
       :listFolded="true"
+      showLrc
       @playing="playing"
       @ended="next"
       ref="player"
@@ -15,7 +16,7 @@
 
 <script>
 import Aplayer from "vue-aplayer";
-import {mapGetters,mapMutations} from "vuex"
+import {mapGetters,mapMutations,mapActions} from "vuex"
 import Bus from '@/utils/bus.js'
 export default {
   name: "",
@@ -53,6 +54,7 @@ export default {
 
   methods: {
     ...mapMutations(["SET_CURRENT_INDEX","SET_CURRENT_MUSIC"]),
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     async getUrl() {
       /* 获取歌的url 可以传多个id 用 ',' 隔开*/
       let songIds = [];
@@ -73,7 +75,7 @@ export default {
     },
     playing() {
       /* 点击列表的歌会切歌，获取musicPlayer当前播放的歌的信息 */
-      this.SET_CURRENT_MUSIC(this.$refs.player.currentMusic)
+      this.SET_CURRENT_MUSIC_ACTION(this.$refs.player.currentMusic)
       /* 找到对应的歌的index，更新currentIndex */
       let length = this.musicList.length;
       for (let i = 0; i < length; i++) {
@@ -92,7 +94,7 @@ export default {
         this.SET_CURRENT_INDEX(this.currentIndex + 1)
       }
       /* 获取下一首歌的信息 */
-      this.SET_CURRENT_MUSIC(this.musicList[this.currentIndex])
+      this.SET_CURRENT_MUSIC_ACTION(this.musicList[this.currentIndex])
       /* 
       踩坑计 
       报错AbortError: The play() request was interrupted by a new load request
