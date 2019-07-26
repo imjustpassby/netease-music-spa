@@ -1,6 +1,6 @@
 <template>
   <a-skeleton active :loading="loading">
-    <div class="dj-list" style="padding-bottom:80px;">
+    <div class="dj-list" style="padding-bottom:100px;">
       <div class="dj-list-top-title">
         <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
           <use xlink:href="#icon-circle" />

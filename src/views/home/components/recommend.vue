@@ -67,7 +67,7 @@ export default {
 
 <style lang='scss'>
 .recommend {
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 }
 .img-box {
   width: 100%;

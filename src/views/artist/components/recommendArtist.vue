@@ -126,7 +126,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .artist {
-  padding: 36px 16px 80px 16px;
+  padding: 36px 16px 100px 16px;
   & .artist-list {
     font-size: 16px;
   }

@@ -164,7 +164,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .artist-detail {
-  padding: 16px 16px 80px 16px;
+  padding: 16px 16px 100px 16px;
   margin-top: 16px;
   text-align: left;
   background-color: #fafafa;

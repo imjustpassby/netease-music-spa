@@ -55,24 +55,6 @@ export default {
   methods: {
     ...mapMutations(["SET_CURRENT_INDEX","SET_CURRENT_MUSIC"]),
     ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
-    async getUrl() {
-      /* 获取歌的url 可以传多个id 用 ',' 隔开*/
-      let songIds = [];
-      for (const item of this.newSongs) {
-        songIds.push(item.id);
-      }
-      let ids = songIds.join(",");
-      let songData = await getSongUrl(ids);
-      /* api有点坑，并不是按传过去musicID的顺序返回 */
-      let length = songIds.length;
-      for (let i = 0; i < length; i++) {
-        for (let j = 0; j < length; j++) {
-          if (songData.data[i].id == this.newSongs[j].id) {
-            this.newSongs[j].songUrl = songData.data[i].url;
-          }
-        }
-      }
-    },
     playing() {
       /* 点击列表的歌会切歌，获取musicPlayer当前播放的歌的信息 */
       this.SET_CURRENT_MUSIC_ACTION(this.$refs.player.currentMusic)

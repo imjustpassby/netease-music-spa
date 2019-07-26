@@ -186,7 +186,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .album-detail-container {
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   .play-icon {
     margin-left: 40%;
     font-size: 24px;
@@ -203,7 +203,7 @@ export default {
 .album-detail {
   text-align: left;
   margin-top: 16px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   h1 {
     font-size: 24px;
     margin: 16px 0;

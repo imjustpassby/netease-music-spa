@@ -10,7 +10,7 @@
         <a-row type="flex" justify="space-around">
           <a-col
             :span="5"
-            style="margin:0 2px 16px 0"
+            style="margin:16px"
             class="album-list-item"
             v-for="(item,index) in albums"
             :key="index"

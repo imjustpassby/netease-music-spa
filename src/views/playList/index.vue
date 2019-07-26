@@ -144,7 +144,7 @@ export default {
 .play-list {
   font-size: 16px;
   margin-top: 16px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   .play-list-item {
     margin-top: 16px;
     img {

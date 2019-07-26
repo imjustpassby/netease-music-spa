@@ -48,7 +48,7 @@ export default {
 .ranking-list{
   font-size: 16px;
   margin-top: 16px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   .ranking-list-item{
     margin-top: 16px;
     img{

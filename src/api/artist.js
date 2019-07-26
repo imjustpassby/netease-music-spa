@@ -166,3 +166,14 @@ export function getArtistDesc(data) {
     }
   })
 }
+
+/* 获取歌手MV */
+export function getArtistMv(data) {
+  return request({
+    url: '/api/artist/mv',
+    withCredentials: true,
+    params: {
+      id: data
+    }
+  })
+}

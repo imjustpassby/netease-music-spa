@@ -1,5 +1,5 @@
 <template>
-<div style="padding-bottom: 80px;">
+<div style="padding-bottom: 100px;">
   <a-row class="album-list">
     <a-col :span="14" :offset="5">
       <newest-album></newest-album>

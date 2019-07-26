@@ -176,7 +176,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .playlist-detail-container {
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   .play-icon {
     margin-left: 40%;
     font-size: 24px;
@@ -193,7 +193,7 @@ export default {
 .playlist-detail {
   text-align: left;
   margin-top: 16px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   h1 {
     font-size: 24px;
     display: inline;
