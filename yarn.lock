@@ -15,6 +15,21 @@
   resolved "https://registry.npm.taobao.org/@ant-design/icons/download/@ant-design/icons-1.2.1.tgz#8e19301b1433ec67d6bbd0e892782e2ade561ff9"
   integrity sha1-jhkwGxQz7GfWu9DoknguKt5WH/k=
 
+"@babel/runtime-corejs2@^7.4.3":
+  version "7.5.5"
+  resolved "https://registry.npm.taobao.org/@babel/runtime-corejs2/download/@babel/runtime-corejs2-7.5.5.tgz#c3214c08ef20341af4187f1c9fbdc357fbec96b2"
+  integrity sha1-wyFMCO8gNBr0GH8cn73DV/vslrI=
+  dependencies:
+    core-js "^2.6.5"
+    regenerator-runtime "^0.13.2"
+
+"@babel/runtime@^7.4.3":
+  version "7.5.5"
+  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
+  integrity sha1-dPulbTXvvspEQJHHhQzNSU/S8TI=
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "https://registry.npm.taobao.org/@types/q/download/@types/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
@@ -972,7 +987,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@6.x, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
+babel-runtime@6.x, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.25.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.npm.taobao.org/babel-runtime/download/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -1452,6 +1467,158 @@ check-types@^7.3.0:
   resolved "https://registry.npm.taobao.org/check-types/download/check-types-7.4.0.tgz#0378ec1b9616ec71f774931a3c6516fad8c152f4"
   integrity sha1-A3jsG5YW7HH3dJMaPGUW+tjBUvQ=
 
+chimee-helper-dom@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.npm.taobao.org/chimee-helper-dom/download/chimee-helper-dom-0.1.8.tgz#8d3fac173ea1cd3da2b51575772e6b082a22831f"
+  integrity sha1-jT+sFz6hzT2itRV1dy5rCCoigx8=
+  dependencies:
+    babel-runtime "^6.26.0"
+    chimee-helper-events "^0.1.0"
+    chimee-helper-utils "^0.2.0"
+    toxic-predicate-functions "^0.1.5"
+
+chimee-helper-events@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npm.taobao.org/chimee-helper-events/download/chimee-helper-events-0.1.0.tgz#a8543e5897ee440665ae209b4b17a32b489e57b1"
+  integrity sha1-qFQ+WJfuRAZlriCbSxejK0ieV7E=
+  dependencies:
+    babel-runtime "^6.23.0"
+    toxic-predicate-functions "^0.1.2"
+
+chimee-helper-log@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.npm.taobao.org/chimee-helper-log/download/chimee-helper-log-0.1.3.tgz#247c96d2694389686139745a90a1619f6e043550"
+  integrity sha1-JHyW0mlDiWhhOXRakKFhn24ENVA=
+  dependencies:
+    babel-runtime "^6.23.0"
+    toxic-predicate-functions "^0.1.2"
+
+chimee-helper-utils@^0.2.0, chimee-helper-utils@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.npm.taobao.org/chimee-helper-utils/download/chimee-helper-utils-0.2.1.tgz#aa8ae731da565e78c49d47a6a3a02cc8bec3e145"
+  integrity sha1-qornMdpWXnjEnUemo6AsyL7D4UU=
+  dependencies:
+    babel-runtime "^6.23.0"
+    toxic-predicate-functions "^0.1.2"
+
+chimee-helper@^0.2.11, chimee-helper@^0.2.6, chimee-helper@^0.2.8:
+  version "0.2.11"
+  resolved "https://registry.npm.taobao.org/chimee-helper/download/chimee-helper-0.2.11.tgz#3d2f0b1c6139639d44b1813b1b73a2a04da83923"
+  integrity sha1-PS8LHGE5Y51EsYE7G3OioE2oOSM=
+  dependencies:
+    babel-runtime "^6.26.0"
+    chimee-helper-dom "^0.1.8"
+    chimee-helper-events "^0.1.0"
+    chimee-helper-log "^0.1.3"
+    chimee-helper-utils "^0.2.1"
+    toxic-predicate-functions "^0.1.5"
+    toxic-utils "^0.2.0"
+    ua-parser-js "^0.7.17"
+
+"chimee-helper@git+https://github.com/Chimeejs/chimee-helper.git":
+  version "0.2.11"
+  resolved "git+https://github.com/Chimeejs/chimee-helper.git#73856ff8754e82c315a796e1b92eccc76780c352"
+  dependencies:
+    babel-runtime "^6.26.0"
+    chimee-helper-dom "^0.1.8"
+    chimee-helper-events "^0.1.0"
+    chimee-helper-log "^0.1.3"
+    chimee-helper-utils "^0.2.1"
+    toxic-predicate-functions "^0.2.3"
+    toxic-utils "^0.3.0"
+    ua-parser-js "^0.7.18"
+
+chimee-kernel-flv@^1.4.10:
+  version "1.4.10"
+  resolved "https://registry.npm.taobao.org/chimee-kernel-flv/download/chimee-kernel-flv-1.4.10.tgz#bb77a73d90350a036ec163830a99ebaf5dc3b8ec"
+  integrity sha1-u3enPZA1CgNuwWODCpnrr13DuOw=
+  dependencies:
+    babel-runtime "^6.23.0"
+
+chimee-kernel-hls@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.npm.taobao.org/chimee-kernel-hls/download/chimee-kernel-hls-1.3.2.tgz#c24a5616fc3105caf39f73088a7f2ba9077e7ccc"
+  integrity sha1-wkpWFvwxBcrzn3MIin8rqQd+fMw=
+  dependencies:
+    babel-runtime "^6.26.0"
+    chimee-helper "^0.2.11"
+    hls.js "^0.9.1"
+    toxic-decorators "^0.3.8"
+
+chimee-player@^1.4.8:
+  version "1.4.8"
+  resolved "https://registry.npm.taobao.org/chimee-player/download/chimee-player-1.4.8.tgz#70da5b863c08bd1d67f8d8192325756a123e9be1"
+  integrity sha1-cNpbhjwIvR1n+NgZIyV1ahI+m+E=
+  dependencies:
+    chimee "^0.11.0"
+    chimee-helper "^0.2.11"
+    chimee-kernel-flv "^1.4.10"
+    chimee-kernel-hls "^1.3.2"
+    chimee-plugin-center-state "0.0.12"
+    chimee-plugin-contextmenu "^0.1.2"
+    chimee-plugin-controlbar "^0.5.0"
+    chimee-plugin-log "0.0.4"
+    chimee-plugin-popup "0.0.7"
+
+chimee-plugin-center-state@0.0.12:
+  version "0.0.12"
+  resolved "https://registry.npm.taobao.org/chimee-plugin-center-state/download/chimee-plugin-center-state-0.0.12.tgz#dd600bbccd34f63537af12cd8a77d43553577b86"
+  integrity sha1-3WALvM009jU3rxLNinfUNVNXe4Y=
+  dependencies:
+    chimee-helper "git+https://github.com/Chimeejs/chimee-helper.git"
+    chimee-plugin-popup "0.0.7"
+
+chimee-plugin-contextmenu@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.npm.taobao.org/chimee-plugin-contextmenu/download/chimee-plugin-contextmenu-0.1.2.tgz#4c9105917350b00bbedea85ef9002dfe0c6fb1f7"
+  integrity sha1-TJEFkXNQsAu+3qhe+QAt/gxvsfc=
+  dependencies:
+    babel-runtime "^6.26.0"
+    chimee-helper "^0.2.6"
+    chimee-plugin-popup "0.0.5"
+
+chimee-plugin-controlbar@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.npm.taobao.org/chimee-plugin-controlbar/download/chimee-plugin-controlbar-0.5.0.tgz#a814bf93935ce684429f829d482668db78837a85"
+  integrity sha1-qBS/k5Nc5oRCn4KdSCZo23iDeoU=
+  dependencies:
+    chimee-helper "git+https://github.com/Chimeejs/chimee-helper.git"
+
+chimee-plugin-log@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.npm.taobao.org/chimee-plugin-log/download/chimee-plugin-log-0.0.4.tgz#4d889a017041b30df1700bfa80c6a389d93c2385"
+  integrity sha1-TYiaAXBBsw3xcAv6gMajidk8I4U=
+  dependencies:
+    babel-runtime "^6.26.0"
+    chimee-helper "^0.2.6"
+    chimee-plugin-popup "0.0.5"
+
+chimee-plugin-popup@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.npm.taobao.org/chimee-plugin-popup/download/chimee-plugin-popup-0.0.5.tgz#0c61b00d0bc6ce7a67b0b7390f418bbd7245e1cf"
+  integrity sha1-DGGwDQvGznpnsLc5D0GLvXJF4c8=
+  dependencies:
+    babel-runtime "^6.26.0"
+    chimee-helper "^0.2.6"
+
+chimee-plugin-popup@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/chimee-plugin-popup/download/chimee-plugin-popup-0.0.7.tgz#791caf330fbe6f82eff61962112c4e2ad8952549"
+  integrity sha1-eRyvMw++b4Lv9hliESxOKtiVJUk=
+  dependencies:
+    babel-runtime "^6.26.0"
+    chimee-helper "^0.2.8"
+
+chimee@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.npm.taobao.org/chimee/download/chimee-0.11.0.tgz#38138a586f37e4e7b612a6c0bc8409e0591504bf"
+  integrity sha1-OBOKWG835Oe2EqbAvIQJ4FkVBL8=
+  dependencies:
+    babel-runtime "^6.26.0"
+    chimee-helper "^0.2.11"
+    es-fullscreen "^0.3.0"
+    toxic-decorators "^0.3.8"
+
 chokidar@^2.0.2, chokidar@^2.1.2:
   version "2.1.6"
   resolved "https://registry.npm.taobao.org/chokidar/download/chokidar-2.1.6.tgz#b6cad653a929e244ce8a834244164d241fa954c5"
@@ -1828,7 +1995,7 @@ copy-webpack-plugin@^4.0.1:
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
 
-core-js@^2.4.0, core-js@^2.5.0:
+core-js@^2.4.0, core-js@^2.5.0, core-js@^2.6.5:
   version "2.6.9"
   resolved "https://registry.npm.taobao.org/core-js/download/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
   integrity sha1-a0shRiDINBUuF5Mjcn/Bl0GwhPI=
@@ -2564,6 +2731,15 @@ es-abstract@^1.12.0, es-abstract@^1.5.1, es-abstract@^1.7.0:
     is-callable "^1.1.4"
     is-regex "^1.0.4"
     object-keys "^1.0.12"
+
+es-fullscreen@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npm.taobao.org/es-fullscreen/download/es-fullscreen-0.3.0.tgz#acdeb5b99d888703bb848d7faa7b60e6ff3def0d"
+  integrity sha1-rN61uZ2IhwO7hI1/qntg5v897w0=
+  dependencies:
+    babel-runtime "^6.26.0"
+    toxic-decorators "^0.3.8"
+    toxic-predicate-functions "^0.1.4"
 
 es-to-primitive@^1.2.0:
   version "1.2.0"
@@ -3319,6 +3495,14 @@ hls.js@^0.12.4:
   dependencies:
     eventemitter3 "3.1.0"
     url-toolkit "^2.1.6"
+
+hls.js@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.npm.taobao.org/hls.js/download/hls.js-0.9.1.tgz#36516d4fac3ab44108e5c127ef0f3e9cd06f6330"
+  integrity sha1-NlFtT6w6tEEI5cEn7w8+nNBvYzA=
+  dependencies:
+    string.prototype.endswith "^0.2.0"
+    url-toolkit "^2.1.2"
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -6082,6 +6266,11 @@ regenerator-runtime@^0.11.0:
   resolved "https://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha1-vgWtf5v30i4Fb5cmzuUBf78Z4uk=
 
+regenerator-runtime@^0.13.2:
+  version "0.13.3"
+  resolved "https://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
+  integrity sha1-fPanfY9cb2Drc8X8GVWyzrAea/U=
+
 regenerator-transform@^0.10.0:
   version "0.10.1"
   resolved "https://registry.npm.taobao.org/regenerator-transform/download/regenerator-transform-0.10.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fregenerator-transform%2Fdownload%2Fregenerator-transform-0.10.1.tgz#1e4996837231da8b7f3cf4114d71b5691a0680dd"
@@ -6809,6 +6998,11 @@ string-width@^1.0.1, string-width@^1.0.2:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
 
+string.prototype.endswith@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/string.prototype.endswith/download/string.prototype.endswith-0.2.0.tgz#a19c20dee51a98777e9a47e10f09be393b9bba75"
+  integrity sha1-oZwg3uUamHd+mkfhDwm+OTubunU=
+
 string_decoder@^1.0.0, string_decoder@^1.1.1:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/string_decoder/download/string_decoder-1.2.0.tgz#fe86e738b19544afe70469243b2a1ee9240eae8d"
@@ -7055,6 +7249,54 @@ tough-cookie@~2.4.3:
     psl "^1.1.24"
     punycode "^1.4.1"
 
+toxic-decorators@^0.3.8:
+  version "0.3.8"
+  resolved "https://registry.npm.taobao.org/toxic-decorators/download/toxic-decorators-0.3.8.tgz#7c4bc31564bc4313d5cee86b2874dcefff99c8e1"
+  integrity sha1-fEvDFWS8QxPVzuhrKHTc7/+ZyOE=
+  dependencies:
+    babel-runtime "^6.25.0"
+    toxic-predicate-functions "^0.1.2"
+    toxic-utils "^0.1.5"
+
+toxic-predicate-functions@^0.1.2, toxic-predicate-functions@^0.1.4, toxic-predicate-functions@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.npm.taobao.org/toxic-predicate-functions/download/toxic-predicate-functions-0.1.5.tgz#50f83378299aad684fe255feeebb8d6648cab64e"
+  integrity sha1-UPgzeCmarWhP4lX+7ruNZkjKtk4=
+  dependencies:
+    babel-runtime "^6.23.0"
+
+toxic-predicate-functions@^0.2.3:
+  version "0.2.5"
+  resolved "https://registry.npm.taobao.org/toxic-predicate-functions/download/toxic-predicate-functions-0.2.5.tgz#d83d68b118e3bc3bdd12d8821418e970b4d8444f"
+  integrity sha1-2D1osRjjvDvdEtiCFBjpcLTYRE8=
+  dependencies:
+    "@babel/runtime" "^7.4.3"
+    lodash "^4.17.11"
+
+toxic-utils@^0.1.5:
+  version "0.1.6"
+  resolved "https://registry.npm.taobao.org/toxic-utils/download/toxic-utils-0.1.6.tgz#164c3969d97e3258c4bc1e4ed25893415756e297"
+  integrity sha1-Fkw5adl+MljEvB5O0liTQVdW4pc=
+  dependencies:
+    babel-runtime "^6.26.0"
+    toxic-predicate-functions "^0.1.4"
+
+toxic-utils@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/toxic-utils/download/toxic-utils-0.2.0.tgz#c2b487c206acb5038896eda3c2e4d426f4e56298"
+  integrity sha1-wrSHwgastQOIlu2jwuTUJvTlYpg=
+  dependencies:
+    babel-runtime "^6.26.0"
+    toxic-predicate-functions "^0.1.4"
+
+toxic-utils@^0.3.0:
+  version "0.3.1"
+  resolved "https://registry.npm.taobao.org/toxic-utils/download/toxic-utils-0.3.1.tgz#6433d24dbf8f0fa2ddc6c8d6fe57e2f8fb6ae79a"
+  integrity sha1-ZDPSTb+PD6LdxsjW/lfi+Ptq55o=
+  dependencies:
+    "@babel/runtime-corejs2" "^7.4.3"
+    lodash "^4.17.11"
+
 trim-newlines@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/trim-newlines/download/trim-newlines-1.0.0.tgz#5887966bb582a4503a41eb524f7d35011815a613"
@@ -7111,6 +7353,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+ua-parser-js@^0.7.17, ua-parser-js@^0.7.18:
+  version "0.7.20"
+  resolved "https://registry.npm.taobao.org/ua-parser-js/download/ua-parser-js-0.7.20.tgz#7527178b82f6a62a0f243d1f94fd30e3e3c21098"
+  integrity sha1-dScXi4L2pioPJD0flP0w4+PCEJg=
 
 uglify-es@^3.3.4:
   version "3.3.9"
@@ -7256,7 +7503,7 @@ url-parse@^1.1.8, url-parse@^1.4.3:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
 
-url-toolkit@^2.1.6:
+url-toolkit@^2.1.2, url-toolkit@^2.1.6:
   version "2.1.6"
   resolved "https://registry.npm.taobao.org/url-toolkit/download/url-toolkit-2.1.6.tgz#6d03246499e519aad224c44044a4ae20544154f2"
   integrity sha1-bQMkZJnlGarSJMRARKSuIFRBVPI=
@@ -7417,16 +7664,6 @@ vue@^2.5.2:
   version "2.6.10"
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha1-pysaQqTYKnIepDjRtr9V5mGVxjc=
-
-vuetify-audio@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.npm.taobao.org/vuetify-audio/download/vuetify-audio-0.0.8.tgz#3c8b00e0c16630f47a4916449355255ed996ed02"
-  integrity sha1-PIsA4MFmMPR6SRZEk1UlXtmW7QI=
-
-vuetify@^1.5.16:
-  version "1.5.16"
-  resolved "https://registry.npm.taobao.org/vuetify/download/vuetify-1.5.16.tgz#cc9d0199c389d64d15787ddc85ca47a28225eeee"
-  integrity sha1-zJ0BmcOJ1k0VeH3chcpHooIl7u4=
 
 vuex@^3.1.1:
   version "3.1.1"

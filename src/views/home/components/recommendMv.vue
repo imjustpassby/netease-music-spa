@@ -13,7 +13,13 @@
           :key="index"
           style="margin-bottom: 16px"
         >
-          <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
+          <img
+            v-lazy="item.picUrl"
+            alt="img"
+            width="100%"
+            style="cursor: pointer;"
+            @click="goMvDetail(item.id)"
+          />
           <p class="recommend-title">{{item.name}}</p>
         </a-col>
       </a-row>
@@ -47,7 +53,16 @@ export default {
     this.loading = false;
   },
 
-  methods: {}
+  methods: {
+    goMvDetail(id) {
+      this.$router.push({
+        path: "/mv-detail",
+        query: {
+          id: id
+        }
+      });
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>

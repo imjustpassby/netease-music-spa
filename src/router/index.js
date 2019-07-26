@@ -58,6 +58,11 @@ export default new Router({
           path: '/artist-detail',
           name: 'artist-detail',
           component: () => import('@/views/artistDetail/index')
+        },
+        {
+          path: '/mv-detail',
+          name: 'mv-detail',
+          component: () => import('@/views/mvDetail/index')
         }
       ]
     }
