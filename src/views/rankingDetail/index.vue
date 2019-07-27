@@ -1,19 +1,22 @@
 <template>
-  <div class="album-detail-container">
+  <div class="playlist-detail-container">
     <a-row>
       <a-col :span="14" :offset="5">
         <a-skeleton active :loading="loading">
-          <div class="album-detail">
+          <div class="playlist-detail">
             <a-row>
               <a-col :span="5">
-                <img v-lazy="albumInfo.picUrl" width="100%" alt="专辑" />
+                <img v-lazy="playList.picUrl" width="100%" alt="歌单" />
               </a-col>
               <a-col :span="18" :offset="1">
-                <svg class="icon" aria-hidden="true" style="font-size:46px; margin-right:16px;">
-                  <use xlink:href="#icon-zhuanji" />
+                <svg class="icon" aria-hidden="true" style="font-size:36px; margin-right:16px;">
+                  <use xlink:href="#icon-paihangbang" />
                 </svg>
-                <h1>{{albumInfo.name}}</h1>
-                <a-button @click.once="addMusicList" class="add-playlist-btn">
+                <h1>{{playList.name}}</h1>
+                <div class="playlist-creator">
+                  <img v-lazy="playList.creator.avatarUrl" width="36px" alt />
+                  <span>{{playList.creator.nickname}}&nbsp;&nbsp;最近更新&nbsp;&nbsp;{{playList.updateTime}}</span>
+                  <a-button @click.once="addMusicList" style="margin-left: 20px">
                     <svg
                       class="icon"
                       aria-hidden="true"
@@ -22,30 +25,23 @@
                       <use xlink:href="#icon-play1" />
                     </svg>加入播放列表
                   </a-button>
-                <div class="album-detail-info">
-                  <p>
-                    歌手：
-                    <span v-for="(art,idx) in albumInfo.artists" :key="idx">
-                      {{art}}
-                      <span v-if="idx!== albumInfo.artists.length-1">/</span>
-                    </span>
-                  </p>
-                  <p>发行时间：{{albumInfo.publishTime}}</p>
-                  <p>发行公司：{{albumInfo.company}}</p>
-                  <p style="white-space: pre-wrap;">介绍：{{albumInfo.description}}</p>
+                </div>
+                <div>
+                  介绍：
+                  <p>{{playList.description}}</p>
                 </div>
               </a-col>
             </a-row>
           </div>
         </a-skeleton>
 
-        <a-skeleton active :loading="loading" class="album-tracks">
+        <a-skeleton active :loading="loading">
           <div>
             <div class="list-title">
               <span style="font-size:24px">歌曲列表</span>
-              <span>共{{albumInfo.tracks.length}}首</span>
+              <span>共{{playList.tracks.length}}首</span>
             </div>
-            <a-table :dataSource="albumInfo.tracks">
+            <a-table :dataSource="playList.tracks">
               <a-table-column title key="action" width="5%">
                 <template slot-scope="text, record">
                   <span>
@@ -67,113 +63,102 @@
 </template>
 
 <script>
-import { getAlbum } from "@/api/album.js";
-import { getSongUrl,getLyric } from "@/api/song.js";
+import { getRankingList } from "@/api/rankingList.js";
+import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
 export default {
   name: "",
   props: [""],
   data() {
     return {
-      loading: true,
-      albumInfo: {
-        picUrl: "",
-        company: "",
-        description: "",
-        name: "",
+      playList: {
         id: "",
-        type: "",
-        publishTime: "",
-        artists: [],
-        tracks: []
-      }
+        creator: {},
+        updateTime: "",
+        trackIds: [],
+        tracks: [],
+        picUrl: "",
+        name: "",
+        description: ""
+      },
+      songList: [],
+      loading: true
     };
   },
 
   components: {},
 
-  computed: {},
+  computed: {
+    idx() {
+      return this.$route.query.idx;
+    }
+  },
 
   watch: {},
 
   beforeMount() {},
 
   async mounted() {
-    await this.getAlbumInfo();
+    await this.getList();
     await this.getSong();
     this.loading = false;
   },
 
   methods: {
-    async getAlbumInfo() {
-      //获取专辑信息
-      let res = await getAlbum(this.$route.query.id);
-      let {
-        picUrl,
-        company,
-        description,
-        name,
-        id,
-        type,
-        publishTime,
-        artists
-      } = res.album;
-      this.albumInfo.picUrl = picUrl;
-      this.albumInfo.company = company;
-      this.albumInfo.description = description;
-      this.albumInfo.name = name;
-      this.albumInfo.id = id;
-      this.albumInfo.type = type;
-      this.albumInfo.publishTime = this.$moment(publishTime).format(
+    async getList() {
+      let res = await getRankingList(this.idx);
+      this.playList.id = res.playlist.id;
+      this.playList.creator = res.playlist.creator;
+      this.playList.updateTime = this.$moment(res.playlist.updateTime).format(
         "YYYY-M-DD"
       );
-      for (const ar of artists) {
-        this.albumInfo.artists.push(ar.name);
-      }
-
-      /* 获取专辑的歌曲 */
-      this.albumInfo.tracks = res.songs.map(item => {
-        let ars = [];
-        for (const art of item.ar) {
-          ars.push(art.name);
+      this.playList.trackIds = res.playlist.trackIds;
+      this.playList.tracks = res.playlist.tracks.map(item => {
+        let artist = [];
+        for (const ar of item.ar) {
+          artist.push(ar.name);
         }
         return {
-          id: item.id,
           name: item.name,
-          artist: ars.join("/"),
-          pic: item.al.picUrl,
+          id: item.id,
+          artist: artist.join("/"),
+          cover: item.al.picUrl,
           albumName: item.al.name,
           albumId: item.al.id
         };
       });
+      this.playList.picUrl = res.playlist.coverImgUrl;
+      this.playList.name = res.playlist.name;
+      this.playList.description = res.playlist.description;
     },
     async getSong() {
       let ids = [];
-      this.albumInfo.tracks.forEach(item => {
+      this.playList.trackIds.forEach(item => {
         ids.push(item.id);
       });
       /* 获取音乐url */
       let res = await getSongUrl(ids.join(","));
-      let songList = res.data.map(item => {
+      this.songList = res.data.map(item => {
         return { url: item.url, id: item.id };
       });
       /* 音乐url加入到playList.tracks */
-      let length = songList.length;
+      let length = this.songList.length;
       for (let i = 0; i < length; i++) {
         for (let j = 0; j < length; j++) {
-          if (songList[i].id == this.albumInfo.tracks[j].id) {
-            this.albumInfo.tracks[j].url = songList[i].url;
-            this.albumInfo.tracks[j].key = j;
+          if (this.songList[i].id == this.playList.tracks[j].id) {
+            this.playList.tracks[j].url = this.songList[i].url;
+            this.playList.tracks[j].key = j;
           }
         }
       }
     },
     addMusicList() {
-      Bus.$emit("add",this.albumInfo.tracks)
+      Bus.$emit("add", this.playList.tracks);
     },
     async addMusic(song) {
       let lyric = await getLyric(song.id);
-      if (lyric.hasOwnProperty('lrc')){
+      if (lyric.hasOwnProperty("lrc")) {
+        //该首歌有歌词
         song.lrc = lyric.lrc.lyric;
       }
       Bus.$emit("play", song);
@@ -182,8 +167,9 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.album-detail-container {
+.playlist-detail-container {
   padding-bottom: 100px;
+  text-align: left;
   .play-icon {
     margin-left: 40%;
     font-size: 24px;
@@ -197,25 +183,27 @@ export default {
     }
   }
 }
-.album-detail {
+.playlist-detail {
   text-align: left;
-  margin-top: 16px;
+  margin-top: 46px;
   padding-bottom: 100px;
   h1 {
     font-size: 24px;
-    margin: 16px 0;
     display: inline;
     position: relative;
-    top: -8px;
+    top: -4px;
   }
-  .add-playlist-btn{
-    position: relative;
-    top: -10px;
-    left: 10px;
-  }
-  .album-detail-info{
-    height: 200px;
-    overflow: hidden;
+  .playlist-creator {
+    font-size: 14px;
+    line-height: 3em;
+    height: 40px;
+    margin: 16px 0;
+    img {
+      margin-right: 16px;
+      float: left;
+      clear: both;
+      border-radius: 50%;
+    }
   }
 }
 </style>

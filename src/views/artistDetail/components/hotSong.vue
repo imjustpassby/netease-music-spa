@@ -19,7 +19,6 @@
 
 <script>
 import { getSongUrl,getLyric } from "@/api/song.js";
-import { mapMutations } from "vuex";
 import Bus from "@/utils/bus.js";
 export default {
   name: "",
@@ -39,7 +38,6 @@ export default {
   mounted() {},
 
   methods: {
-    ...mapMutations(["ADD_MUSIC"]),
     async getSong(id) {
       /* 获取音乐url */
       let res = await getSongUrl(id);
@@ -50,16 +48,17 @@ export default {
       let length = this.hotSongs.length;
       for (let j = 0; j < length; j++) {
         if (this.hotSongs[j].id === songList[0].id) {
-          this.hotSongs[j].src = songList[0].url;
-          this.hotSongs[j].lrc = lyric.lrc.lyric;
-          return;
+          this.hotSongs[j].url = songList[0].url;
+          if(lyric.hasOwnProperty('lrc')){
+            this.hotSongs[j].lrc = lyric.lrc.lyric;
+          }
+          return this.hotSongs[j];
         }
       }
     },
     async addMusic(song) {
-      this.ADD_MUSIC(song);
-      await this.getSong(song.id);
-      Bus.$emit("play", song);
+      let res = await this.getSong(song.id);
+      Bus.$emit("play", res);
     }
   }
 };

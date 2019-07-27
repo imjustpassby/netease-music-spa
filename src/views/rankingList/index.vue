@@ -5,7 +5,7 @@
         <a-skeleton active :loading="loading">
           <a-row type="flex" justify="space-around">
               <a-col :span="5" class="ranking-list-item" v-for="(item,index) in coverImgUrl" :key="index">
-                <img v-lazy="item.url" width="100%" alt="img" />
+                <img v-lazy="item.url" width="100%" alt="img" @click="goRankingDetail(index)" />
                 <p class="ranking-list-title">{{item.name}}</p>
               </a-col>
           </a-row>
@@ -41,7 +41,16 @@ export default {
     this.loading = false;
   },
 
-  methods: {}
+  methods: {
+    goRankingDetail(idx){
+      this.$router.push({
+        path: '/ranking-detail',
+        query: {
+          idx: idx
+        }
+      })
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>

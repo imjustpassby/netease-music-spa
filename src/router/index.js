@@ -63,6 +63,11 @@ export default new Router({
           path: '/mv-detail',
           name: 'mv-detail',
           component: () => import('@/views/mvDetail/index')
+        },
+        {
+          path: '/ranking-detail',
+          name: 'ranking-detail',
+          component: () => import('@/views/rankingDetail/index')
         }
       ]
     }

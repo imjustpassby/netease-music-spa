@@ -22,7 +22,7 @@ export function getPlayList(data) {
     params: {
       limit: 20,
       cat: data.cat ? data.cat : '',
-      offset: data.offset ? data.offset : 0
+      offset: data.offset ? data.offset+1 : 1 //推荐歌单第一张可能是VIP资源，里面的歌曲需要VIP，因此跳过第一张推荐
     }
   })
 }

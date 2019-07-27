@@ -8,7 +8,7 @@
           </a-col>
           <a-col :span="20">
             <recommend-artist v-if="!isQuery"></recommend-artist>
-            <query-artist-by-cat v-else :artistList="artistList" ref="queryArtist"></query-artist-by-cat>
+            <query-artist-by-cat v-else :artistList="artistList"></query-artist-by-cat>
           </a-col>
         </a-row>
       </a-col>

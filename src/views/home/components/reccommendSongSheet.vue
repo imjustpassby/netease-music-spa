@@ -5,14 +5,14 @@
         <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
           <use xlink:href="#icon-circle" />
         </svg>推荐歌单
-        <button class="more">更多&gt;</button>
+        <button class="more" @click="showMore">更多&gt;</button>
       </div>
-      <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
+      <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0;overflow:hidden;" v-bind:style="{height:height}">
         <a-col
           :span="4"
           v-for="(item,index) in personalized"
           :key="index"
-          style="margin:0 2px 16px 0"
+          style="margin:0 2px 16px 0;"
           @click="goPlaylistDetail(item.id)"
         >
           <div class="img-box">
@@ -33,6 +33,8 @@ export default {
   data() {
     return {
       personalized: [],
+      playlist: [],
+      height: '500px',
       loading: true
     };
   },
@@ -48,7 +50,6 @@ export default {
   async mounted() {
     let personalized = await getPersonalized();
     this.personalized = personalized.result;
-    this.personalized.splice(10);
     this.loading = false;
   },
 
@@ -60,6 +61,9 @@ export default {
           id: id
         }
       })
+    },
+    showMore(){
+      this.height = 'auto';
     }
   }
 };

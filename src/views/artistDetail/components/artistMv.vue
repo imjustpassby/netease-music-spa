@@ -11,7 +11,7 @@
             :key="index"
             @click="goMvDetail(item.id)"
           >
-            <img v-lazy="item.imgurl16v9" width="100%" alt="img" />
+            <img v-lazy="item.imgurl16v9" width="100%" alt="img" style="cursor:pointer"/>
             <p class="album-list-title">{{item.name}}</p>
           </a-col>
         </a-row>

@@ -6,9 +6,6 @@ const getters = {
   nickname: state => state.user.nickname,
   avatarUrl: state => state.user.avatarUrl,
   loginSuccess: state => state.user.loginSuccess,
-  currentMusic: state => state.player.currentMusic,
-  musicList: state => state.player.musicList,
-  currentIndex: state => state.player.currentIndex
 }
 
 export default getters

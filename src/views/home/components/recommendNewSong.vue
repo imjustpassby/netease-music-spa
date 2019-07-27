@@ -10,7 +10,7 @@
         <a-col :span="12" v-for="(item,index) in personalizedNewSong" :key="index">
           <a-row type="flex" justify="start" class="recommend-new-songs">
             <a-col :span="4" style="position:relative;">
-              <div @click="addMusic(item)">
+              <div @click.once="addMusic(item)">
                 <svg
                   class="icon play"
                   aria-hidden="true"
@@ -19,7 +19,7 @@
                   <use xlink:href="#icon-play" />
                 </svg>
                 <img
-                  v-lazy="item.pic"
+                  v-lazy="item.cover"
                   height="68px"
                   alt="img"
                   style="margin:9px 0 0 9px;cursor: pointer;z-index:-1"
@@ -27,7 +27,7 @@
               </div>
             </a-col>
             <a-col :span="20">
-              <p class="recommend-title" style="line-height:2em;cursor:text">{{item.title}}</p>
+              <p class="recommend-title" style="line-height:2em;cursor:text">{{item.name}}</p>
               <span class="recommend-title" style="line-height:2em;cursor:text">{{item.artist}}</span>
             </a-col>
           </a-row>
@@ -41,7 +41,6 @@
 import { getPersonalizedNewSong } from "@/api/home.js";
 import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
-import { mapMutations } from "vuex";
 export default {
   name: "",
   props: [""],
@@ -66,7 +65,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["ADD_MUSIC"]),
     async getNewSong() {
       let personalizedNewSong = await getPersonalizedNewSong();
       this.personalizedNewSong = personalizedNewSong.result.map(item => {
@@ -75,10 +73,10 @@ export default {
           artist.push(ar.name);
         }
         return {
-          title: item.name,
+          name: item.name,
           id: item.id,
           artist: artist.join("/"),
-          pic: item.song.album.blurPicUrl,
+          cover: item.song.album.blurPicUrl,
           albumName: item.song.album.name,
           albumId: item.song.album.id
         };
@@ -94,16 +92,17 @@ export default {
       let length = this.personalizedNewSong.length;
       for (let j = 0; j < length; j++) {
         if (this.personalizedNewSong[j].id === songList[0].id) {
-          this.personalizedNewSong[j].src = songList[0].url;
-          this.personalizedNewSong[j].lrc = lyric.lrc.lyric;
-          return;
+          this.personalizedNewSong[j].url = songList[0].url;
+          if(lyric.hasOwnProperty('lrc')){
+            this.personalizedNewSong[j].lrc = lyric.lrc.lyric;
+          }
+          return this.personalizedNewSong[j];
         }
       }
     },
     async addMusic(song) {
-      this.ADD_MUSIC(song);
-      await this.getSong(song.id);
-      Bus.$emit("play", song);
+      let res = await this.getSong(song.id);
+      Bus.$emit("play", res);
     }
   }
 };

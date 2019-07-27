@@ -51,7 +51,7 @@
         </div>
       </div>
       <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
-      <music-player class="music-player"></music-player>
+      <aplayer class="aplayer"></aplayer>
     </div>
     <transition name="fade-transform" mode="out-in">
       <router-view />
@@ -62,7 +62,7 @@
 
 <script>
 import LoginForm from "./login.vue";
-import MusicPlayer from "./musicPlayer.vue";
+import Aplayer from "./aplayer.vue"
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "",
@@ -123,7 +123,7 @@ export default {
 
   components: {
     LoginForm,
-    MusicPlayer
+    Aplayer
   },
 
   computed: {
@@ -139,7 +139,10 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+    window.sessionStorage.setItem("checkedTopLink", 0);
+    window.sessionStorage.setItem("checkedSubLink", 0);
+  },
 
   methods: {
     ...mapActions(["LOGOUT"]),
@@ -277,6 +280,8 @@ export default {
     cursor: pointer;
     line-height: 24px;
     em {
+      display: inline-block;
+      width: 100%;
       color: #fff;
     }
   }
@@ -291,5 +296,11 @@ export default {
   left: 0;
   right: 0;
   z-index: 99;
+}
+.aplayer{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -4px;
 }
 </style>

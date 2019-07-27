@@ -145,7 +145,7 @@ export default {
           title: item.name,
           id: item.id,
           artist: artist.join("/"),
-          pic: item.al.picUrl,
+          cover: item.al.picUrl,
           albumName: item.al.name,
           albumId: item.al.id,
           key: item.id
