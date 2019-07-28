@@ -1,58 +1,59 @@
 <template>
   <div>
-    <div class="g-topbar">
-      <div class="m-top">
-        <div class="logo">
-          <h1>
-            <router-link to="/">
-              <svg class="icon icon-netease" aria-hidden="true">
-                <use xlink:href="#icon-netease-music" />
-              </svg>网易云音乐
-            </router-link>
-          </h1>
-        </div>
-        <div class="m-nav">
-          <ul>
-            <li
-              v-for="(item,index) in topLink"
-              :key="index"
-              :class="checkedTopLink==index ?'isTopChecked' : ''"
-              @click="clickTopLink(index)"
-            >
-              <router-link :to="item.link">
-                <span>{{item.span}}</span>
+    <a-row>
+      <a-col :span="24">
+        <div class="g-topbar">
+          <div class="m-top">
+            <div class="logo animation-class">
+              <router-link to="/">
+                <span>CoisinMusic</span>
               </router-link>
-            </li>
-          </ul>
-        </div>
-        <div class="m-nav-login">
-          <button v-if="!loginSuccess" class="underline-btn" @click="showLoginForm">登录</button>
-          <div v-else>
-            <button class="underline-btn" @click="logout">登出</button>
-            <button class="underline-btn">{{nickname}}</button>
-            <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
+            </div>
+            <div class="m-nav">
+              <ul>
+                <li
+                  v-for="(item,index) in topLink"
+                  :key="index"
+                  :class="checkedTopLink==index ?'isTopChecked' : ''"
+                  @click="clickTopLink(index)"
+                >
+                  <router-link :to="item.link">
+                    <span>{{item.span}}</span>
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+            <div class="m-nav-login">
+              <button v-if="!loginSuccess" class="underline-btn" @click="showLoginForm">登录</button>
+              <div v-else>
+                <button class="underline-btn" @click="logout">登出</button>
+                <button class="underline-btn">{{nickname}}</button>
+                <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
+              </div>
+            </div>
           </div>
+          <div class="m-subnav">
+            <div class="m-subnav-list">
+              <ul>
+                <li
+                  v-for="(item,index) in subLink"
+                  :key="index"
+                  :class="checkedSubLink==index ?'isSubChecked' : ''"
+                  @click="clickSubLink(index)"
+                >
+                  <router-link :to="item.link">
+                    <em>{{item.span}}</em>
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
+          <aplayer class="aplayer"></aplayer>
         </div>
-      </div>
-      <div class="m-subnav">
-        <div class="m-subnav-list">
-          <ul>
-            <li
-              v-for="(item,index) in subLink"
-              :key="index"
-              :class="checkedSubLink==index ?'isSubChecked' : ''"
-              @click="clickSubLink(index)"
-            >
-              <router-link :to="item.link">
-                <em>{{item.span}}</em>
-              </router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
-      <aplayer class="aplayer"></aplayer>
-    </div>
+      </a-col>
+    </a-row>
+
     <transition name="fade-transform" mode="out-in">
       <router-view />
     </transition>
@@ -60,6 +61,7 @@
 </template>
 
 <script>
+import "@/style/animationClass.scss";
 import LoginForm from "./login.vue";
 import Aplayer from "./aplayer.vue";
 import { mapGetters, mapActions } from "vuex";
@@ -176,7 +178,7 @@ export default {
   z-index: 99;
   width: 100%;
   background-color: #242424;
-  color: 333;
+  color: #333;
 }
 .m-top {
   position: relative;
@@ -193,6 +195,9 @@ export default {
   align-items: center;
   .logo {
     min-width: 10%;
+    position: relative;
+    left: -4%;
+    height: 70px;
     .icon-netease {
       margin: 0 4px;
     }
@@ -204,6 +209,11 @@ export default {
       text-decoration: none;
       padding: 0 19px;
     }
+  }
+  .m-nav{
+    position: relative;
+    left: -30px;
+    margin-left: 16px;
   }
   .m-nav li,
   li span,
