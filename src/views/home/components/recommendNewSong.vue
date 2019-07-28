@@ -28,7 +28,7 @@
             </a-col>
             <a-col :span="20">
               <p class="recommend-title" style="line-height:2em;cursor:text">{{item.name}}</p>
-              <span class="recommend-title" style="line-height:2em;cursor:text">{{item.artist}}</span>
+              <span class="recommend-title" style="line-height:2em;cursor:text;color:#999">{{item.artist}}</span>
             </a-col>
           </a-row>
         </a-col>

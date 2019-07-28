@@ -5,7 +5,8 @@ import 'nprogress/nprogress.css'// Progress 进度条样式
 import Vue from 'vue'
 
 const whiteList = ['/home', '/ranking-list', '/playlist', '/dj-radios', '/new-album',
-  '/artist', '/album-detail', '/playlist-detail', '/artist-detail', '/mv-detail', '/ranking-detail']
+  '/artist', '/album-detail', '/playlist-detail', '/artist-detail', '/mv-detail', '/ranking-detail',
+  '/dj-detail']
 router.beforeEach((to, from, next) => {
   NProgress.start();
   if (store.getters.loginSuccess) { //如果已登录，直接跳转

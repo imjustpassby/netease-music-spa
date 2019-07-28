@@ -2,6 +2,14 @@
   <div>
     <a-row class="dj-list">
       <a-col :span="14" :offset="5">
+        <dj-cate></dj-cate>
+      </a-col>
+
+      <a-col :span="14" :offset="5">
+        <recommend-program></recommend-program>
+      </a-col>
+
+      <a-col :span="14" :offset="5">
         <dj-recommend></dj-recommend>
       </a-col>
 
@@ -13,6 +21,8 @@
 </template>
 
 <script>
+import DjCate from "./components/djCate"
+import RecommendProgram from "./components/recommendProgram"
 import TodayDj from "./components/todayDj"
 import DjRecommend from "./components/djRecommend"
 export default {
@@ -25,7 +35,9 @@ export default {
 
   components: {
     TodayDj,
-    DjRecommend
+    RecommendProgram,
+    DjRecommend,
+    DjCate
   },
 
   computed: {},

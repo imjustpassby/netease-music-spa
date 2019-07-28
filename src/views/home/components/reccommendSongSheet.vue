@@ -7,7 +7,7 @@
         </svg>推荐歌单
         <button class="more" @click="showMore">更多&gt;</button>
       </div>
-      <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0;overflow:hidden;" v-bind:style="{height:height}">
+      <a-row type="flex" justify="space-between" style="padding: 14px 0 0 0;overflow:hidden;" v-bind:style="{height:height}">
         <a-col
           :span="4"
           v-for="(item,index) in personalized"

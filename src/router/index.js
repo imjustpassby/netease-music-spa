@@ -68,6 +68,11 @@ export default new Router({
           path: '/ranking-detail',
           name: 'ranking-detail',
           component: () => import('@/views/rankingDetail/index')
+        },
+        {
+          path: '/dj-detail',
+          name: 'dj-detail',
+          component: () => import('@/views/djDetail/index')
         }
       ]
     }

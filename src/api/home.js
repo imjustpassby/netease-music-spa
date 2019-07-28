@@ -41,13 +41,6 @@ export function getPersonalizedDJProgram() {
     withCredentials: true
   })
 }
-/* 推荐节目 */
-export function getProgramRecommend() {
-  return request({
-    url: '/program/recommend',
-    withCredentials: true
-  })
-}
 /* 独家放送 */
 export function getPersonalizedPrivateContent() {
   return request({

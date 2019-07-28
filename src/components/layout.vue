@@ -56,13 +56,12 @@
     <transition name="fade-transform" mode="out-in">
       <router-view />
     </transition>
-    
   </div>
 </template>
 
 <script>
 import LoginForm from "./login.vue";
-import Aplayer from "./aplayer.vue"
+import Aplayer from "./aplayer.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "",
@@ -79,12 +78,6 @@ export default {
           link: "/my"
         }
       ],
-      checkedTopLink: window.sessionStorage.getItem(
-        "checkedSubLink",
-        this.checkedTopLink
-      )
-        ? window.sessionStorage.getItem("checkedSubLink", this.checkedTopLink)
-        : 0,
       subLink: [
         {
           span: "推荐",
@@ -111,13 +104,9 @@ export default {
           link: "/new-album"
         }
       ],
-      checkedSubLink: window.sessionStorage.getItem(
-        "checkedSubLink",
-        this.checkedSubLink
-      )
-        ? window.sessionStorage.getItem("checkedSubLink", this.checkedSubLink)
-        : 0,
-      loginShow: false
+      loginShow: false,
+      checkedTopLink: 0,
+      checkedSubLink: 0
     };
   },
 
@@ -147,22 +136,23 @@ export default {
   methods: {
     ...mapActions(["LOGOUT"]),
     clickTopLink(idx) {
-      if (idx===0){
-        this.checkedTopLink = idx;
-        window.sessionStorage.setItem("checkedTopLink", this.checkedTopLink);
-        this.clickSubLink(0);
+      if (idx === 0) {
+        window.sessionStorage.setItem("checkedTopLink", idx);
+        window.sessionStorage.setItem("checkedSubLink", 0);
+        this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
+        this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
       } else {
-        if (this.$store.getters.loginSuccess){
-          this.checkedTopLink = idx;
-          window.sessionStorage.setItem("checkedTopLink", this.checkedTopLink);
-          this.clickSubLink(-1);
+        if (this.$store.getters.loginSuccess) {
+          window.sessionStorage.setItem("checkedTopLink", idx);
+          window.sessionStorage.setItem("checkedSubLink", -1);
+          this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
+          this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
         }
       }
-      
     },
     clickSubLink(idx) {
-      this.checkedSubLink = idx;
-      window.sessionStorage.setItem("checkedSubLink", this.checkedSubLink);
+      window.sessionStorage.setItem("checkedSubLink", idx);
+      this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
     },
     showLoginForm() {
       this.loginShow = true;
@@ -297,10 +287,10 @@ export default {
   right: 0;
   z-index: 99;
 }
-.aplayer{
+.aplayer {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: -4px;
+  bottom: -6px;
 }
 </style>

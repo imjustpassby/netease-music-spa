@@ -14,15 +14,11 @@
                 </svg>
                 <h1>{{albumInfo.name}}</h1>
                 <a-button @click.once="addMusicList" class="add-playlist-btn">
-                    <svg
-                      class="icon"
-                      aria-hidden="true"
-                      style="font-size:16px; margin-right:16px;"
-                    >
-                      <use xlink:href="#icon-play1" />
-                    </svg>加入播放列表
-                  </a-button>
-                <div class="album-detail-info">
+                  <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
+                    <use xlink:href="#icon-play1" />
+                  </svg>加入播放列表
+                </a-button>
+                <div :class="!expand ? 'album-detail-info' : ''">
                   <p>
                     歌手：
                     <span v-for="(art,idx) in albumInfo.artists" :key="idx">
@@ -32,6 +28,7 @@
                   </p>
                   <p>发行时间：{{albumInfo.publishTime}}</p>
                   <p>发行公司：{{albumInfo.company}}</p>
+                  <button class="more" @click="showMore">{{expandText}}</button>
                   <p style="white-space: pre-wrap;">介绍：{{albumInfo.description}}</p>
                 </div>
               </a-col>
@@ -68,7 +65,7 @@
 
 <script>
 import { getAlbum } from "@/api/album.js";
-import { getSongUrl,getLyric } from "@/api/song.js";
+import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
 export default {
   name: "",
@@ -86,7 +83,9 @@ export default {
         publishTime: "",
         artists: [],
         tracks: []
-      }
+      },
+      expand: false,
+      expandText: "展开"
     };
   },
 
@@ -169,20 +168,30 @@ export default {
       }
     },
     addMusicList() {
-      Bus.$emit("add",this.albumInfo.tracks)
+      Bus.$emit("add", { list: this.albumInfo.tracks, type: "album" });
     },
     async addMusic(song) {
       let lyric = await getLyric(song.id);
-      if (lyric.hasOwnProperty('lrc')){
+      if (lyric.hasOwnProperty("lrc")) {
         song.lrc = lyric.lrc.lyric;
       }
       Bus.$emit("play", song);
+    },
+    showMore(){
+      if(this.expand){
+        this.expand = false;
+        this.expandText = "展开";
+      } else {
+        this.expand = true;
+        this.expandText = "收起";
+      }
     }
   }
 };
 </script>
 <style lang='scss' scoped>
 .album-detail-container {
+  position: relative;
   padding-bottom: 100px;
   .play-icon {
     margin-left: 40%;
@@ -208,14 +217,26 @@ export default {
     position: relative;
     top: -8px;
   }
-  .add-playlist-btn{
+  .add-playlist-btn {
     position: relative;
     top: -10px;
     left: 10px;
   }
-  .album-detail-info{
+  .album-detail-info {
     height: 200px;
     overflow: hidden;
   }
+}
+.more {
+  position: absolute;
+  bottom: -16px;
+  right: 0;
+  font-size: 14px;
+  line-height: 2.5em;
+  outline: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
 }
 </style>

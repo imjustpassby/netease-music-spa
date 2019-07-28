@@ -14,6 +14,7 @@
             class="dj-list-item"
             v-for="(item,index) in djs"
             :key="index"
+            @click="goDjDetail(item)"
           >
             <img v-lazy="item.picUrl" width="100%" alt="img" />
             <p class="dj-list-title">{{item.name}}</p>
@@ -59,6 +60,14 @@ export default {
           picUrl: item.picUrl
         };
       });
+    },
+    goDjDetail(data){
+      this.$router.push({
+        path: '/dj-detail',
+        query: {
+          rid: data.id
+        }
+      })
     }
   }
 };

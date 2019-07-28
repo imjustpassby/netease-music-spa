@@ -153,7 +153,7 @@ export default {
       }
     },
     addMusicList() {
-      Bus.$emit("add", this.playList.tracks);
+      Bus.$emit("add", { list: this.playList.tracks, type: "ranking" });
     },
     async addMusic(song) {
       let lyric = await getLyric(song.id);

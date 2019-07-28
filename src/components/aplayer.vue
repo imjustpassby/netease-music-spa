@@ -30,7 +30,7 @@ export default {
       lrcType: 2,
       listFolded: true,
       listMaxHeight: "300px",
-      theme: "#e9e9e9"
+      theme: "#FFDB00"
     };
     const ap = new APlayer(options);
     Bus.$on("play", song => {
@@ -49,18 +49,21 @@ export default {
       ap.list.switch(ap.list.audios.length - 1);
       ap.play();
     });
-    Bus.$on("add", list => {
-      list.forEach(item => {
-        getLyric(item.id)
-          .then(res => {
-            if (res.hasOwnProperty("lrc")) {
-              item.lrc = res.lrc.lyric;
-            }
-            ap.list.add(item);
-          })
-          .catch();
-      });
-      // ap.list.add(list);
+    Bus.$on("add", data => {
+      if (data.type !== "program") {
+        data.list.forEach(item => {
+          getLyric(item.id)
+            .then(res => {
+              if (res.hasOwnProperty("lrc")) {
+                item.lrc = res.lrc.lyric;
+              }
+              ap.list.add(item);
+            })
+            .catch();
+        });
+      } else {
+        ap.list.add(data.list);
+      }
     });
   },
 
