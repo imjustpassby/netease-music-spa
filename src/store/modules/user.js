@@ -77,9 +77,6 @@ const user = {
           commit('SET_PROFILE', res.profile);
           commit('SET_BINDINGS', res.bindings);
           commit('SET_LOGIN_SUCCESS', true);
-          setInterval(() => {
-            loginRefresh()
-          },3600)
           resolve(res)
         }).catch((err) => {
           reject(err)

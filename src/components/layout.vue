@@ -2,55 +2,63 @@
   <div>
     <a-row>
       <a-col :span="24">
-        <div class="g-topbar">
-          <div class="m-top">
-            <div class="logo animation-class">
-              <router-link to="/">
-                <span>CoisinMusic</span>
-              </router-link>
-            </div>
-            <div class="m-nav">
-              <ul>
-                <li
-                  v-for="(item,index) in topLink"
-                  :key="index"
-                  :class="checkedTopLink==index ?'isTopChecked' : ''"
-                  @click="clickTopLink(index)"
-                >
-                  <router-link :to="item.link">
-                    <span>{{item.span}}</span>
+        <a-row>
+          <div class="g-topbar">
+            <div class="m-top">
+              <a-col :span="3" :offset="5">
+                <div class="logo animation-class">
+                  <router-link to="/">
+                    <span>CoisinMusic</span>
                   </router-link>
-                </li>
-              </ul>
+                </div>
+              </a-col>
+              <a-col :span="7">
+                <div class="m-nav">
+                  <ul>
+                    <li
+                      v-for="(item,index) in topLink"
+                      :key="index"
+                      :class="checkedTopLink==index ?'isTopChecked' : ''"
+                      @click="clickTopLink(index)"
+                    >
+                      <router-link :to="item.link">
+                        <span>{{item.span}}</span>
+                      </router-link>
+                    </li>
+                  </ul>
+                </div>
+              </a-col>
+              <a-col :span="4">
+                <div class="m-nav-login">
+                  <button v-if="!loginSuccess" class="underline-btn" @click="showLoginForm">登录</button>
+                  <div v-else>
+                    <button class="underline-btn" @click="logout">登出</button>
+                    <button class="underline-btn">{{nickname}}</button>
+                    <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
+                  </div>
+                </div>
+              </a-col>
             </div>
-            <div class="m-nav-login">
-              <button v-if="!loginSuccess" class="underline-btn" @click="showLoginForm">登录</button>
-              <div v-else>
-                <button class="underline-btn" @click="logout">登出</button>
-                <button class="underline-btn">{{nickname}}</button>
-                <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
+            <div class="m-subnav">
+              <div class="m-subnav-list">
+                <ul>
+                  <li
+                    v-for="(item,index) in subLink"
+                    :key="index"
+                    :class="checkedSubLink==index ?'isSubChecked' : ''"
+                    @click="clickSubLink(index)"
+                  >
+                    <router-link :to="item.link">
+                      <em>{{item.span}}</em>
+                    </router-link>
+                  </li>
+                </ul>
               </div>
             </div>
+            <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
+            <aplayer class="aplayer"></aplayer>
           </div>
-          <div class="m-subnav">
-            <div class="m-subnav-list">
-              <ul>
-                <li
-                  v-for="(item,index) in subLink"
-                  :key="index"
-                  :class="checkedSubLink==index ?'isSubChecked' : ''"
-                  @click="clickSubLink(index)"
-                >
-                  <router-link :to="item.link">
-                    <em>{{item.span}}</em>
-                  </router-link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
-          <aplayer class="aplayer"></aplayer>
-        </div>
+        </a-row>
       </a-col>
     </a-row>
 
@@ -189,14 +197,8 @@ export default {
   color: #ccc;
   background: #242424;
   border-bottom: 1px solid #000;
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  align-items: center;
   .logo {
     min-width: 10%;
-    position: relative;
-    left: -4%;
     height: 70px;
     .icon-netease {
       margin: 0 4px;
@@ -210,10 +212,8 @@ export default {
       padding: 0 19px;
     }
   }
-  .m-nav{
-    position: relative;
-    left: -30px;
-    margin-left: 16px;
+  .m-nav {
+    text-align: left;
   }
   .m-nav li,
   li span,
@@ -229,7 +229,6 @@ export default {
     padding: 0 19px;
   }
   .m-nav-login {
-    width: 30%;
     position: relative;
     .avatar {
       width: 30px;
@@ -268,7 +267,7 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    margin-left: -12%;
+    margin-left: -4%;
   }
   li {
     display: inline-block;
