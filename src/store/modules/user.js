@@ -1,10 +1,9 @@
 import {
   loginCellphone,
   loginStatus,
-  userDetail,
   logout,
   loginRefresh
-} from '@/api/login'
+} from '@/api/user'
 
 const user = {
   state: {
@@ -110,20 +109,6 @@ const user = {
         }).catch(err => {
           reject(err)
         });
-      })
-    },
-    USER_DETAIL({
-      commit
-    }, uid) {
-      return new Promise((resolve, reject) => {
-        userDetail({
-          uid
-        }).then(res => {
-          console.log("ACTIONS USER_DETAIL")
-          resolve(res)
-        }).catch(err => {
-          reject(err)
-        })
       })
     }
   }

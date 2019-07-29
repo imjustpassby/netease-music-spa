@@ -154,6 +154,7 @@ export default {
     },
     addMusicList() {
       Bus.$emit("add", { list: this.playList.tracks, type: "ranking" });
+      this.$message.success("已加入播放列表！");
     },
     async addMusic(song) {
       let lyric = await getLyric(song.id);

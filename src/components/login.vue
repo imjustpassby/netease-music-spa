@@ -97,7 +97,6 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
           this.loginShow = false;
         }
       });
@@ -114,16 +113,6 @@ export default {
           .toString()
           .trim()
       };
-      /* this.$store.dispatch("LOGIN",userInfo)
-        .then(() => {
-          console.log("ok login");
-          this.$emit("confirmLogin");
-          this.modalShow = false;
-        })
-        .catch(() => {
-          console.log("fail login");
-          return false;
-        }); */
       await this.LOGIN(userInfo)
         .then(res => {
           this.$emit("confirmLogin");

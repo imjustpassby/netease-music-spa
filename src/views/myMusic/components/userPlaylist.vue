@@ -1,0 +1,80 @@
+<template>
+  <div class="userPlayList">
+    <a-row type="flex" justify="space-around">
+      <a-divider orientation="left" style="font-weight:bold">创建的歌单</a-divider>
+      <a-list itemLayout="horizontal" :dataSource="userPlaylist" style="width:100%">
+        <a-list-item slot="renderItem" slot-scope="item, index">
+          <a-list-item-meta :description="item.trackCount+'首'">
+            <p slot="title" class="playlist-title" @click="showPlaylist(item)">{{item.name}}</p>
+            <a-avatar slot="avatar" :src="item.coverImgUrl" style="width:46px;height:46px" />
+          </a-list-item-meta>
+        </a-list-item>
+      </a-list>
+      <a-divider orientation="left" style="font-weight:bold">收藏的歌单</a-divider>
+      <a-list itemLayout="horizontal" :dataSource="subPlaylist" style="width:100%">
+        <a-list-item slot="renderItem" slot-scope="item, index">
+          <a-list-item-meta :description="item.trackCount+'首'">
+            <p slot="title" class="playlist-title" @click="showPlaylist(item)">{{item.name}}</p>
+            <a-avatar slot="avatar" :src="item.coverImgUrl" style="width:46px;height:46px" />
+          </a-list-item-meta>
+        </a-list-item>
+      </a-list>
+    </a-row>
+  </div>
+</template>
+
+<script>
+import { getUserPlaylist } from "@/api/user";
+import { mapGetters } from "vuex";
+export default {
+  name: "",
+  props: [""],
+  data() {
+    return {
+      userPlaylist: [],
+      subPlaylist: []
+    };
+  },
+
+  components: {},
+
+  computed: {
+    ...mapGetters(["account", "profile", "uid", "nickname", "avatarUrl"])
+  },
+
+  watch: {},
+
+  beforeMount() {},
+
+  async mounted() {
+    await this.getUserPlaylist();
+  },
+
+  methods: {
+    async getUserPlaylist() {
+      let res = await getUserPlaylist(this.uid);
+      this.userPlaylist = res.playlist.filter(item => {
+        return item.creator.userId == this.uid;
+      });
+      this.subPlaylist = res.playlist.filter(item => {
+        return item.creator.userId != this.uid;
+      });
+    },
+    showPlaylist(playlist){
+      this.$emit("showPlaylist",playlist);
+    }
+  }
+};
+</script>
+<style lang='scss' scoped>
+.userPlayList {
+  padding: 36px 16px 100px 16px;
+  text-align: left;
+  border: 1px solid rgb(232,232,232);
+  .playlist-title{
+    text-decoration: underline;
+    cursor: pointer;
+    color: #333;
+  }
+}
+</style>

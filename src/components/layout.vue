@@ -8,7 +8,7 @@
               <a-col :span="3" :offset="5">
                 <div class="logo animation-class">
                   <router-link to="/">
-                    <span>CoisinMusic</span>
+                    <span>Coisin4Music</span>
                   </router-link>
                 </div>
               </a-col>
@@ -174,6 +174,9 @@ export default {
       await this.LOGOUT()
         .then(result => {
           this.$message.success("已退出登录");
+          this.$router.push({
+            path: '/'
+          })
         })
         .catch(err => {});
     }

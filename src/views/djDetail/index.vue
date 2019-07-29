@@ -182,6 +182,7 @@ export default {
     },
     addMusicList() {
       Bus.$emit("add", { list: this.djRadio.tracks, type: "program" });
+      this.$message.success("已加入播放列表！");
     },
     async addMusic(song) {
       Bus.$emit("play", song);
