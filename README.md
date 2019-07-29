@@ -1,17 +1,17 @@
 # netease-spa
 
-> 基于vue框架的模仿网易云音乐web网站，利用[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)提供的api集成，功能不多，充当练习项目。
+> 基于vue框架的模仿网易云音乐web网站，利用[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)提供的api集成，UI框架VUE-ANT-DESIGN，项目功能不多，仅仅是为了练习。
 
 ## 后端API
 
 > 请移步到[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi),感谢大佬！
 
-##主要功能
+## 主要功能
 
 + 用户
    1.手机密码登录
 + 首页
-   1.banner（只能看）
+   1.banner（只能看...内容比较杂，包括单曲、专辑、广告？）
    2.推荐歌单
    3.独家放送（只能看...没有详情接口）
    4.最新音乐

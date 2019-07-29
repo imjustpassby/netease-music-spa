@@ -65,14 +65,14 @@ export function userDetail(data) {
 /* 获取用户信息 , 歌单，收藏，mv, dj 数量 */
 export function getUserSubCount(data) {
   return request({
-    url: '/api//user/subcount',
+    url: '/api/user/subcount',
     withCredentials: true,
   })
 }
 /* 获取用户歌单 */
 export function getUserPlaylist(data) {
   return request({
-    url: '/api//user/playlist',
+    url: '/api/user/playlist',
     withCredentials: true,
     params: {
       uid: data
@@ -82,7 +82,7 @@ export function getUserPlaylist(data) {
 /* 获取用户播放记录 */
 export function getUserRecord(data) {
   return request({
-    url: '/api//user/record',
+    url: '/api/user/record',
     withCredentials: true,
     params: {
       uid: data.uid,
