@@ -1,5 +1,5 @@
 import request from "@/utils/request"
-
+/* 手机密码登录 */
 export function loginCellphone(data) {
   return request({
     url: '/api/login/cellphone',
@@ -10,21 +10,42 @@ export function loginCellphone(data) {
     }
   })
 }
-
+/* 发送验证码 */
+export function CaptchaSent(data){
+  return request({
+    url: '/api/captcha/sent',
+    withCredentials: true,
+    params: {
+      phone: data
+    }
+  })
+}
+/* 验证验证码 */
+export function CaptchaVerify(data){
+  return request({
+    url: '/api/captcha/verify',
+    withCredentials: true,
+    params: {
+      phone: data.phone,
+      captcha: data.captcha
+    }
+  })
+}
+/* 刷新登录状态 */
 export function loginRefresh() {
   return request({
     url: '/api/login/refresh',
     withCredentials: true
   })
 }
-
+/* 登出 */
 export function logout() {
   return request({
     url: '/api/logout',
     withCredentials: true
   })
 }
-
+/* 登录状态 */
 export function loginStatus() {
   return request({
     url: '/api/login/status',
