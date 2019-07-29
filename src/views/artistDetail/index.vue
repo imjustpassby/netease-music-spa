@@ -148,6 +148,7 @@ export default {
           cover: item.al.picUrl,
           albumName: item.al.name,
           albumId: item.al.id,
+          pop: item.pop,
           key: item.id
         };
       });

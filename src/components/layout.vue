@@ -12,7 +12,7 @@
                   </router-link>
                 </div>
               </a-col>
-              <a-col :span="7">
+              <a-col :span="6">
                 <div class="m-nav">
                   <ul>
                     <li

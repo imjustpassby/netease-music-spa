@@ -5,7 +5,7 @@
         <div class="dj-list-top-title">
           <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
             <use xlink:href="#icon-circle" />
-          </svg>电台推荐
+          </svg>精选电台 - 订阅更精彩
         </div>
         <a-row type="flex" justify="space-around">
           <a-col

@@ -10,15 +10,26 @@
           </span>
         </template>
       </a-table-column>
-      <a-table-column title="歌曲标题" data-index="title" width="50%" key="title" />
-      <a-table-column title="歌手" data-index="artist" width="25%" key="artist" />
+      <a-table-column title="歌曲标题" data-index="title" width="30%" key="title" />
+      <a-table-column title="热度" width="20%" key="hot" align="center">
+        <template slot-scope="text, record">
+          <a-progress
+            :percent="record.pop"
+            size="small"
+            status="active"
+            strokeColor="red"
+            :format="percent => percent"
+          />
+        </template>
+      </a-table-column>
+      <a-table-column title="歌手" align="center" data-index="artist" width="20%" key="artist" />
       <a-table-column title="专辑" data-index="albumName" key="albumName" />
     </a-table>
   </div>
 </template>
 
 <script>
-import { getSongUrl,getLyric } from "@/api/song.js";
+import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
 export default {
   name: "",
@@ -49,7 +60,7 @@ export default {
       for (let j = 0; j < length; j++) {
         if (this.hotSongs[j].id === songList[0].id) {
           this.hotSongs[j].url = songList[0].url;
-          if(lyric.hasOwnProperty('lrc')){
+          if (lyric.hasOwnProperty("lrc")) {
             this.hotSongs[j].lrc = lyric.lrc.lyric;
           }
           return this.hotSongs[j];
