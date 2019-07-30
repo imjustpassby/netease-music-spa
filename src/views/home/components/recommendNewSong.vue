@@ -28,7 +28,10 @@
             </a-col>
             <a-col :span="20">
               <p class="recommend-title" style="line-height:2em;cursor:text">{{item.name}}</p>
-              <span class="recommend-title" style="line-height:2em;cursor:text;color:#999">{{item.artist}}</span>
+              <span
+                class="recommend-title"
+                style="line-height:2em;cursor:text;color:#999"
+              >{{item.artist}}</span>
             </a-col>
           </a-row>
         </a-col>
@@ -39,8 +42,8 @@
 
 <script>
 import { getPersonalizedNewSong } from "@/api/home.js";
-import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
+import { mapActions } from "vuex";
 export default {
   name: "",
   props: [""],
@@ -65,6 +68,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     async getNewSong() {
       let personalizedNewSong = await getPersonalizedNewSong();
       this.personalizedNewSong = personalizedNewSong.result.map(item => {
@@ -82,27 +86,14 @@ export default {
         };
       });
     },
-    async getSong(id) {
-      /* 获取音乐url */
-      let res = await getSongUrl(id);
-      let lyric = await getLyric(id);
-      let songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      let length = this.personalizedNewSong.length;
-      for (let j = 0; j < length; j++) {
-        if (this.personalizedNewSong[j].id === songList[0].id) {
-          this.personalizedNewSong[j].url = songList[0].url;
-          if(lyric.hasOwnProperty('lrc')){
-            this.personalizedNewSong[j].lrc = lyric.lrc.lyric;
-          }
-          return this.personalizedNewSong[j];
-        }
-      }
-    },
     async addMusic(song) {
-      let res = await this.getSong(song.id);
-      Bus.$emit("play", res);
+      this.SET_CURRENT_MUSIC_ACTION(song)
+        .then(result => {
+          Bus.$emit("play", result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

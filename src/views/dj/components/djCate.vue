@@ -23,7 +23,7 @@
           <a-col :span="12" v-for="(item,index) in djRecommend" :key="index">
             <a-row type="flex" justify="start" class="recommend-new-songs">
               <a-col :span="4" style="position:relative;">
-                <div @click.once="goDjDetail(item)">
+                <div @click="goDjDetail(item)">
                   <img
                     v-lazy="item.picUrl"
                     height="68px"

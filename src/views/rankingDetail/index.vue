@@ -45,7 +45,7 @@
               <a-table-column title key="action" width="5%">
                 <template slot-scope="text, record">
                   <span>
-                    <svg class="icon play-icon" aria-hidden="true" @click="addMusic(record)">
+                    <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
                       <use xlink:href="#icon-play1" />
                     </svg>
                   </span>
@@ -64,7 +64,7 @@
 
 <script>
 import { getRankingList } from "@/api/rankingList.js";
-import { getSongUrl, getLyric } from "@/api/song.js";
+import { mapActions } from "vuex";
 import Bus from "@/utils/bus.js";
 export default {
   name: "",
@@ -81,7 +81,6 @@ export default {
         name: "",
         description: ""
       },
-      songList: [],
       loading: true
     };
   },
@@ -100,11 +99,11 @@ export default {
 
   async mounted() {
     await this.getList();
-    await this.getSong();
     this.loading = false;
   },
 
   methods: {
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     async getList() {
       let res = await getRankingList(this.idx);
       this.playList.id = res.playlist.id;
@@ -124,45 +123,26 @@ export default {
           artist: artist.join("/"),
           cover: item.al.picUrl,
           albumName: item.al.name,
-          albumId: item.al.id
+          albumId: item.al.id,
+          key: item.id
         };
       });
       this.playList.picUrl = res.playlist.coverImgUrl;
       this.playList.name = res.playlist.name;
       this.playList.description = res.playlist.description;
     },
-    async getSong() {
-      let ids = [];
-      this.playList.trackIds.forEach(item => {
-        ids.push(item.id);
-      });
-      /* 获取音乐url */
-      let res = await getSongUrl(ids.join(","));
-      this.songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      /* 音乐url加入到playList.tracks */
-      let length = this.songList.length;
-      for (let i = 0; i < length; i++) {
-        for (let j = 0; j < length; j++) {
-          if (this.songList[i].id == this.playList.tracks[j].id) {
-            this.playList.tracks[j].url = this.songList[i].url;
-            this.playList.tracks[j].key = j;
-          }
-        }
-      }
-    },
     addMusicList() {
       Bus.$emit("add", { list: this.playList.tracks, type: "ranking" });
       this.$message.success("已加入播放列表！");
     },
     async addMusic(song) {
-      let lyric = await getLyric(song.id);
-      if (lyric.hasOwnProperty("lrc")) {
-        //该首歌有歌词
-        song.lrc = lyric.lrc.lyric;
-      }
-      Bus.$emit("play", song);
+      this.SET_CURRENT_MUSIC_ACTION(song)
+        .then(result => {
+          Bus.$emit("play", result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

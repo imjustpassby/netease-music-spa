@@ -41,8 +41,8 @@
 
 <script>
 import { getProgramRecommend } from "@/api/dj.js";
-import { getSongUrl } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
+import { mapActions } from "vuex";
 export default {
   name: "",
   props: [""],
@@ -67,6 +67,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     async getProgramRecommend(){
       let res = await getProgramRecommend();
       this.programRecommend = res.programs.map(item=>{
@@ -78,23 +79,14 @@ export default {
         };
       });
     },
-    async getSong(id) {
-      /* 获取音乐url */
-      let res = await getSongUrl(id);
-      let songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      let length = this.programRecommend.length;
-      for (let j = 0; j < length; j++) {
-        if (this.programRecommend[j].id === songList[0].id) {
-          this.programRecommend[j].url = songList[0].url;
-          return this.programRecommend[j];
-        }
-      }
-    },
     async addMusic(song) {
-      let res = await this.getSong(song.id);
-      Bus.$emit("play", res);
+      this.SET_CURRENT_MUSIC_ACTION(song)
+        .then(result => {
+          Bus.$emit("play", result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

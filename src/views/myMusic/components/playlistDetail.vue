@@ -15,7 +15,7 @@
               <div class="playlist-creator">
                 <img v-lazy="playList.creator.avatarUrl" width="36px" alt />
                 <span>{{playList.creator.nickname}}&nbsp;&nbsp;于&nbsp;&nbsp;{{playList.createTime}}&nbsp;&nbsp;创建</span>
-                <a-button @click="addMusicList" style="margin-left: 20px">
+                <a-button @click.once="addMusicList" style="margin-left: 20px">
                   <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
                     <use xlink:href="#icon-play1" />
                   </svg>加入播放列表
@@ -60,8 +60,8 @@
 </template>
 
 <script>
-import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
+import { mapActions } from "vuex";
 export default {
   name: "",
   props: ["playList"],
@@ -82,53 +82,19 @@ export default {
   mounted() {},
 
   methods: {
-    async getSongs() {
-      let ids = [];
-      this.playList.trackIds.forEach(item => {
-        ids.push(item.id);
-      });
-      /* 获取音乐url */
-      let res = await getSongUrl(ids.join(","));
-      let songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      /* 音乐url加入到playList.tracks */
-      let length = songList.length;
-      for (let i = 0; i < length; i++) {
-        for (let j = 0; j < length; j++) {
-          if (songList[i].id == this.playList.tracks[j].id) {
-            this.playList.tracks[j].url = songList[i].url;
-            this.playList.tracks[j].key = j;
-          }
-        }
-      }
-    },
-    async addMusicList() {
-      await this.getSongs();
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
+    addMusicList() {
       Bus.$emit("add", { list: this.playList.tracks, type: "playlist" });
       this.$message.success("已加入播放列表！");
     },
-    async getSong(id) {
-      /* 获取音乐url */
-      let res = await getSongUrl(id);
-      let lyric = await getLyric(id);
-      let songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      let length = this.playList.tracks.length;
-      for (let j = 0; j < length; j++) {
-        if (this.playList.tracks[j].id === songList[0].id) {
-          this.playList.tracks[j].url = songList[0].url;
-          if (lyric.hasOwnProperty("lrc")) {
-            this.playList.tracks[j].lrc = lyric.lrc.lyric;
-          }
-          return this.playList.tracks[j];
-        }
-      }
-    },
     async addMusic(song) {
-      let res = await this.getSong(song.id);
-      Bus.$emit("play", res);
+      this.SET_CURRENT_MUSIC_ACTION(song)
+        .then(result => {
+          Bus.$emit("play", result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

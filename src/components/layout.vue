@@ -57,6 +57,7 @@
             </div>
             <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
             <aplayer class="aplayer"></aplayer>
+            <my-playlist></my-playlist>
           </div>
         </a-row>
       </a-col>
@@ -72,6 +73,7 @@
 import "@/style/animationClass.scss";
 import LoginForm from "./login.vue";
 import Aplayer from "./aplayer.vue";
+import MyPlaylist from "./myPlaylist.vue"
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "",
@@ -122,7 +124,8 @@ export default {
 
   components: {
     LoginForm,
-    Aplayer
+    Aplayer,
+    MyPlaylist
   },
 
   computed: {

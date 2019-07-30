@@ -65,8 +65,8 @@
 
 <script>
 import { getAlbum } from "@/api/album.js";
-import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
+import { mapActions } from "vuex";
 export default {
   name: "",
   props: [""],
@@ -99,11 +99,11 @@ export default {
 
   async mounted() {
     await this.getAlbumInfo();
-    await this.getSong();
     this.loading = false;
   },
 
   methods: {
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     async getAlbumInfo() {
       //获取专辑信息
       let res = await getAlbum(this.$route.query.id);
@@ -142,44 +142,26 @@ export default {
           artist: ars.join("/"),
           pic: item.al.picUrl,
           albumName: item.al.name,
-          albumId: item.al.id
+          albumId: item.al.id,
+          key: item.id
         };
       });
-    },
-    async getSong() {
-      let ids = [];
-      this.albumInfo.tracks.forEach(item => {
-        ids.push(item.id);
-      });
-      /* 获取音乐url */
-      let res = await getSongUrl(ids.join(","));
-      let songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      /* 音乐url加入到playList.tracks */
-      let length = songList.length;
-      for (let i = 0; i < length; i++) {
-        for (let j = 0; j < length; j++) {
-          if (songList[i].id == this.albumInfo.tracks[j].id) {
-            this.albumInfo.tracks[j].url = songList[i].url;
-            this.albumInfo.tracks[j].key = j;
-          }
-        }
-      }
     },
     addMusicList() {
       Bus.$emit("add", { list: this.albumInfo.tracks, type: "album" });
       this.$message.success("已加入播放列表！");
     },
     async addMusic(song) {
-      let lyric = await getLyric(song.id);
-      if (lyric.hasOwnProperty("lrc")) {
-        song.lrc = lyric.lrc.lyric;
-      }
-      Bus.$emit("play", song);
+      this.SET_CURRENT_MUSIC_ACTION(song)
+        .then(result => {
+          Bus.$emit("play", result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
-    showMore(){
-      if(this.expand){
+    showMore() {
+      if (this.expand) {
         this.expand = false;
         this.expandText = "展开";
       } else {

@@ -69,8 +69,8 @@
 
 <script>
 import { getPlaylistDetail } from "@/api/playList.js";
-import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
+import { mapActions } from "vuex";
 export default {
   name: "",
   props: [""],
@@ -87,8 +87,7 @@ export default {
         picUrl: "",
         name: "",
         description: ""
-      },
-      songList: []
+      }
     };
   },
 
@@ -102,11 +101,11 @@ export default {
 
   async mounted() {
     await this.getListDetail(this.$route.query.id);
-    await this.getSong();
     this.loading = false;
   },
 
   methods: {
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     async getListDetail(data) {
       //获取歌单信息
       let res = await getPlaylistDetail(data);
@@ -128,7 +127,8 @@ export default {
           artist: artist.join("/"),
           cover: item.al.picUrl,
           albumName: item.al.name,
-          albumId: item.al.id
+          albumId: item.al.id,
+          key: item.id
         };
       });
       this.playList.tags = res.playlist.tags;
@@ -136,37 +136,18 @@ export default {
       this.playList.name = res.playlist.name;
       this.playList.description = res.playlist.description;
     },
-    async getSong() {
-      let ids = [];
-      this.playList.trackIds.forEach(item => {
-        ids.push(item.id);
-      });
-      /* 获取音乐url */
-      let res = await getSongUrl(ids.join(","));
-      this.songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      /* 音乐url加入到playList.tracks */
-      let length = this.songList.length;
-      for (let i = 0; i < length; i++) {
-        for (let j = 0; j < length; j++) {
-          if (this.songList[i].id == this.playList.tracks[j].id) {
-            this.playList.tracks[j].url = this.songList[i].url;
-            this.playList.tracks[j].key = j;
-          }
-        }
-      }
-    },
     addMusicList() {
       Bus.$emit("add", { list: this.playList.tracks, type: "playlist" });
       this.$message.success("已加入播放列表！");
     },
     async addMusic(song) {
-      let lyric = await getLyric(song.id);
-      if (lyric.hasOwnProperty("lrc")) {
-        song.lrc = lyric.lrc.lyric;
-      }
-      Bus.$emit("play", song);
+      this.SET_CURRENT_MUSIC_ACTION(song)
+        .then(result => {
+          Bus.$emit("play", result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

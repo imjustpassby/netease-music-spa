@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import { getSongUrl, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
+import { mapActions } from "vuex";
 export default {
   name: "",
   props: ["hotSongs"],
@@ -49,28 +49,16 @@ export default {
   mounted() {},
 
   methods: {
-    async getSong(id) {
-      /* 获取音乐url */
-      let res = await getSongUrl(id);
-      let lyric = await getLyric(id);
-      let songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      let length = this.hotSongs.length;
-      for (let j = 0; j < length; j++) {
-        if (this.hotSongs[j].id === songList[0].id) {
-          this.hotSongs[j].url = songList[0].url;
-          if (lyric.hasOwnProperty("lrc")) {
-            this.hotSongs[j].lrc = lyric.lrc.lyric;
-          }
-          return this.hotSongs[j];
-        }
-      }
-    },
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     async addMusic(song) {
-      let res = await this.getSong(song.id);
-      Bus.$emit("play", res);
-    }
+      this.SET_CURRENT_MUSIC_ACTION(song)
+        .then(result => {
+          Bus.$emit("play", result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
   }
 };
 </script>

@@ -76,7 +76,7 @@
 
 <script>
 import { getDjDetail, getDjProgram } from "@/api/dj.js";
-import { getSongUrl } from "@/api/song.js";
+import { mapActions } from "vuex";
 import Bus from "@/utils/bus.js";
 export default {
   name: "",
@@ -119,11 +119,11 @@ export default {
   async mounted() {
     await this.getDjDetail();
     await this.getDjProgram();
-    await this.getSong();
     this.loading = false;
   },
 
   methods: {
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     async getDjDetail() {
       let res = await getDjDetail(this.rid);
       this.djRadio.picUrl = res.djRadio.picUrl;
@@ -155,38 +155,24 @@ export default {
           artist: this.djRadio.dj.nickname,
           cover: item.coverUrl,
           description: item.description,
-          listenerCount: item.listenerCount
+          listenerCount: item.listenerCount,
+          key: item.mainSong.id
         };
       });
-    },
-    async getSong() {
-      let ids = [];
-      this.djRadio.tracks.forEach(item => {
-        ids.push(item.id);
-      });
-      /* 获取音乐url */
-      let res = await getSongUrl(ids.join(","));
-      let songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      /* 音乐url加入到djRadio.tracks */
-      let length = songList.length;
-      for (let i = 0; i < length; i++) {
-        for (let j = 0; j < length; j++) {
-          if (songList[i].id == this.djRadio.tracks[j].id) {
-            this.djRadio.tracks[j].url = songList[i].url;
-            this.djRadio.tracks[j].key = j;
-          }
-        }
-      }
     },
     addMusicList() {
       Bus.$emit("add", { list: this.djRadio.tracks, type: "program" });
       this.$message.success("已加入播放列表！");
     },
     async addMusic(song) {
-      Bus.$emit("play", song);
-    }
+      this.SET_CURRENT_MUSIC_ACTION(song)
+        .then(result => {
+          Bus.$emit("play", result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
   }
 };
 </script>
