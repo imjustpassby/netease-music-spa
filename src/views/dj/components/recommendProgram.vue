@@ -75,7 +75,8 @@ export default {
           name: item.name,
           id: item.mainSong.id,
           artist: item.dj.nickname,
-          cover: item.coverUrl
+          cover: item.coverUrl,
+          theme: [255,255,255]
         };
       });
     },

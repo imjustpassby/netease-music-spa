@@ -33,7 +33,10 @@ const playlist = {
       state.currentMusic = {};
     },
     DELETE_SONG(state, data) {
-      state.playlist.splice(data,1)
+      if (data < state.currentIndex) {
+        state.currentIndex -= 1;
+      }
+      state.playlist.splice(data, 1);
     }
   },
   actions: {
@@ -52,6 +55,10 @@ const playlist = {
             data.lrc = lyric.lrc.lyric;
           }
         }
+        var colorThief = new ColorThief();
+        colorThief.getColorAsync(data.cover, (color) => {
+          data.theme = color;
+        });
         let hasSong = false;
         let length = state.playlist.length;
         for (let i = 0; i < length; i++){

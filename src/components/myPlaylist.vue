@@ -37,6 +37,7 @@
           slot-scope="item, index"
           style="padding-left: 6px"
           :class="currentIndex==index? 'activeItem' : ''"
+          :style="currentIndex==index? 'background: rgba('+item.theme[0]+','+item.theme[1]+','+item.theme[2]+',.3)' : {}"
         >
           <a slot="actions">
             <a-icon
@@ -83,7 +84,7 @@ export default {
   mounted() {},
 
   methods: {
-    ...mapMutations(["DELETE_SONG","CLEAR_PLAYLIST"]),
+    ...mapMutations(["DELETE_SONG", "CLEAR_PLAYLIST"]),
     ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     showDrawer() {
       this.visible = true;
@@ -112,7 +113,7 @@ export default {
     nextSong() {
       Bus.$emit("nextSong");
     },
-    clearPlaylist(){
+    clearPlaylist() {
       this.CLEAR_PLAYLIST();
       Bus.$emit("clear");
     }
@@ -141,9 +142,9 @@ export default {
   }
 }
 .more {
-  position: absolute;
-  top: 10px;
-  right: 10%;
+  position: relative;
+  left: 85%;
+  top: -16px;
   font-size: 14px;
   line-height: 2.5em;
   outline: none;
@@ -151,7 +152,7 @@ export default {
   text-decoration: underline;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0);
-  &:hover{
+  &:hover {
     color: blue;
   }
 }
@@ -169,7 +170,6 @@ export default {
   height: 46px;
 }
 .activeItem {
-  background-color: #ffdb00;
   .cover-img {
     transition: all 0.3s ease-in-out;
     transition-delay: 0.3s;

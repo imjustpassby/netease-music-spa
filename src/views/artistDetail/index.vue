@@ -149,7 +149,8 @@ export default {
           albumName: item.al.name,
           albumId: item.al.id,
           pop: item.pop,
-          key: item.id
+          key: item.id,
+          theme: [255,255,255]
         };
       });
     },

@@ -156,7 +156,8 @@ export default {
           cover: item.coverUrl,
           description: item.description,
           listenerCount: item.listenerCount,
-          key: item.mainSong.id
+          key: item.mainSong.id,
+          theme: [255,255,255]
         };
       });
     },

@@ -143,7 +143,8 @@ export default {
           pic: item.al.picUrl,
           albumName: item.al.name,
           albumId: item.al.id,
-          key: item.id
+          key: item.id,
+          theme: [255,255,255]
         };
       });
     },
