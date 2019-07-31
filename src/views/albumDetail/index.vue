@@ -6,9 +6,9 @@
           <div class="album-detail">
             <a-row>
               <a-col :span="5">
-                <img v-lazy="albumInfo.picUrl" width="100%" alt="专辑" />
+                <img v-lazy="albumInfo.picUrl" style="margin-top:30px;" width="100%" alt="专辑" />
               </a-col>
-              <a-col :span="18" :offset="1">
+              <a-col :span="18" :offset="1" style="margin-top:26px;">
                 <svg class="icon" aria-hidden="true" style="font-size:46px; margin-right:16px;">
                   <use xlink:href="#icon-zhuanji" />
                 </svg>

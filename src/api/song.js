@@ -19,3 +19,13 @@ export function getLyric(data) {
     }
   })
 }
+/* 音乐是否可用 */
+export function checkMusic(data) {
+  return request({
+    url: '/api/check/music',
+    withCredentials: true,
+    params: {
+      id: data
+    }
+  })
+}

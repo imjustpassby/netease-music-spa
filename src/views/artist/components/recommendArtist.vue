@@ -24,7 +24,7 @@
             :key="index"
           >
             <div class="img-box">
-              <img v-lazy="item.picUrl" width="100%" alt="img" @click="goArtistDetail(item.id)"/>
+              <img v-lazy="item.picUrl" width="100%" alt="img" @click="goArtistDetail(item.id)" />
             </div>
             <p class="artist-list-title">{{item.name}}</p>
           </a-col>
@@ -55,7 +55,7 @@
             :key="index"
           >
             <div class="img-box">
-              <img v-lazy="item.picUrl" width="100%" alt="img" @click="goArtistDetail(item.id)"/>
+              <img v-lazy="item.picUrl" width="100%" alt="img" @click="goArtistDetail(item.id)" />
             </div>
             <p class="artist-list-title">{{item.name}}</p>
           </a-col>
@@ -113,13 +113,13 @@ export default {
         return { id: item.id, name: item.name, picUrl: item.picUrl };
       });
     },
-    goArtistDetail(id){
+    goArtistDetail(id) {
       this.$router.push({
-        path: '/artist-detail',
+        path: "/artist-detail",
         query: {
           id: id
         }
-      })
+      });
     }
   }
 };
@@ -136,18 +136,18 @@ export default {
     line-height: 1.5em;
   }
   .img-box {
-  width: 100%;
-  position: relative;
-  height: 0;
-  padding-bottom: 100%;
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    cursor: pointer;
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
   }
-}
 }
 </style>

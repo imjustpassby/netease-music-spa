@@ -6,7 +6,7 @@
           <div class="playlist-detail">
             <a-row>
               <a-col :span="5">
-                <img v-lazy="playList.picUrl" width="100%" alt="歌单" />
+                <img v-lazy="playList.picUrl" style="margin-top:30px" width="100%" alt="歌单" />
               </a-col>
               <a-col :span="18" :offset="1">
                 <svg class="icon" aria-hidden="true" style="font-size:100px; margin-right:16px;">

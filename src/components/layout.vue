@@ -88,6 +88,10 @@ export default {
         {
           span: "我的音乐",
           link: "/my"
+        },
+        {
+          span: "搜索",
+          link: "/search-detail"
         }
       ],
       subLink: [
@@ -149,7 +153,7 @@ export default {
   methods: {
     ...mapActions(["LOGOUT"]),
     clickTopLink(idx) {
-      if (idx === 0) {
+      if (idx === 0 || idx === 2) {
         window.sessionStorage.setItem("checkedTopLink", idx);
         window.sessionStorage.setItem("checkedSubLink", 0);
         this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
@@ -164,6 +168,8 @@ export default {
       }
     },
     clickSubLink(idx) {
+      window.sessionStorage.setItem("checkedTopLink", 0);
+      this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
       window.sessionStorage.setItem("checkedSubLink", idx);
       this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
     },

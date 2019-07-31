@@ -73,6 +73,11 @@ export default new Router({
           path: '/dj-detail',
           name: 'dj-detail',
           component: () => import('@/views/djDetail/index')
+        },
+        {
+          path: '/search-detail',
+          name: 'search-detail',
+          component: () => import('@/views/searchDetail/index')
         }
       ]
     }

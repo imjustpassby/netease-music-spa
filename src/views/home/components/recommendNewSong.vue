@@ -82,7 +82,8 @@ export default {
           artist: artist.join("/"),
           cover: item.song.album.blurPicUrl,
           albumName: item.song.album.name,
-          albumId: item.song.album.id
+          albumId: item.song.album.id,
+          theme: [255,255,255]
         };
       });
     },
