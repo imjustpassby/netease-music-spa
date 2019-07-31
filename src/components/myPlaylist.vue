@@ -30,25 +30,23 @@
       width="25%"
       :visible="visible"
     >
+      <button class="more" @click="clearPlaylist">清空列表</button>
       <a-list itemLayout="horizontal" :dataSource="playlist">
         <a-list-item
           slot="renderItem"
           slot-scope="item, index"
+          style="padding-left: 6px"
           :class="currentIndex==index? 'activeItem' : ''"
         >
-          <a slot="actions" style="color:#333333;">
+          <a slot="actions">
             <a-icon
               type="caret-right"
-              style="font-size:16px"
+              class="actions-item"
               @click="playSong({song:item,idx:index})"
             />
           </a>
-          <a slot="actions" style="color:#999999">
-            <a-icon
-              type="delete"
-              style="font-size:16px"
-              @click="deleteSong({song:item,idx:index})"
-            />
+          <a slot="actions" class="actions-item">
+            <a-icon type="delete" class="actions-item" @click="deleteSong({song:item,idx:index})" />
           </a>
           <a-list-item-meta :description="item.artist">
             <p slot="title">{{item.name}}</p>
@@ -85,7 +83,7 @@ export default {
   mounted() {},
 
   methods: {
-    ...mapMutations(["DELETE_SONG"]),
+    ...mapMutations(["DELETE_SONG","CLEAR_PLAYLIST"]),
     ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     showDrawer() {
       this.visible = true;
@@ -103,13 +101,20 @@ export default {
         });
     },
     deleteSong(data) {
+      if (data.idx === this.currentIndex) {
+        this.nextSong();
+      }
       this.DELETE_SONG(data.idx);
     },
-    lastSong(){
+    lastSong() {
       Bus.$emit("lastSong");
     },
-    nextSong(){
+    nextSong() {
       Bus.$emit("nextSong");
+    },
+    clearPlaylist(){
+      this.CLEAR_PLAYLIST();
+      Bus.$emit("clear");
     }
   }
 };
@@ -135,11 +140,48 @@ export default {
     opacity: 1;
   }
 }
+.more {
+  position: absolute;
+  top: 10px;
+  right: 10%;
+  font-size: 14px;
+  line-height: 2.5em;
+  outline: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
+  &:hover{
+    color: blue;
+  }
+}
+.actions-item {
+  font-size: 16px;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+    transition: all 0.1s ease-in-out;
+    transform: scale(1.5);
+  }
+}
 .cover-img {
   width: 46px;
   height: 46px;
 }
 .activeItem {
-  background-color: rgba(233, 233, 233, 0.5);
+  background-color: #ffdb00;
+  .cover-img {
+    transition: all 0.3s ease-in-out;
+    transition-delay: 0.3s;
+    animation: spinDisc 5s linear infinite;
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+}
+@keyframes spinDisc {
+  100% {
+    transform: rotate(1turn);
+  }
 }
 </style>

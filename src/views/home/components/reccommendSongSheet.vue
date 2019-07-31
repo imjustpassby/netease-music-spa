@@ -18,7 +18,9 @@
           <div class="img-box">
             <img v-lazy="item.picUrl" alt="img" />
           </div>
-          <p class="recommend-title">{{item.name}}</p>
+          <div style="height:46px;overflow:hidden">
+            <p class="recommend-title">{{item.name}}</p>
+          </div>
         </a-col>
       </a-row>
     </div>

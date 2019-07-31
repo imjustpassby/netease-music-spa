@@ -15,7 +15,7 @@
               <div class="playlist-creator">
                 <img v-lazy="playList.creator.avatarUrl" width="36px" alt />
                 <span>{{playList.creator.nickname}}&nbsp;&nbsp;于&nbsp;&nbsp;{{playList.createTime}}&nbsp;&nbsp;创建</span>
-                <a-button @click.once="addMusicList" style="margin-left: 20px">
+                <a-button @click="addMusicList" style="margin-left: 20px">
                   <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
                     <use xlink:href="#icon-play1" />
                   </svg>加入播放列表

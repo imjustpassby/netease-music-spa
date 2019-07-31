@@ -1,7 +1,7 @@
 import { getSongUrl, getLyric } from "@/api/song.js"
 const playlist = {
   state: {
-    currentIndex: 0,
+    currentIndex: -1,
     currentMusic: {},
     playlist: []
   },
@@ -29,6 +29,8 @@ const playlist = {
     },
     CLEAR_PLAYLIST(state) {
       state.playlist.splice(0);
+      state.currentIndex = -1;
+      state.currentMusic = {};
     },
     DELETE_SONG(state, data) {
       state.playlist.splice(data,1)

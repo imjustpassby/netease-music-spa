@@ -67,6 +67,9 @@ export default {
         })
         .catch();
     });
+    Bus.$on("clear",()=>{
+      ap.list.clear();
+    })
   },
 
   methods: {
