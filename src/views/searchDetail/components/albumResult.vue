@@ -10,7 +10,7 @@
         style="margin-bottom:16px"
       >
         <div class="img-box">
-          <img v-lazy="ar.picUrl" width="100%" alt="img" @click="goArtistDetail(ar.id)" />
+          <img v-lazy="ar.picUrl" width="100%" alt="img" @click="goAlbumDetail(ar.id)" />
         </div>
         <p class="artist-list-title">{{ar.name}}</p>
       </a-col>

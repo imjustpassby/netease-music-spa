@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-modal
-      title="手机登录"
+      title="手机登录（网易云音乐账号）"
       centered
       v-model="modalShow"
       :footer="false"

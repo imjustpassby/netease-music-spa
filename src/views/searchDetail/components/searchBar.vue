@@ -3,7 +3,7 @@
     <a-row type="flex" justify="space-around" class="search-top">
       <a-col :span="16" class="certain-category-search-wrapper">
         <a-input-search
-          placeholder="关键字模糊搜索"
+          placeholder="音乐/歌手/专辑/歌单/MV"
           @search="getSearchResult"
           enterButton
           v-model="keywords"
