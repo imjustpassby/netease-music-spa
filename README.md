@@ -1,6 +1,6 @@
 # netease-spa
 
-> 基于vue框架的模仿网易云音乐web网站，利用[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)提供的api集成，UI框架VUE-ANT-DESIGN，项目功能不多，仅仅是为了练习。
+> 基于vue框架的模仿网易云音乐web网站，利用[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)提供的api集成，UI框架VUE-ANT-DESIGN。
 
 ## 后端API
 
@@ -54,6 +54,12 @@
    1.我创建的歌单
    2.我收藏的歌单
    3.歌单详情页（单首播放/歌单加入播放列表）
+
++ 搜索
+
++ 播放器
+
++ 播放列表
 
 + 更多功能开发中...
 

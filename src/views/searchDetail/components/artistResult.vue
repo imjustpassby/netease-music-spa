@@ -1,7 +1,14 @@
 <template>
-  <div>
-    <a-row type="flex" justify="start">
-      <a-col :span="4" :offset="1" v-for="(ar,idx) in artistResult" :key="idx">
+  <div style="padding-bottom:100px;">
+    <a-back-top style="bottom: 100px;left:10%" />
+    <a-row type="flex" justify="start" style="margin:16px 0">
+      <a-col
+        :span="4"
+        :offset="1"
+        v-for="(ar,idx) in exactSearch"
+        :key="idx"
+        style="margin-bottom:16px"
+      >
         <div class="img-box">
           <img v-lazy="ar.img1v1Url" width="100%" alt="img" @click="goArtistDetail(ar.id)" />
         </div>
@@ -12,11 +19,14 @@
 </template>
 
 <script>
+import { search } from "@/api/search";
+import Bus from "@/utils/bus.js";
 export default {
   name: "",
-  props: ["artistResult"],
   data() {
-    return {};
+    return {
+      exactSearch: []
+    };
   },
 
   components: {},
@@ -27,7 +37,11 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+    Bus.$on("searchArtist", async data => {
+      await this.search(data);
+    });
+  },
 
   methods: {
     goArtistDetail(id) {
@@ -37,6 +51,10 @@ export default {
           id: id
         }
       });
+    },
+    async search(data) {
+      let res = await search({ keywords: data, type: 100 });
+      this.exactSearch = res.result.artists;
     }
   }
 };

@@ -3,7 +3,7 @@
     <a-row type="flex" justify="space-around" class="search-top">
       <a-col :span="16" class="certain-category-search-wrapper">
         <a-input-search
-          placeholder="input search text"
+          placeholder="关键字模糊搜索"
           @search="getSearchResult"
           enterButton
           v-model="keywords"
@@ -14,13 +14,13 @@
 </template>
 
 <script>
+import Bus from "@/utils/bus.js";
 export default {
   name: "",
   props: [""],
   data() {
     return {
-      keywords: "",
-      
+      keywords: ""
     };
   },
 
@@ -36,7 +36,11 @@ export default {
 
   methods: {
     getSearchResult(val) {
-        this.$emit("getSearchResult",val);
+      Bus.$emit("searchSong", val);
+      Bus.$emit("searchArtist", val);
+      Bus.$emit("searchAlbum", val);
+      Bus.$emit("searchPlaylist", val);
+      Bus.$emit("searchMv", val);
     }
   }
 };

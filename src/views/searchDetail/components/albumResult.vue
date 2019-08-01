@@ -1,23 +1,33 @@
 <template>
-  <div>
-    <a-row type="flex" justify="start">
-      <a-col :span="4" :offset="1" v-for="(ab,idx) in albumResult" :key="idx">
+  <div style="padding-bottom:100px;">
+    <a-back-top style="bottom: 100px;left:10%" />
+    <a-row type="flex" justify="start" style="margin:16px 0">
+      <a-col
+        :span="4"
+        :offset="1"
+        v-for="(ar,idx) in exactSearch"
+        :key="idx"
+        style="margin-bottom:16px"
+      >
         <div class="img-box">
-          <img v-lazy="ab.picUrl" width="100%" alt="img" @click="goAlbumDetail(ab.id)" />
+          <img v-lazy="ar.picUrl" width="100%" alt="img" @click="goArtistDetail(ar.id)" />
         </div>
-        <p class="album-list-title">{{ab.name}}</p>
-        <p class="album-list-title">{{ab.artist.name}}</p>
+        <p class="artist-list-title">{{ar.name}}</p>
       </a-col>
     </a-row>
   </div>
 </template>
 
 <script>
+import { search } from "@/api/search";
+import Bus from "@/utils/bus.js";
 export default {
   name: "",
-  props: ["albumResult"],
+  props: ["albumResult", "keywords"],
   data() {
-    return {};
+    return {
+      exactSearch: []
+    };
   },
 
   components: {},
@@ -28,16 +38,24 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+    Bus.$on("searchAlbum",async data =>{
+      await this.search(data);
+    })
+  },
 
   methods: {
-    goAlbumDetail(id){
+    goAlbumDetail(id) {
       this.$router.push({
-        path: '/album-detail',
+        path: "/album-detail",
         query: {
           id: id
         }
-      })
+      });
+    },
+    async search(data) {
+      let res = await search({ keywords: data, type: 10 });
+      this.exactSearch = res.result.albums;
     }
   }
 };
