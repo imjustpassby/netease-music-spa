@@ -5,14 +5,14 @@
         <a-row>
           <div class="g-topbar">
             <div class="m-top">
-              <a-col :span="3" :offset="5">
+              <a-col :span="8">
                 <div class="logo animation-class">
                   <router-link to="/">
                     <span>Coisin4Music</span>
                   </router-link>
                 </div>
               </a-col>
-              <a-col :span="6">
+              <a-col :span="8">
                 <div class="m-nav">
                   <ul>
                     <li
@@ -210,7 +210,6 @@ export default {
   background: #242424;
   border-bottom: 1px solid #000;
   .logo {
-    min-width: 10%;
     height: 70px;
     .icon-netease {
       margin: 0 4px;
