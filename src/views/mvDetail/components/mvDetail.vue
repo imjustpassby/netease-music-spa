@@ -76,8 +76,10 @@ export default {
     new Chimee({
       wrapper: "#wrapper",
       src: this.mv.url,
-      controls: true,
-      autoplay: true
+      isLive: false,
+      box: "native",
+      autoplay: true,
+      controls: true
     });
   },
 
