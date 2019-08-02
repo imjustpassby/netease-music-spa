@@ -13,11 +13,6 @@
                   <use xlink:href="#icon-zhuanji" />
                 </svg>
                 <h1>{{albumInfo.name}}</h1>
-                <a-button @click.once="addMusicList" class="add-playlist-btn">
-                  <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-                    <use xlink:href="#icon-play1" />
-                  </svg>加入播放列表
-                </a-button>
                 <div :class="!expand ? 'album-detail-info' : ''">
                   <p>
                     歌手：
@@ -25,6 +20,15 @@
                       {{art}}
                       <span v-if="idx!== albumInfo.artists.length-1">/</span>
                     </span>
+                    <a-button @click.once="addMusicList" class="add-playlist-btn">
+                      <svg
+                        class="icon"
+                        aria-hidden="true"
+                        style="font-size:16px; margin-right:16px;"
+                      >
+                        <use xlink:href="#icon-play1" />
+                      </svg>加入播放列表
+                    </a-button>
                   </p>
                   <p>发行时间：{{albumInfo.publishTime}}</p>
                   <p>发行公司：{{albumInfo.company}}</p>
@@ -229,9 +233,7 @@ export default {
     top: -8px;
   }
   .add-playlist-btn {
-    position: relative;
-    top: -10px;
-    left: 10px;
+    margin-left: 100px;
   }
   .album-detail-info {
     height: 200px;

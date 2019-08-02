@@ -83,8 +83,21 @@ export default new Router({
           path: '/song-detail',
           name: 'song-detail',
           component: () => import('@/views/songDetail/index')
+        },
+        {
+          path: '/404',
+          name: '404',
+          component: () => import('@/views/errorPage')
         }
       ]
+    },
+    {
+      path: '*',
+      redirect: '/404',
+      component: () => import('@/views/errorPage')
     }
-  ]
+  ],
+  scrollBehavior: () => ({
+    y: 0
+  })
 })
