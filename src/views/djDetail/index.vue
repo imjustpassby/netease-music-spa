@@ -78,6 +78,7 @@
 import { getDjDetail, getDjProgram } from "@/api/dj.js";
 import { mapActions } from "vuex";
 import Bus from "@/utils/bus.js";
+import { formatTime } from "@/utils/index";
 export default {
   name: "",
   props: [""],
@@ -136,11 +137,13 @@ export default {
       this.djRadio.subCount = res.djRadio.subCount;
       this.djRadio.shareCount = res.djRadio.shareCount;
       this.djRadio.programCount = res.djRadio.programCount;
-      this.djRadio.lastProgramCreateTime = this.$moment(
-        res.djRadio.lastProgramCreateTime
-      ).format("YYYY-M-DD");
-      this.djRadio.createTime = this.$moment(res.djRadio.createTime).format(
-        "YYYY-M-DD"
+      this.djRadio.lastProgramCreateTime = formatTime(
+        res.djRadio.lastProgramCreateTime,
+        "{y}-{m}-{d}"
+      );
+      this.djRadio.createTime = formatTime(
+        res.djRadio.createTime,
+        "{y}-{m}-{d}"
       );
     },
     async getDjProgram() {
@@ -157,7 +160,7 @@ export default {
           description: item.description,
           listenerCount: item.listenerCount,
           key: item.mainSong.id,
-          theme: [255,255,255]
+          theme: [255, 255, 255]
         };
       });
     },
@@ -173,7 +176,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    },
+    }
   }
 };
 </script>

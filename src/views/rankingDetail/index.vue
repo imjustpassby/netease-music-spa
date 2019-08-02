@@ -78,6 +78,7 @@
 import { getRankingList } from "@/api/rankingList.js";
 import { mapActions } from "vuex";
 import Bus from "@/utils/bus.js";
+import { formatTime } from "@/utils/index";
 export default {
   name: "",
   props: [""],
@@ -120,9 +121,7 @@ export default {
       let res = await getRankingList(this.idx);
       this.playList.id = res.playlist.id;
       this.playList.creator = res.playlist.creator;
-      this.playList.updateTime = this.$moment(res.playlist.updateTime).format(
-        "YYYY-M-DD"
-      );
+      this.playList.updateTime = formatTime(res.playlist.updateTime, "{y}-{m}-{d}");
       this.playList.trackIds = res.playlist.trackIds;
       this.playList.tracks = res.playlist.tracks.map(item => {
         let artist = [];

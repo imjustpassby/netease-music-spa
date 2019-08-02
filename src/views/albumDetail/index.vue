@@ -79,6 +79,7 @@
 import { getAlbum } from "@/api/album.js";
 import Bus from "@/utils/bus.js";
 import { mapActions } from "vuex";
+import { formatTime } from "@/utils/index";
 export default {
   name: "",
   props: [""],
@@ -135,9 +136,7 @@ export default {
       this.albumInfo.name = name;
       this.albumInfo.id = id;
       this.albumInfo.type = type;
-      this.albumInfo.publishTime = this.$moment(publishTime).format(
-        "YYYY-M-DD"
-      );
+      this.albumInfo.publishTime = formatTime(publishTime, "{y}-{m}-{d}");
       for (const ar of artists) {
         this.albumInfo.artists.push(ar.name);
       }

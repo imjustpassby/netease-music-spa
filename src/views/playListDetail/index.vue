@@ -83,6 +83,7 @@
 import { getPlaylistDetail } from "@/api/playList.js";
 import Bus from "@/utils/bus.js";
 import { mapActions } from "vuex";
+import { formatTime } from "@/utils/index";
 export default {
   name: "",
   props: [""],
@@ -124,9 +125,7 @@ export default {
       // this.playList = res.playlist;
       this.playList.id = res.playlist.id;
       this.playList.creator = res.playlist.creator;
-      this.playList.createTime = this.$moment(res.playlist.createTime).format(
-        "YYYY-M-DD"
-      );
+      this.playList.createTime = formatTime(res.playlist.createTime, "{y}-{m}-{d}");
       this.playList.trackIds = res.playlist.trackIds;
       this.playList.tracks = res.playlist.tracks.map(item => {
         let artist = [];

@@ -37,6 +37,7 @@
 
 <script>
 import { getArtistAlbum } from "@/api/artist.js";
+import { formatTime } from "@/utils/index";
 export default {
   name: "",
   props: ["albumSize"],
@@ -72,7 +73,7 @@ export default {
         return {
           id: item.id,
           name: item.name,
-          publishTime: this.$moment(item.publishTime).format("YYYY-M-DD"),
+          publishTime: formatTime(item.publishTime, "{y}-{m}-{d}"),
           picUrl: item.picUrl
         };
       });

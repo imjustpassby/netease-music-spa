@@ -10,11 +10,9 @@ import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import '@/style/index.scss'
 
-import moment from 'moment'
 import '@/permission.js'
 
 import VueLazyLoad from 'vue-lazyload'
-Vue.prototype.$moment = moment;
 
 Vue.config.productionTip = false
 

@@ -113,10 +113,10 @@ export default {
     margin-right: 16px;
     .play {
       position: absolute;
-      height: 60%;
-      width: 60%;
-      left: 35%;
-      top: 20%;
+      height: 50%;
+      width: 50%;
+      left: 40%;
+      top: 25%;
       z-index: 9;
       cursor: pointer;
     }
