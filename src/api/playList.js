@@ -56,3 +56,10 @@ export function getPlaylistDetail(data) {
     }
   })
 }
+/* 获取每日推荐歌单(需要登录) */
+export function getRecommendResource() {
+  return request({
+    url: '/api/recommend/resource',
+    withCredentials: true
+  })
+}

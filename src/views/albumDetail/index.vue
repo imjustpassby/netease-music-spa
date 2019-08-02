@@ -52,9 +52,17 @@
                   </span>
                 </template>
               </a-table-column>
-              <a-table-column title="歌曲标题" data-index="name" width="50%" key="title" />
-              <a-table-column title="歌手" data-index="artist" width="25%" key="artist" />
-              <a-table-column title="专辑" data-index="albumName" key="albumName" />
+              <a-table-column title="歌曲标题" width="40%" key="title">
+                <template slot-scope="text, record">
+                  <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+                </template>
+              </a-table-column>
+              <a-table-column title="歌手" width="25%" key="artist">
+                <template slot-scope="text, record">
+                  <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                </template>
+              </a-table-column>
+              <a-table-column title="专辑" key="albumName" data-index="albumName"></a-table-column>
             </a-table>
           </div>
         </a-skeleton>
@@ -133,6 +141,7 @@ export default {
       /* 获取专辑的歌曲 */
       this.albumInfo.tracks = res.songs.map(item => {
         let ars = [];
+        let artistId = item.ar[0].id;
         for (const art of item.ar) {
           ars.push(art.name);
         }
@@ -140,11 +149,12 @@ export default {
           id: item.id,
           name: item.name,
           artist: ars.join("/"),
+          artistId: artistId,
           cover: item.al.picUrl,
           albumName: item.al.name,
           albumId: item.al.id,
           key: item.id,
-          theme: [255,255,255]
+          theme: [255, 255, 255]
         };
       });
     },
@@ -169,6 +179,22 @@ export default {
         this.expand = true;
         this.expandText = "收起";
       }
+    },
+    goSongDetail(song) {
+      this.$router.push({
+        path: "/song-detail",
+        query: {
+          id: song.id
+        }
+      });
+    },
+    goArtistDetail(song) {
+      this.$router.push({
+        path: "/artist-detail",
+        query: {
+          id: song.artistId
+        }
+      });
     }
   }
 };
@@ -177,6 +203,7 @@ export default {
 .album-detail-container {
   position: relative;
   padding-bottom: 100px;
+  font-size: 14px;
   .play-icon {
     margin-left: 40%;
     font-size: 24px;
@@ -193,7 +220,7 @@ export default {
 .album-detail {
   text-align: left;
   margin-top: 16px;
-  padding-bottom: 100px;
+  padding-bottom: 30px;
   h1 {
     font-size: 24px;
     margin: 16px 0;

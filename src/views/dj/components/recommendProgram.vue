@@ -28,7 +28,7 @@
                 </div>
               </a-col>
               <a-col :span="20">
-                <p class="recommend-title" >{{item.name}}</p>
+                <p class="recommend-title">{{item.name}}</p>
                 <p class="recommend-title" style="color:#999">{{item.artist}}</p>
               </a-col>
             </a-row>
@@ -68,15 +68,15 @@ export default {
 
   methods: {
     ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
-    async getProgramRecommend(){
+    async getProgramRecommend() {
       let res = await getProgramRecommend();
-      this.programRecommend = res.programs.map(item=>{
+      this.programRecommend = res.programs.map(item => {
         return {
           name: item.name,
           id: item.mainSong.id,
           artist: item.dj.nickname,
           cover: item.coverUrl,
-          theme: [255,255,255]
+          theme: [255, 255, 255]
         };
       });
     },
@@ -108,13 +108,13 @@ export default {
 }
 .recommend-title {
   text-align: left;
-  white-space:nowrap; 
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 10px;
   font-size: 14px;
-  line-height:2em;
-  cursor:text;
+  line-height: 2em;
+  cursor: text;
 }
 .recommend-new-songs {
   border-bottom: 1px solid #ddd;

@@ -51,9 +51,21 @@
                   </span>
                 </template>
               </a-table-column>
-              <a-table-column title="歌曲标题" data-index="name" width="50%" key="title" />
-              <a-table-column title="歌手" data-index="artist" width="25%" key="artist" />
-              <a-table-column title="专辑" data-index="albumName" key="albumName" />
+              <a-table-column title="歌曲标题" width="40%" key="title">
+                <template slot-scope="text, record">
+                  <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+                </template>
+              </a-table-column>
+              <a-table-column title="歌手" width="25%" key="artist">
+                <template slot-scope="text, record">
+                  <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                </template>
+              </a-table-column>
+              <a-table-column title="专辑" key="albumName">
+                <template slot-scope="text, record">
+                  <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+                </template>
+              </a-table-column>
             </a-table>
           </div>
         </a-skeleton>
@@ -114,6 +126,7 @@ export default {
       this.playList.trackIds = res.playlist.trackIds;
       this.playList.tracks = res.playlist.tracks.map(item => {
         let artist = [];
+        let artistId = item.ar[0].id;
         for (const ar of item.ar) {
           artist.push(ar.name);
         }
@@ -121,11 +134,12 @@ export default {
           name: item.name,
           id: item.id,
           artist: artist.join("/"),
+          artistId: artistId,
           cover: item.al.picUrl,
           albumName: item.al.name,
           albumId: item.al.id,
           key: item.id,
-          theme: [255,255,255]
+          theme: [255, 255, 255]
         };
       });
       this.playList.picUrl = res.playlist.coverImgUrl;
@@ -144,6 +158,30 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    goSongDetail(song) {
+      this.$router.push({
+        path: "/song-detail",
+        query: {
+          id: song.id
+        }
+      });
+    },
+    goArtistDetail(song) {
+      this.$router.push({
+        path: "/artist-detail",
+        query: {
+          id: song.artistId
+        }
+      });
+    },
+    goAlbumDetail(song) {
+      this.$router.push({
+        path: "/album-detail",
+        query: {
+          id: song.albumId
+        }
+      });
     }
   }
 };
@@ -152,6 +190,7 @@ export default {
 .playlist-detail-container {
   padding-bottom: 100px;
   text-align: left;
+  font-size: 14px;
   .play-icon {
     margin-left: 40%;
     font-size: 24px;

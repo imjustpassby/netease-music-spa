@@ -62,7 +62,6 @@
         </a-row>
       </a-col>
     </a-row>
-
     <transition name="fade-transform" mode="out-in">
       <router-view />
     </transition>
@@ -73,7 +72,7 @@
 import "@/style/animationClass.scss";
 import LoginForm from "./login.vue";
 import Aplayer from "./aplayer.vue";
-import MyPlaylist from "./myPlaylist.vue"
+import MyPlaylist from "./myPlaylist.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "",
@@ -165,7 +164,7 @@ export default {
           this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
           this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
         }
-      } else if (idx === 2){
+      } else if (idx === 2) {
         window.sessionStorage.setItem("checkedTopLink", idx);
         window.sessionStorage.setItem("checkedSubLink", -1);
         this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
@@ -189,8 +188,8 @@ export default {
         .then(result => {
           this.$message.success("已退出登录");
           this.$router.push({
-            path: '/'
-          })
+            path: "/"
+          });
         })
         .catch(err => {});
     }

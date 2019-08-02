@@ -31,7 +31,7 @@
       :visible="visible"
     >
       <button class="more" @click="clearPlaylist">清空列表</button>
-      <a-list itemLayout="horizontal" :dataSource="playlist">
+      <a-list itemLayout="horizontal" :dataSource="playlist" :locale="locale">
         <a-list-item
           slot="renderItem"
           slot-scope="item, index"
@@ -50,8 +50,14 @@
             <a-icon type="delete" class="actions-item" @click="deleteSong({song:item,idx:index})" />
           </a>
           <a-list-item-meta :description="item.artist">
-            <p slot="title">{{item.name}}</p>
-            <a-avatar slot="avatar" class="cover-img" :src="item.cover" />
+            <p slot="title" @click="goSongDetail(item)" style="cursor:pointer">{{item.name}}</p>
+            <a-avatar
+              slot="avatar"
+              class="cover-img"
+              :src="item.cover"
+              style="cursor:pointer"
+              @click="goAlbumDetail(item)"
+            />
           </a-list-item-meta>
         </a-list-item>
       </a-list>
@@ -67,7 +73,8 @@ export default {
   props: [""],
   data() {
     return {
-      visible: false
+      visible: false,
+      locale: { emptyText: "列表空空如也 o(╥﹏╥)o" }
     };
   },
 
@@ -102,7 +109,7 @@ export default {
         });
     },
     deleteSong(data) {
-      if (data.idx === 0 && this.playlist.length === 1){
+      if (data.idx === 0 && this.playlist.length === 1) {
         this.DELETE_SONG(data.idx);
         Bus.$emit("clear");
         return;
@@ -121,6 +128,30 @@ export default {
     clearPlaylist() {
       this.CLEAR_PLAYLIST();
       Bus.$emit("clear");
+    },
+    goSongDetail(song) {
+      this.$router.push({
+        path: "/song-detail",
+        query: {
+          id: song.id
+        }
+      });
+    },
+    goArtistDetail(song) {
+      this.$router.push({
+        path: "/artist-detail",
+        query: {
+          id: song.artistId
+        }
+      });
+    },
+    goAlbumDetail(song) {
+      this.$router.push({
+        path: "/album-detail",
+        query: {
+          id: song.albumId
+        }
+      });
     }
   }
 };

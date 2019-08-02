@@ -10,7 +10,11 @@
           </span>
         </template>
       </a-table-column>
-      <a-table-column title="歌曲标题" data-index="title" width="30%" key="title" />
+      <a-table-column title="歌曲标题" width="30%" key="name">
+        <template slot-scope="text, record">
+          <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+        </template>
+      </a-table-column>
       <a-table-column title="热度" width="20%" key="hot" align="center">
         <template slot-scope="text, record">
           <a-progress
@@ -23,7 +27,11 @@
         </template>
       </a-table-column>
       <a-table-column title="歌手" align="center" data-index="artist" width="20%" key="artist" />
-      <a-table-column title="专辑" data-index="albumName" key="albumName" />
+      <a-table-column title="专辑" key="albumName">
+        <template slot-scope="text, record">
+          <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+        </template>
+      </a-table-column>
     </a-table>
   </div>
 </template>
@@ -59,6 +67,22 @@ export default {
           console.log(err);
         });
     },
+    goSongDetail(song) {
+      this.$router.push({
+        path: "/song-detail",
+        query: {
+          id: song.id
+        }
+      });
+    },
+    goAlbumDetail(song) {
+      this.$router.push({
+        path: "/album-detail",
+        query: {
+          id: song.albumId
+        }
+      });
+    }
   }
 };
 </script>

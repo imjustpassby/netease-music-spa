@@ -4,7 +4,7 @@
       <a-col :span="4" :offset="5">
         <user-playlist @showPlaylist="showPlaylist"></user-playlist>
       </a-col>
-      <a-col :span="10">
+      <a-col :span="12">
         <playlist-detail v-if="isShow" :playList="playList"></playlist-detail>
       </a-col>
     </a-row>
@@ -70,6 +70,7 @@ export default {
       this.playList.trackIds = res.playlist.trackIds;
       this.playList.tracks = res.playlist.tracks.map(item => {
         let artist = [];
+        let artistId = item.ar[0].id;
         for (const ar of item.ar) {
           artist.push(ar.name);
         }
@@ -77,6 +78,7 @@ export default {
           name: item.name,
           id: item.id,
           artist: artist.join("/"),
+          artistId: artistId,
           cover: item.al.picUrl,
           albumName: item.al.name,
           albumId: item.al.id,

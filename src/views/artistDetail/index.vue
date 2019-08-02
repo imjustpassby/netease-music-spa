@@ -59,7 +59,7 @@
                 class="tab-option-item"
                 :class="tabIndex ===1 ? 'tab-option-item-active' : ''"
                 @click="clickTab(1)"
-              >热门单曲</a-col>
+              >热门单曲(TOP50)</a-col>
               <a-col
                 :span="5"
                 class="tab-option-item"
@@ -138,13 +138,15 @@ export default {
       /* 格式化热门歌曲 */
       this.hotSongs = res.hotSongs.map(item => {
         let artist = [];
+        let artistId = item.ar[0].id;
         for (const ar of item.ar) {
           artist.push(ar.name);
         }
         return {
-          title: item.name,
+          name: item.name,
           id: item.id,
           artist: artist.join("/"),
+          artistId: artistId,
           cover: item.al.picUrl,
           albumName: item.al.name,
           albumId: item.al.id,
@@ -170,6 +172,7 @@ export default {
   margin-top: 16px;
   text-align: left;
   background-color: #fafafa;
+  font-size: 14px;
   h3 {
     display: inline;
     font-size: 24px;

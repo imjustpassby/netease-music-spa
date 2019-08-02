@@ -49,9 +49,21 @@
                 </span>
               </template>
             </a-table-column>
-            <a-table-column title="歌曲标题" data-index="name" width="30%" key="title" />
-            <a-table-column title="歌手" data-index="artist" align="center" width="25%" key="artist" />
-            <a-table-column title="专辑" data-index="albumName" key="albumName" />
+            <a-table-column title="歌曲标题" width="40%" key="name">
+              <template slot-scope="text, record">
+                <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+              </template>
+            </a-table-column>
+            <a-table-column title="歌手" align="center" width="25%" key="artist">
+              <template slot-scope="text, record">
+                <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+              </template>
+            </a-table-column>
+            <a-table-column title="专辑" key="albumName">
+              <template slot-scope="text, record">
+                <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+              </template>
+            </a-table-column>
           </a-table>
         </div>
       </a-col>
@@ -95,6 +107,30 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    goSongDetail(song) {
+      this.$router.push({
+        path: "/song-detail",
+        query: {
+          id: song.id
+        }
+      });
+    },
+    goArtistDetail(song) {
+      this.$router.push({
+        path: "/artist-detail",
+        query: {
+          id: song.artistId
+        }
+      });
+    },
+    goAlbumDetail(song) {
+      this.$router.push({
+        path: "/album-detail",
+        query: {
+          id: song.albumId
+        }
+      });
     }
   }
 };
@@ -102,6 +138,7 @@ export default {
 <style lang='scss' scoped>
 .playlist-detail-container {
   padding: 0 0 100px 16px;
+  font-size: 14px;
   .play-icon {
     margin-left: 40%;
     font-size: 24px;

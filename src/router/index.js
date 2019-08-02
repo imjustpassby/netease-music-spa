@@ -78,6 +78,11 @@ export default new Router({
           path: '/search-detail',
           name: 'search-detail',
           component: () => import('@/views/searchDetail/index')
+        },
+        {
+          path: '/song-detail',
+          name: 'song-detail',
+          component: () => import('@/views/songDetail/index')
         }
       ]
     }

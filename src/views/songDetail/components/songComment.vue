@@ -1,11 +1,11 @@
 <template>
-  <div class="mv-comment">
+  <div class="song-comment">
     <h1>
       <svg class="icon" aria-hidden="true" style="font-size:24px; margin:0 6px;">
         <use xlink:href="#icon-home_comment_fill" />
       </svg>&nbsp;热门评论
     </h1>
-    <a-comment v-for="(item,index) in hotComments" :key="index" class="mv-comment-list">
+    <a-comment v-for="(item,index) in hotComments" :key="index" class="song-comment-list">
       <a slot="author">{{item.user.nickname}}</a>
       <a-avatar slot="avatar" :src="item.user.avatarUrl" alt="avatar" />
       <p slot="content">{{item.content}}</p>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getCommentMv } from "@/api/mv.js";
+import { getCommentMusic } from "@/api/song.js";
 export default {
   name: "",
   props: [""],
@@ -33,28 +33,34 @@ export default {
 
   computed: {},
 
-  watch: {},
+  watch: {
+    $route(to, from) {
+      this.getComments(to.query.id);
+    }
+  },
 
   beforeMount() {},
 
   async mounted() {
-    await this.getCommentMv();
+    await this.getComments(this.$route.query.id)
   },
 
   methods: {
-    async getCommentMv() {
-      let res = await getCommentMv(this.$route.query.id);
+    async getComments(data) {
+      let res = await getCommentMusic(data);
+      this.comments = res.comments;
       this.hotComments = [...res.hotComments,...res.comments];
+
     }
   }
 };
 </script>
 <style lang='scss' scoped>
-.mv-comment {
+.song-comment {
   text-align: left;
   margin: 16px 0;
   padding-bottom: 100px;
-  &-list{
+  &-list {
     border-bottom: 1px dashed #ccc;
   }
   h1 {

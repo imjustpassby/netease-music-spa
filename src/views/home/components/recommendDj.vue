@@ -25,7 +25,7 @@
 
 <script>
 import { getPersonalizedDJProgram } from "@/api/home.js";
-import { getSongUrl } from "@/api/song.js";
+import { mapActions } from "vuex";
 import Bus from "@/utils/bus.js";
 export default {
   name: "",
@@ -52,30 +52,23 @@ export default {
         name: item.name,
         id: item.program.mainSong.id,
         artist: item.program.dj.nickname,
-        cover: item.picUrl
+        cover: item.picUrl,
+        theme: [255, 255, 255]
       };
     });
     this.loading = false;
   },
 
   methods: {
-    async getSong(id) {
-      /* 获取音乐url */
-      let res = await getSongUrl(id);
-      let songList = res.data.map(item => {
-        return { url: item.url, id: item.id };
-      });
-      let length = this.personalizedDJProgram.length;
-      for (let j = 0; j < length; j++) {
-        if (this.personalizedDJProgram[j].id === songList[0].id) {
-          this.personalizedDJProgram[j].url = songList[0].url;
-          return this.personalizedDJProgram[j];
-        }
-      }
-    },
+    ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
     async addMusic(song) {
-      let res = await this.getSong(song.id);
-      Bus.$emit("play", res);
+      this.SET_CURRENT_MUSIC_ACTION(song)
+        .then(result => {
+          Bus.$emit("play", result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
