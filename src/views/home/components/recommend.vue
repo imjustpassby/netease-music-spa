@@ -115,8 +115,8 @@ export default {
       position: absolute;
       height: 60%;
       width: 60%;
-      left: 17px;
-      top: 17px;
+      left: 35%;
+      top: 20%;
       z-index: 9;
       cursor: pointer;
     }

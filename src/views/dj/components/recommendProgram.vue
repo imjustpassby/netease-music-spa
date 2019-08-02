@@ -10,7 +10,7 @@
         <div>
           <a-col :span="12" v-for="(item,index) in programRecommend" :key="index">
             <a-row type="flex" justify="start" class="recommend-new-songs">
-              <a-col :span="4" style="position:relative;">
+              <a-col :span="3" style="position:relative;">
                 <div @click.once="addMusic(item)">
                   <svg
                     class="icon play"
@@ -21,13 +21,13 @@
                   </svg>
                   <img
                     v-lazy="item.cover"
-                    height="68px"
+                    width="100%"
                     alt="img"
                     style="margin:9px 0 0 9px;cursor: pointer;z-index:-1"
                   />
                 </div>
               </a-col>
-              <a-col :span="20">
+              <a-col :span="18" :offset="1">
                 <p class="recommend-title">{{item.name}}</p>
                 <p class="recommend-title" style="color:#999">{{item.artist}}</p>
               </a-col>
@@ -113,7 +113,7 @@ export default {
   text-overflow: ellipsis;
   margin-top: 10px;
   font-size: 14px;
-  line-height: 2em;
+  line-height: 1.5em;
   cursor: text;
 }
 .recommend-new-songs {
@@ -123,8 +123,8 @@ export default {
     position: absolute;
     height: 60%;
     width: 60%;
-    left: 25%;
-    top: 25%;
+    left: 35%;
+    top: 30%;
     z-index: 9;
     cursor: pointer;
   }

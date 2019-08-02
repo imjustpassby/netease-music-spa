@@ -9,7 +9,7 @@
       <a-row type="flex" justify="space-around" style="padding: 14px 0 0 0">
         <a-col :span="12" v-for="(item,index) in personalizedNewSong" :key="index">
           <a-row type="flex" justify="start" class="recommend-new-songs">
-            <a-col :span="4" style="position:relative;">
+            <a-col :span="3" style="position:relative;">
               <div @click.once="addMusic(item)">
                 <svg
                   class="icon play"
@@ -20,17 +20,22 @@
                 </svg>
                 <img
                   v-lazy="item.cover"
-                  height="68px"
+                  width="100%"
                   alt="img"
                   style="margin:9px 0 0 9px;cursor: pointer;z-index:-1"
                 />
               </div>
             </a-col>
-            <a-col :span="20">
-              <p class="recommend-title" style="line-height:2em;cursor:text">{{item.name}}</p>
+            <a-col :span="18" :offset="1">
+              <p
+                class="recommend-title"
+                style="line-height:1.5em;cursor:pointer"
+                @click="goSongDetail(item)"
+              >{{item.name}}</p>
               <span
                 class="recommend-title"
-                style="line-height:2em;cursor:text;color:#999"
+                style="line-height:1.5em;cursor:pointer;color:#999"
+                @click="goArtistDetail(item)"
               >{{item.artist}}</span>
             </a-col>
           </a-row>
@@ -73,6 +78,7 @@ export default {
       let personalizedNewSong = await getPersonalizedNewSong();
       this.personalizedNewSong = personalizedNewSong.result.map(item => {
         let artist = [];
+        let artistId = item.song.artists[0].id;
         for (const ar of item.song.artists) {
           artist.push(ar.name);
         }
@@ -80,10 +86,11 @@ export default {
           name: item.name,
           id: item.id,
           artist: artist.join("/"),
+          artistId: artistId,
           cover: item.song.album.blurPicUrl,
           albumName: item.song.album.name,
           albumId: item.song.album.id,
-          theme: [255,255,255]
+          theme: [255, 255, 255]
         };
       });
     },
@@ -95,6 +102,22 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    goSongDetail(song) {
+      this.$router.push({
+        path: "/song-detail",
+        query: {
+          id: song.id
+        }
+      });
+    },
+    goArtistDetail(song) {
+      this.$router.push({
+        path: "/artist-detail",
+        query: {
+          id: song.artistId
+        }
+      });
     }
   }
 };
