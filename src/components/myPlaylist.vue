@@ -102,6 +102,11 @@ export default {
         });
     },
     deleteSong(data) {
+      if (data.idx === 0 && this.playlist.length === 1){
+        this.DELETE_SONG(data.idx);
+        Bus.$emit("clear");
+        return;
+      }
       if (data.idx === this.currentIndex) {
         this.nextSong();
       }

@@ -153,18 +153,23 @@ export default {
   methods: {
     ...mapActions(["LOGOUT"]),
     clickTopLink(idx) {
-      if (idx === 0 || idx === 2) {
+      if (idx === 0) {
         window.sessionStorage.setItem("checkedTopLink", idx);
         window.sessionStorage.setItem("checkedSubLink", 0);
         this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
         this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
-      } else {
+      } else if (idx === 1) {
         if (this.$store.getters.loginSuccess) {
           window.sessionStorage.setItem("checkedTopLink", idx);
           window.sessionStorage.setItem("checkedSubLink", -1);
           this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
           this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
         }
+      } else if (idx === 2){
+        window.sessionStorage.setItem("checkedTopLink", idx);
+        window.sessionStorage.setItem("checkedSubLink", -1);
+        this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
+        this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
       }
     },
     clickSubLink(idx) {
