@@ -63,3 +63,13 @@ export function getRecommendResource() {
     withCredentials: true
   })
 }
+/* 获取相似歌单(包含这首歌的歌单) */
+export function getSimilarPlaylist(data) {
+  return request({
+    url: '/api/simi/playlist',
+    withCredentials: true,
+    params: {
+      id: data
+    }
+  })
+}

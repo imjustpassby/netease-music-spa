@@ -6,8 +6,11 @@
         <song-info></song-info>
       </a-col>
       <br>
-      <a-col :span="14" :offset="5">
+      <a-col :span="10" :offset="5">
         <song-comment></song-comment>
+      </a-col>
+      <a-col :span="4" :offset="1">
+        <similar-song></similar-song>
       </a-col>
     </a-row>
   </div>
@@ -16,6 +19,7 @@
 <script>
 import SongInfo from "./components/songInfo";
 import SongComment from "./components/songComment";
+import SimilarSong from "./components/similarSong"
 export default {
   name: "",
   props: [""],
@@ -27,7 +31,8 @@ export default {
 
   components: {
     SongInfo,
-    SongComment
+    SongComment,
+    SimilarSong
   },
 
   computed: {},

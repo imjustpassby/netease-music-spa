@@ -42,15 +42,14 @@ export default {
   beforeMount() {},
 
   async mounted() {
-    await this.getComments(this.$route.query.id)
+    await this.getComments(this.$route.query.id);
   },
 
   methods: {
     async getComments(data) {
       let res = await getCommentMusic(data);
       this.comments = res.comments;
-      this.hotComments = [...res.hotComments,...res.comments];
-
+      this.hotComments = [...res.hotComments, ...res.comments];
     }
   }
 };

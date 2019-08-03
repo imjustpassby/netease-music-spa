@@ -125,8 +125,8 @@ export default {
     margin-top: 30px;
     border-radius: 50%;
     transition: all 0.3s ease-in-out;
-    transition-delay: 0.3s;
-    animation: spinDisc 20s linear infinite;
+    transition-delay: 2s;
+    animation: spinDisc 30s linear infinite;
     &:hover {
       animation-play-state: paused;
     }
