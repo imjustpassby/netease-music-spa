@@ -179,8 +179,8 @@ export default {
 }
 .more {
   position: relative;
-  left: 85%;
   top: -16px;
+  left: 80%;
   font-size: 14px;
   line-height: 2.5em;
   outline: none;

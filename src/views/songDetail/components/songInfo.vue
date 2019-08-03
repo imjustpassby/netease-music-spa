@@ -21,8 +21,11 @@
               </svg>播放
             </a-button>
           </div>
-          <div>
+          <div :class="!expand ? 'album-detail-info' : ''">
             <span style="cursor:pointer" @click="goAlbumDetail">专辑：{{songInfo.albumName}}</span>
+            <button class="more" @click="showMore">{{expandText}}</button>
+            <p>歌词：</p>
+            <pre>{{lyric}}</pre>
           </div>
         </a-col>
       </a-row>
@@ -31,7 +34,7 @@
 </template>
 
 <script>
-import { getSongDetail } from "@/api/song.js";
+import { getSongDetail, getLyric } from "@/api/song.js";
 import Bus from "@/utils/bus.js";
 import { mapActions } from "vuex";
 export default {
@@ -48,7 +51,10 @@ export default {
         albumName: "",
         albumId: null,
         theme: [255, 255, 255]
-      }
+      },
+      lyric: "",
+      expand: false,
+      expandText: "展开"
     };
   },
 
@@ -59,6 +65,7 @@ export default {
   watch: {
     $route(to, from) {
       this.getSongDetail(to.query.id);
+      this.getLyric(to.query.id);
     }
   },
 
@@ -66,6 +73,7 @@ export default {
 
   async mounted() {
     await this.getSongDetail(this.$route.query.id);
+    await this.getLyric(this.$route.query.id);
   },
 
   methods: {
@@ -85,6 +93,10 @@ export default {
       this.songInfo.cover = song.al.picUrl;
       this.songInfo.albumName = song.al.name;
       this.songInfo.albumId = song.al.id;
+    },
+    async getLyric(data) {
+      let res = await getLyric(data);
+      this.lyric = res.lrc.lyric.replace(/[\[d{2}:d{2}\.\d{3}\]]/g, "");
     },
     async addMusic() {
       this.SET_CURRENT_MUSIC_ACTION(this.songInfo)
@@ -110,6 +122,15 @@ export default {
           id: this.songInfo.albumId
         }
       });
+    },
+    showMore() {
+      if (this.expand) {
+        this.expand = false;
+        this.expandText = "展开";
+      } else {
+        this.expand = true;
+        this.expandText = "收起";
+      }
     }
   }
 };
@@ -148,5 +169,21 @@ export default {
     height: 40px;
     margin: 16px 0;
   }
+}
+.album-detail-info {
+  height: 150px;
+  overflow: hidden;
+}
+.more {
+  position: absolute;
+  bottom: -16px;
+  right: 0;
+  font-size: 14px;
+  line-height: 2.5em;
+  outline: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
 }
 </style>

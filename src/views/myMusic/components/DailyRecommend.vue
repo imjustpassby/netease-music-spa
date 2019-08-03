@@ -3,7 +3,7 @@
     <a-row>
       <a-col :span="17" style="margin-top:60px">
         <div class="list-title">
-          <span style="font-size:16px">每日推荐歌曲</span>
+          <span class="title">每日推荐歌曲</span>
           <a-button @click="addMusicList" style="margin-left: 20px">
             <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
               <use xlink:href="#icon-play1" />
@@ -197,5 +197,6 @@ export default {
 .title {
   text-align: left;
   font-size: 16px;
+  font-weight:bold
 }
 </style>
