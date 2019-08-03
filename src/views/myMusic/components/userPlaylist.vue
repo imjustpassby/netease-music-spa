@@ -1,6 +1,15 @@
 <template>
   <div class="userPlayList">
     <a-row type="flex" justify="space-around">
+      <a-divider orientation="left" style="font-weight:bold">每日推荐</a-divider>
+      <a-list itemLayout="horizontal" style="width:100%">
+        <a-list-item>
+          <a-list-item-meta :description="'for - ' + nickname">
+            <p slot="title" class="playlist-title" @click="goDailyRecommend">每日歌曲&歌单推荐</p>
+            <a-avatar slot="avatar" :src="avatarUrl" style="width:46px;height:46px" />
+          </a-list-item-meta>
+        </a-list-item>
+      </a-list>
       <a-divider orientation="left" style="font-weight:bold">创建的歌单</a-divider>
       <a-list itemLayout="horizontal" :dataSource="userPlaylist" style="width:100%">
         <a-list-item slot="renderItem" slot-scope="item, index">
@@ -62,6 +71,12 @@ export default {
     },
     showPlaylist(playlist){
       this.$emit("showPlaylist",playlist);
+    },
+    goDailyRecommend(){
+      this.$emit("closePlaylist");
+      this.$router.push({
+        path: '/my/daily-recommend'
+      })
     }
   }
 };

@@ -1,19 +1,24 @@
 <template>
   <div>
     <a-row>
-      <a-col :span="4" :offset="5">
-        <user-playlist @showPlaylist="showPlaylist"></user-playlist>
+      <a-col :span="4" :offset="3">
+        <user-playlist @showPlaylist="showPlaylist" @closePlaylist="closePlaylist"></user-playlist>
       </a-col>
-      <a-col :span="12">
+      <a-col :span="14">
         <playlist-detail v-if="isShow" :playList="playList"></playlist-detail>
+      </a-col>
+      <a-col :span="14" v-if="!isShow">
+        <transition name="fade-transform" mode="out-in">
+          <router-view />
+        </transition>
       </a-col>
     </a-row>
   </div>
 </template>
 
 <script>
-import UserPlaylist from "./components/userPlaylist"
-import PlaylistDetail from "./components/playlistDetail"
+import UserPlaylist from "./components/userPlaylist";
+import PlaylistDetail from "./components/playlistDetail";
 import { getPlaylistDetail } from "@/api/playList.js";
 import { mapGetters } from "vuex";
 import { formatTime } from "@/utils/index";
@@ -51,13 +56,11 @@ export default {
 
   beforeMount() {},
 
-  mounted() {
-      
-  },
+  mounted() {},
 
   methods: {
-    async showPlaylist(data){
-      await this.getListDetail(data.id)
+    async showPlaylist(data) {
+      await this.getListDetail(data.id);
       this.isShow = true;
     },
     async getListDetail(data) {
@@ -65,7 +68,10 @@ export default {
       let res = await getPlaylistDetail(data);
       this.playList.id = res.playlist.id;
       this.playList.creator = res.playlist.creator;
-      this.playList.createTime = formatTime(res.playlist.createTime, "{y}-{m}-{d}");
+      this.playList.createTime = formatTime(
+        res.playlist.createTime,
+        "{y}-{m}-{d}"
+      );
       this.playList.trackIds = res.playlist.trackIds;
       this.playList.tracks = res.playlist.tracks.map(item => {
         let artist = [];
@@ -82,7 +88,7 @@ export default {
           albumName: item.al.name,
           albumId: item.al.id,
           key: item.id,
-          theme: [255,255,255]
+          theme: [255, 255, 255]
         };
       });
       this.playList.tags = res.playlist.tags;
@@ -90,9 +96,11 @@ export default {
       this.playList.name = res.playlist.name;
       this.playList.description = res.playlist.description;
     },
+    closePlaylist(){
+      this.isShow = false;
+    }
   }
 };
 </script>
 <style lang='scss' scoped>
-
 </style>

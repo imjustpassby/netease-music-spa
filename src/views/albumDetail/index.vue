@@ -235,7 +235,7 @@ export default {
     margin-left: 100px;
   }
   .album-detail-info {
-    height: 200px;
+    height: 210px;
     overflow: hidden;
   }
 }

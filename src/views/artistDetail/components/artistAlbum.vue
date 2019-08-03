@@ -9,13 +9,15 @@
           v-for="(item,index) in albums"
           :key="index"
         >
-          <img
-            v-lazy="item.picUrl"
-            width="100%"
-            alt="img"
-            style="cursor:pointer"
-            @click="goAlbumDetail(item.id)"
-          />
+          <div class="img-box">
+            <img
+              v-lazy="item.picUrl"
+              width="100%"
+              alt="img"
+              style="cursor:pointer"
+              @click="goAlbumDetail(item.id)"
+            />
+          </div>
           <p class="album-list-title">{{item.name}}</p>
           <p class="album-list-title">{{item.publishTime}}</p>
         </a-col>
@@ -96,4 +98,18 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
+.img-box {
+  width: 100%;
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
 </style>

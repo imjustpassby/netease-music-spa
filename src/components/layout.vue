@@ -86,7 +86,7 @@ export default {
         },
         {
           span: "我的音乐",
-          link: "/my"
+          link: "/my/daily-recommend"
         },
         {
           span: "搜索",

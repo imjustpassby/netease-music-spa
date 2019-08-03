@@ -42,7 +42,14 @@ export default new Router({
         {
           path: '/my',
           name: 'my',
-          component: () => import('@/views/myMusic/index')
+          component: () => import('@/views/myMusic/index'),
+          children: [
+            {
+              path: 'daily-recommend',
+              name: 'daily-recommend',
+              component: () => import("@/views/myMusic/components/DailyRecommend")
+            }
+          ]
         },
         {
           path: '/album-detail',
