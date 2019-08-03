@@ -82,3 +82,12 @@
 > [音频播放器Aplayer](https://github.com/MoePlayer/APlayer)
 > [视频播放器chimee](http://chimee.org/)
 
+## NGINX部署
+
+```
+location ~ /api/{
+	rewrite ^/api/(.*)$ /$1 break;
+	proxy_pass xxx(后端地址);
+}
+```
+
