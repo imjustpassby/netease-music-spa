@@ -22,8 +22,11 @@
             </a-button>
           </div>
           <div :class="!expand ? 'album-detail-info' : ''">
-            <span style="cursor:pointer" @click="goAlbumDetail">专辑：{{songInfo.albumName}}</span>
-            <button class="more" @click="showMore">{{expandText}}</button>
+            <div>
+              <span style="cursor:pointer" @click="goAlbumDetail">专辑：{{songInfo.albumName}}</span>
+              <button class="more" @click="showMore">{{expandText}}</button>
+            </div>
+            <br />
             <p>歌词：</p>
             <pre>{{lyric}}</pre>
           </div>

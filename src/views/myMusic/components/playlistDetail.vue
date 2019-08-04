@@ -40,7 +40,7 @@
             <span>共{{playList.tracks.length}}首</span>
           </div>
           <a-table :dataSource="playList.tracks" :pagination="pagination">
-            <a-table-column title key="action" width="5%">
+            <a-table-column title key="action" width="10%">
               <template slot-scope="text, record">
                 <span>
                   <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
@@ -51,17 +51,32 @@
             </a-table-column>
             <a-table-column title="歌曲标题" width="40%" key="name">
               <template slot-scope="text, record">
-                <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+                <a-popover placement="top">
+                  <template slot="content">
+                    <span>{{record.name}}</span>
+                  </template>
+                  <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+                </a-popover>
               </template>
             </a-table-column>
             <a-table-column title="歌手" align="center" width="25%" key="artist">
               <template slot-scope="text, record">
-                <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                <a-popover placement="top">
+                  <template slot="content">
+                    <span>{{record.artist}}</span>
+                  </template>
+                  <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                </a-popover>
               </template>
             </a-table-column>
             <a-table-column title="专辑" key="albumName">
               <template slot-scope="text, record">
-                <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+                <a-popover placement="top">
+                  <template slot="content">
+                    <span>{{record.albumName}}</span>
+                  </template>
+                  <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+                </a-popover>
               </template>
             </a-table-column>
           </a-table>

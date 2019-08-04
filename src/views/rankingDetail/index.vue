@@ -42,7 +42,7 @@
               <span>共{{playList.tracks.length}}首</span>
             </div>
             <a-table :dataSource="playList.tracks">
-              <a-table-column title key="action" width="5%">
+              <a-table-column title key="action" width="10%">
                 <template slot-scope="text, record">
                   <span>
                     <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
@@ -53,17 +53,32 @@
               </a-table-column>
               <a-table-column title="歌曲标题" width="40%" key="title">
                 <template slot-scope="text, record">
-                  <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+                  <a-popover placement="top">
+                    <template slot="content">
+                      <span>{{record.name}}</span>
+                    </template>
+                    <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+                  </a-popover>
                 </template>
               </a-table-column>
               <a-table-column title="歌手" width="25%" key="artist">
                 <template slot-scope="text, record">
-                  <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                  <a-popover placement="top">
+                    <template slot="content">
+                      <span>{{record.artist}}</span>
+                    </template>
+                    <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                  </a-popover>
                 </template>
               </a-table-column>
               <a-table-column title="专辑" key="albumName">
                 <template slot-scope="text, record">
-                  <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+                  <a-popover placement="top">
+                    <template slot="content">
+                      <span>{{record.albumName}}</span>
+                    </template>
+                    <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+                  </a-popover>
                 </template>
               </a-table-column>
             </a-table>
@@ -121,7 +136,10 @@ export default {
       let res = await getRankingList(this.idx);
       this.playList.id = res.playlist.id;
       this.playList.creator = res.playlist.creator;
-      this.playList.updateTime = formatTime(res.playlist.updateTime, "{y}-{m}-{d}");
+      this.playList.updateTime = formatTime(
+        res.playlist.updateTime,
+        "{y}-{m}-{d}"
+      );
       this.playList.trackIds = res.playlist.trackIds;
       this.playList.tracks = res.playlist.tracks.map(item => {
         let artist = [];

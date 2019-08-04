@@ -49,7 +49,7 @@
               <span>共{{djRadio.programCount}}首</span>
             </div>
             <a-table :dataSource="djRadio.tracks">
-              <a-table-column title key="action" width="5%">
+              <a-table-column title key="action" width="10%">
                 <template slot-scope="text, record">
                   <span>
                     <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
@@ -58,14 +58,40 @@
                   </span>
                 </template>
               </a-table-column>
-              <a-table-column title="节目标题" data-index="name" width="20%" key="title" />
+              <a-table-column title="节目标题" width="20%" key="title">
+                <template slot-scope="text, record">
+                  <a-popover placement="top">
+                    <template slot="content">
+                      <span>{{record.name}}</span>
+                    </template>
+                    <span>{{record.name}}</span>
+                  </a-popover>
+                </template>
+              </a-table-column>
               <a-table-column
                 title="播放次数"
-                data-index="listenerCount"
                 width="10%"
                 key="listenerCount"
-              />
-              <a-table-column title="节目描述" data-index="description" width="70%" key="description" />
+              >
+                <template slot-scope="text, record">
+                  <a-popover placement="top">
+                    <template slot="content">
+                      <span>{{record.listenerCount}}</span>
+                    </template>
+                    <span>{{record.listenerCount}}</span>
+                  </a-popover>
+                </template>
+              </a-table-column>
+              <a-table-column title="节目描述" width="70%" key="description">
+                <template slot-scope="text, record">
+                  <a-popover placement="top">
+                    <template slot="content">
+                      <span>{{record.description}}</span>
+                    </template>
+                    <span>{{record.description}}</span>
+                  </a-popover>
+                </template>
+              </a-table-column>
             </a-table>
           </div>
         </a-skeleton>

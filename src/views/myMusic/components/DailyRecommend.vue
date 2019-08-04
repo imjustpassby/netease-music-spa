@@ -10,9 +10,9 @@
             </svg>加入播放列表
           </a-button>
         </div>
-        <hr>
+        <hr />
         <a-table :dataSource="dailySongs" :pagination="pagination" :loading="loading">
-          <a-table-column title key="action" width="5%">
+          <a-table-column title key="action" width="10%" align="center">
             <template slot-scope="text, record">
               <span>
                 <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
@@ -23,17 +23,32 @@
           </a-table-column>
           <a-table-column title="歌曲标题" width="40%" key="name">
             <template slot-scope="text, record">
-              <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+              <a-popover placement="top">
+                <template slot="content">
+                  <span>{{record.name}}</span>
+                </template>
+                <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+              </a-popover>
             </template>
           </a-table-column>
           <a-table-column title="歌手" align="center" width="25%" key="artist">
             <template slot-scope="text, record">
-              <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+              <a-popover placement="top">
+                <template slot="content">
+                  <span>{{record.artist}}</span>
+                </template>
+                <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+              </a-popover>
             </template>
           </a-table-column>
           <a-table-column title="专辑" key="albumName">
             <template slot-scope="text, record">
-              <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+              <a-popover placement="top">
+                <template slot="content">
+                  <span>{{record.albumName}}</span>
+                </template>
+                <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+              </a-popover>
             </template>
           </a-table-column>
         </a-table>
@@ -48,7 +63,7 @@
             style="padding-left: 6px;text-align:left;"
           >
             <a-list-item-meta :description="'by - '+item.creator.nickname">
-              <p slot="title">{{item.name}}</p>
+              <p slot="title" style="cursor:pointer" @click="goPlaylistDetail(item)">{{item.name}}</p>
               <a-avatar
                 slot="avatar"
                 class="cover-img"
@@ -77,7 +92,7 @@ export default {
       dailyPlaylist: [],
       pagination: { defaultPageSize: 50 },
       locale: {
-        emptyText: ''
+        emptyText: ""
       },
       loading: true
     };
@@ -177,7 +192,6 @@ export default {
   padding: 0 0 100px 16px;
   font-size: 14px;
   .play-icon {
-    margin-left: 40%;
     font-size: 24px;
     cursor: pointer;
   }
@@ -197,6 +211,6 @@ export default {
 .title {
   text-align: left;
   font-size: 16px;
-  font-weight:bold
+  font-weight: bold;
 }
 </style>

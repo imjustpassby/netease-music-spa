@@ -87,7 +87,6 @@ export default {
   text-align: left;
   border: 1px solid rgb(232,232,232);
   .playlist-title{
-    text-decoration: underline;
     cursor: pointer;
     color: #333;
   }
