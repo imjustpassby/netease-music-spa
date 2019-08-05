@@ -6,11 +6,11 @@
       </svg>&nbsp;热门评论
     </h1>
     <a-comment v-for="(item,index) in hotComments" :key="index" class="song-comment-list">
-      <a slot="author">{{item.user.nickname}}</a>
+      <p slot="author" style="font-size:14px;">{{item.user.nickname}}</p>
       <a-avatar slot="avatar" :src="item.user.avatarUrl" alt="avatar" />
       <p slot="content">{{item.content}}</p>
       <a-comment v-for="(beReplied,idx) in item.beReplied" :key="idx">
-        <a slot="author">{{beReplied.user.nickname}}</a>
+        <p slot="author" style="font-size:14px;">{{beReplied.user.nickname}}</p>
         <a-avatar slot="avatar" :src="beReplied.user.avatarUrl" alt="avatar" />
         <p slot="content">{{beReplied.content}}</p>
       </a-comment>

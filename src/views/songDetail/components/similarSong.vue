@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { getSimilarSong } from "@/api/song.js";
+import { getSimilarSong, getSongDetail } from "@/api/song.js";
 import { getSimilarPlaylist } from "@/api/playList.js";
 export default {
   name: "",
@@ -82,7 +82,11 @@ export default {
   methods: {
     async getSimilarSong(data) {
       let res = await getSimilarSong(data);
-      this.songs = res.songs.map(item => {
+      let ids = res.songs.map(item=>{
+        return item.id
+      })
+      let covers = await this.getCover(ids.join(','));
+      this.songs = res.songs.map((item,index) => {
         let artist = [];
         let artistId = item.artists[0].id;
         for (const ar of item.artists) {
@@ -93,8 +97,7 @@ export default {
           name: item.name,
           artist: artist.join("/"),
           artistId: artistId,
-          cover:
-            "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          cover: covers[index],
           albumName: item.album.name,
           albumId: item.album.id,
           theme: [255, 255, 255]
@@ -106,11 +109,18 @@ export default {
       this.playlist = res.playlists.map(item => {
         return {
           id: item.id,
-          creator:item.creator,
+          creator: item.creator,
           cover: item.coverImgUrl,
           name: item.name
         };
       });
+    },
+    async getCover(data) {
+      let res = await getSongDetail(data);
+      let covers = res.songs.map(item=>{
+        return item.al.picUrl;
+      });
+      return covers;
     },
     goSongDetail(song) {
       this.$router.push({

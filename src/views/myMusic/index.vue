@@ -1,13 +1,14 @@
 <template>
   <div>
+    <a-back-top style="bottom: 100px;left:10%" />
     <a-row>
-      <a-col :span="4" :offset="3">
+      <a-col :span="4" :offset="5">
         <user-playlist @showPlaylist="showPlaylist" @closePlaylist="closePlaylist"></user-playlist>
       </a-col>
-      <a-col :span="14">
+      <a-col :span="12">
         <playlist-detail v-if="isShow" :playList="playList"></playlist-detail>
       </a-col>
-      <a-col :span="14" v-if="!isShow">
+      <a-col :span="12" v-if="!isShow">
         <transition name="fade-transform" mode="out-in">
           <router-view />
         </transition>

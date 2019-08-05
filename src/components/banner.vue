@@ -5,7 +5,7 @@
         <div class="banner">
           <a-carousel effect="fade" autoplay>
             <div v-for="(item,index) in banner" :key="index">
-              <img v-lazy="item.imageUrl" alt="banner" />
+              <img v-lazy="item.imageUrl" width="100%" alt="banner" />
             </div>
           </a-carousel>
         </div>

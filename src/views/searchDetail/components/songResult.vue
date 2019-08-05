@@ -99,7 +99,8 @@ export default {
             "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
           albumName: item.album.name,
           albumId: item.album.id,
-          theme: [255, 255, 255]
+          theme: [255, 255, 255],
+          key: item.id
         };
       });
     },

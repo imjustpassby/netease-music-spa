@@ -47,7 +47,12 @@ export default new Router({
             {
               path: 'daily-recommend',
               name: 'daily-recommend',
-              component: () => import("@/views/myMusic/components/DailyRecommend")
+              component: () => import("@/views/myMusic/components/dailyRecommend")
+            },
+            {
+              path: 'daily-playlist',
+              name: 'daily-playlist',
+              component: () => import("@/views/myMusic/components/dailyPlaylist")
             }
           ]
         },

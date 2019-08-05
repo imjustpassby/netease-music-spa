@@ -1,7 +1,7 @@
 <template>
   <div class="playlist-detail-container">
     <a-row>
-      <a-col :span="17" style="margin-top:60px">
+      <a-col :span="24" style="margin-top:52px">
         <div class="list-title">
           <span class="title">每日推荐歌曲</span>
           <a-button @click="addMusicList" style="margin-left: 20px">
@@ -53,34 +53,12 @@
           </a-table-column>
         </a-table>
       </a-col>
-      <a-col :span="6" :offset="1" style="margin-top:74px">
-        <p class="title">每日推荐歌单</p>
-        <hr />
-        <a-list itemLayout="horizontal" :dataSource="dailyPlaylist" :locale="locale">
-          <a-list-item
-            slot="renderItem"
-            slot-scope="item, index"
-            style="padding-left: 6px;text-align:left;"
-          >
-            <a-list-item-meta :description="'by - '+item.creator.nickname">
-              <p slot="title" style="cursor:pointer" @click="goPlaylistDetail(item)">{{item.name}}</p>
-              <a-avatar
-                slot="avatar"
-                class="cover-img"
-                :src="item.picUrl"
-                @click="goPlaylistDetail(item)"
-              />
-            </a-list-item-meta>
-          </a-list-item>
-        </a-list>
-      </a-col>
     </a-row>
   </div>
 </template>
 
 <script>
 import { getRecommendSongs } from "@/api/song";
-import { getRecommendResource } from "@/api/playList";
 import Bus from "@/utils/bus.js";
 import { mapActions } from "vuex";
 export default {
@@ -89,11 +67,7 @@ export default {
   data() {
     return {
       dailySongs: [],
-      dailyPlaylist: [],
       pagination: { defaultPageSize: 50 },
-      locale: {
-        emptyText: ""
-      },
       loading: true
     };
   },
@@ -108,7 +82,6 @@ export default {
 
   async mounted() {
     await this.getRecommendSongs();
-    await this.getRecommendResource();
     this.loading = false;
   },
 
@@ -135,10 +108,6 @@ export default {
         };
       });
     },
-    async getRecommendResource() {
-      let res = await getRecommendResource();
-      this.dailyPlaylist = res.recommend;
-    },
     addMusicList() {
       Bus.$emit("add", { list: this.dailySongs, type: "playlist" });
       this.$message.success("已加入播放列表！");
@@ -155,14 +124,6 @@ export default {
     goSongDetail(data) {
       this.$router.push({
         path: "/song-detail",
-        query: {
-          id: data.id
-        }
-      });
-    },
-    goPlaylistDetail(data) {
-      this.$router.push({
-        path: "/playlist-detail",
         query: {
           id: data.id
         }
@@ -202,11 +163,6 @@ export default {
       margin: 10px;
     }
   }
-}
-.cover-img {
-  width: 46px;
-  height: 46px;
-  cursor: pointer;
 }
 .title {
   text-align: left;
