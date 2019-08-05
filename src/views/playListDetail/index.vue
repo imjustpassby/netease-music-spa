@@ -16,7 +16,9 @@
                 <div class="playlist-creator">
                   <img v-lazy="playList.creator.avatarUrl" width="36px" alt />
                   <span>{{playList.creator.nickname}}&nbsp;&nbsp;于&nbsp;&nbsp;{{playList.createTime}}&nbsp;&nbsp;创建</span>
-                  <a-button @click.once="addMusicList" style="margin-left: 20px">
+                </div>
+                <div>
+                  <a-button @click.once="addMusicList" style="margin-right: 20px">
                     <svg
                       class="icon"
                       aria-hidden="true"
@@ -24,6 +26,15 @@
                     >
                       <use xlink:href="#icon-play1" />
                     </svg>加入播放列表
+                  </a-button>
+                  <a-button @click.once="subscribe(playList.id)" style="margin-right: 20px">
+                    <svg
+                      class="icon"
+                      aria-hidden="true"
+                      style="font-size:16px; margin-right:16px;"
+                    >
+                      <use xlink:href="#icon-like1" />
+                    </svg>收藏歌单
                   </a-button>
                 </div>
                 <div class="tag">
@@ -95,7 +106,7 @@
 </template>
 
 <script>
-import { getPlaylistDetail } from "@/api/playList.js";
+import { getPlaylistDetail, subscribePlaylist } from "@/api/playList.js";
 import Bus from "@/utils/bus.js";
 import { mapActions } from "vuex";
 import { formatTime } from "@/utils/index";
@@ -180,6 +191,10 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    async subscribe(data) {
+      await subscribePlaylist({ id: data, type: 1 });
+      this.$message.success("收藏成功！");
     },
     goSongDetail(song) {
       this.$router.push({

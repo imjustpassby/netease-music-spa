@@ -73,3 +73,14 @@ export function getSimilarPlaylist(data) {
     }
   })
 }
+/* 收藏、取消收藏歌单 */
+export function subscribePlaylist(data) {
+  return request({
+    url: '/api/playlist/subscribe',
+    withCredentials: true,
+    params: {
+      id: data.id,
+      t: data.type
+    }
+  })
+}

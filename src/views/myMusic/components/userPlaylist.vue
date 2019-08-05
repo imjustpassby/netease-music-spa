@@ -41,6 +41,7 @@
 <script>
 import { getUserPlaylist } from "@/api/user";
 import { mapGetters } from "vuex";
+import Bus from "@/utils/bus.js";
 export default {
   name: "",
   props: [""],
@@ -63,6 +64,11 @@ export default {
 
   async mounted() {
     await this.getUserPlaylist();
+    Bus.$on("unsubscribe",data=>{
+      this.subPlaylist = this.subPlaylist.filter(item=>{
+        return item.id !== data
+      })
+    })
   },
 
   methods: {

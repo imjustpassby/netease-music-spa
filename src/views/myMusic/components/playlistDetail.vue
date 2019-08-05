@@ -15,10 +15,17 @@
               <div class="playlist-creator">
                 <img v-lazy="playList.creator.avatarUrl" width="36px" alt />
                 <span>{{playList.creator.nickname}}&nbsp;&nbsp;于&nbsp;&nbsp;{{playList.createTime}}&nbsp;&nbsp;创建</span>
-                <a-button @click="addMusicList" style="margin-left: 20px">
+              </div>
+              <div>
+                <a-button @click="addMusicList" style="margin-right: 20px">
                   <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
                     <use xlink:href="#icon-play1" />
                   </svg>加入播放列表
+                </a-button>
+                <a-button @click="unsubscribe(playList.id)" style="margin-right: 20px">
+                  <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
+                    <use xlink:href="#icon-like1" />
+                  </svg>取消收藏
                 </a-button>
               </div>
               <div class="tag">
@@ -87,6 +94,7 @@
 </template>
 
 <script>
+import { subscribePlaylist } from "@/api/playList.js";
 import Bus from "@/utils/bus.js";
 import { mapActions } from "vuex";
 export default {
@@ -122,6 +130,11 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    async unsubscribe(data){
+      await subscribePlaylist({ id: data, type: 2 });
+      this.$message.success("已取消收藏！");
+      Bus.$emit("unsubscribe",data)
     },
     goSongDetail(song) {
       this.$router.push({
