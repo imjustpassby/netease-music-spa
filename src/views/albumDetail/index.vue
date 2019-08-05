@@ -116,7 +116,11 @@ export default {
 
   computed: {},
 
-  watch: {},
+  watch: {
+    $route(to, from) {
+      this.getAlbumInfo();
+    }
+  },
 
   beforeMount() {},
 

@@ -134,7 +134,11 @@ export default {
 
   computed: {},
 
-  watch: {},
+  watch: {
+    $route(to, from) {
+      this.getListDetail(this.$route.query.id);
+    }
+  },
 
   beforeMount() {},
 

@@ -122,7 +122,11 @@ export default {
 
   computed: {},
 
-  watch: {},
+  watch: {
+    $route(to, from) {
+      this.getArtistInfo();
+    }
+  },
 
   beforeMount() {},
 

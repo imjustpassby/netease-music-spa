@@ -139,7 +139,12 @@ export default {
     }
   },
 
-  watch: {},
+  watch: {
+    $route(to, from) {
+      this.getDjDetail();
+      this.getDjProgram();
+    }
+  },
 
   beforeMount() {},
 
