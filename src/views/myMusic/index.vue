@@ -6,7 +6,7 @@
         <user-playlist @showPlaylist="showPlaylist" @closePlaylist="closePlaylist"></user-playlist>
       </a-col>
       <a-col :span="12">
-        <playlist-detail v-if="isShow" :playList="playList"></playlist-detail>
+        <playlist-detail v-if="isShow" :playList="playList" :showUnsubscribeBtn="showUnsubscribeBtn"></playlist-detail>
       </a-col>
       <a-col :span="12" v-if="!isShow">
         <transition name="fade-transform" mode="out-in">
@@ -40,7 +40,7 @@ export default {
         name: "",
         description: ""
       },
-      songList: []
+      showUnsubscribeBtn: true
     };
   },
 
@@ -61,7 +61,12 @@ export default {
 
   methods: {
     async showPlaylist(data) {
-      await this.getListDetail(data.id);
+      if(data.type === 'self'){
+        this.showUnsubscribeBtn = false;
+      } else if (data.type === 'other'){
+        this.showUnsubscribeBtn = true;
+      }
+      await this.getListDetail(data.playlist.id);
       this.isShow = true;
     },
     async getListDetail(data) {

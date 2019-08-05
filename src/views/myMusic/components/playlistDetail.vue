@@ -22,7 +22,7 @@
                     <use xlink:href="#icon-play1" />
                   </svg>加入播放列表
                 </a-button>
-                <a-button @click="unsubscribe(playList.id)" style="margin-right: 20px">
+                <a-button v-if="showUnsubscribeBtn" @click="unsubscribe(playList.id)" style="margin-right: 20px">
                   <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
                     <use xlink:href="#icon-like1" />
                   </svg>取消收藏
@@ -99,7 +99,7 @@ import Bus from "@/utils/bus.js";
 import { mapActions } from "vuex";
 export default {
   name: "",
-  props: ["playList"],
+  props: ["playList","showUnsubscribeBtn"],
   data() {
     return {
       pagination: { defaultPageSize: 40 }

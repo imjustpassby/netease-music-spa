@@ -20,7 +20,11 @@
       <a-list itemLayout="horizontal" :dataSource="userPlaylist" style="width:100%">
         <a-list-item slot="renderItem" slot-scope="item, index">
           <a-list-item-meta :description="item.trackCount+'首'">
-            <p slot="title" class="playlist-title" @click="showPlaylist(item)">{{item.name}}</p>
+            <p
+              slot="title"
+              class="playlist-title"
+              @click="showPlaylist({playlist:item,type:'self'})"
+            >{{item.name}}</p>
             <a-avatar slot="avatar" :src="item.coverImgUrl" style="width:46px;height:46px" />
           </a-list-item-meta>
         </a-list-item>
@@ -29,7 +33,11 @@
       <a-list itemLayout="horizontal" :dataSource="subPlaylist" style="width:100%">
         <a-list-item slot="renderItem" slot-scope="item, index">
           <a-list-item-meta :description="item.trackCount+'首'">
-            <p slot="title" class="playlist-title" @click="showPlaylist(item)">{{item.name}}</p>
+            <p
+              slot="title"
+              class="playlist-title"
+              @click="showPlaylist({playlist:item,type:'other'})"
+            >{{item.name}}</p>
             <a-avatar slot="avatar" :src="item.coverImgUrl" style="width:46px;height:46px" />
           </a-list-item-meta>
         </a-list-item>
@@ -64,11 +72,11 @@ export default {
 
   async mounted() {
     await this.getUserPlaylist();
-    Bus.$on("unsubscribe",data=>{
-      this.subPlaylist = this.subPlaylist.filter(item=>{
-        return item.id !== data
-      })
-    })
+    Bus.$on("unsubscribe", data => {
+      this.subPlaylist = this.subPlaylist.filter(item => {
+        return item.id !== data;
+      });
+    });
   },
 
   methods: {
