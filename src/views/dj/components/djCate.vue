@@ -22,19 +22,18 @@
         <div>
           <a-col :span="12" v-for="(item,index) in djRecommend" :key="index">
             <a-row type="flex" justify="start" class="recommend-new-songs">
-              <a-col :span="4" style="position:relative;">
+              <a-col :span="3" style="position:relative;">
                 <div @click="goDjDetail(item)">
                   <img
                     v-lazy="item.picUrl"
-                    height="68px"
+                    width="100%"
                     alt="img"
                     style="margin:9px 0 0 9px;cursor: pointer;z-index:-1"
                   />
                 </div>
               </a-col>
-              <a-col :span="20">
+              <a-col :span="18" :offset="1">
                 <p class="recommend-title">{{item.name}}</p>
-                <p class="recommend-title" style="color:#999">{{item.dj.nickname}}</p>
               </a-col>
             </a-row>
           </a-col>
@@ -125,7 +124,7 @@ export default {
 .recommend-title {
   text-align: left;
   margin-top: 10px;
-  font-size: 12px;
+  font-size: 14px;
   line-height:2em;
   cursor:text;
 }

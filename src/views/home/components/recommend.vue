@@ -2,13 +2,7 @@
   <div class="recommend">
     <a-row>
       <a-col :span="14" :offset="5">
-        <recommend-song-sheet></recommend-song-sheet>
-      </a-col>
-    </a-row>
-
-    <a-row>
-      <a-col :span="14" :offset="5">
-        <recommend-private-content></recommend-private-content>
+        <recommend-playlist></recommend-playlist>
       </a-col>
     </a-row>
 
@@ -29,11 +23,17 @@
         <recommend-dj></recommend-dj>
       </a-col>
     </a-row>
+
+    <a-row>
+      <a-col :span="14" :offset="5">
+        <recommend-private-content></recommend-private-content>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
 <script>
-import RecommendSongSheet from "./reccommendSongSheet.vue";
+import RecommendPlaylist from "./recommendPlaylist";
 import RecommendDj from "./recommendDj.vue";
 import RecommendMv from "./recommendMv.vue";
 import RecommendNewSong from "./recommendNewSong.vue";
@@ -46,7 +46,7 @@ export default {
   },
 
   components: {
-    RecommendSongSheet,
+    RecommendPlaylist,
     RecommendDj,
     RecommendMv,
     RecommendNewSong,
@@ -91,16 +91,6 @@ export default {
     font-size: 24px;
     line-height: 1.5em;
     border-bottom: 1px solid #dddddd;
-  }
-  .more {
-    float: right;
-    font-size: 14px;
-    line-height: 2.5em;
-    outline: none;
-    border: none;
-    text-decoration: underline;
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0);
   }
   .recommend-title {
     margin-top: 7px;
