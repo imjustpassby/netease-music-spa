@@ -100,6 +100,11 @@ export default new Router({
           path: '/404',
           name: '404',
           component: () => import('@/views/errorPage')
+        },
+        {
+          path: '/copyright',
+          name: 'copyright',
+          component: () => import('@/views/copyright')
         }
       ]
     },

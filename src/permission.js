@@ -6,7 +6,7 @@ import Vue from 'vue'
 
 const whiteList = ['/home', '/ranking-list', '/playlist', '/dj-radios', '/new-album',
   '/artist', '/album-detail', '/playlist-detail', '/artist-detail', '/mv-detail', '/ranking-detail',
-  '/dj-detail', '/search-detail', '/song-detail','/404']
+  '/dj-detail', '/search-detail', '/song-detail', '/404', 'copyright']
 router.beforeEach((to, from, next) => {
   NProgress.start();
   if (store.getters.loginSuccess) { //如果已登录，直接跳转

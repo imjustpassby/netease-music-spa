@@ -1,7 +1,13 @@
 <template>
   <div>
+    <a-back-top style="bottom: 100px;left:10%" />
     <banner></banner>
     <recommend></recommend>
+    <a-row>
+      <a-col :span="24" style="margin-top:-80px;padding-bottom: 100px;">
+        <router-link to="/copyright">免责声明</router-link>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
