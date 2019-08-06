@@ -4,7 +4,7 @@ import {
   logout,
   loginRefresh
 } from '@/api/user'
-
+import Cookie from "js-cookie"
 const user = {
   state: {
     account: window.sessionStorage.getItem('account'),
@@ -13,7 +13,8 @@ const user = {
     uid: window.sessionStorage.getItem('uid'),
     nickname: window.sessionStorage.getItem('nickname'),
     avatarUrl: window.sessionStorage.getItem('avatarUrl'),
-    loginSuccess: window.sessionStorage.getItem('loginSuccess') ? window.sessionStorage.getItem('loginSuccess') : false
+    loginSuccess: window.sessionStorage.getItem('loginSuccess') ? window.sessionStorage.getItem('loginSuccess') : false,
+    cookie: window.sessionStorage.getItem('cookie')
   },
   mutations: {
     SET_ACCOUNT(state, account) {
@@ -52,6 +53,7 @@ const user = {
       window.sessionStorage.setItem('nickname', '');
       window.sessionStorage.setItem('avatarUrl', '');
       window.sessionStorage.setItem('loginSuccess', '');
+      window.sessionStorage.setItem('cookie', {});
       state.account = {},
       state.profile = {},
       state.bindings = {},
@@ -60,6 +62,11 @@ const user = {
       state.nickname = "";
       state.avatarUrl = "";
       state.loginSuccess = false;
+      state.cookie = {};
+    },
+    SET_COOKIE(state, cookie) {
+      state.cookie = cookie;
+      window.sessionStorage.setItem('cookie', cookie);
     }
   },
   actions: {
@@ -76,6 +83,7 @@ const user = {
           commit('SET_PROFILE', res.profile);
           commit('SET_BINDINGS', res.bindings);
           commit('SET_LOGIN_SUCCESS', true);
+          commit('SET_COOKIE', Cookie.get());//保存登录后返回的cookie到vuex
           resolve(res)
         }).catch((err) => {
           reject(err)

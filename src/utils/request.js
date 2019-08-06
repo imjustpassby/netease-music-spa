@@ -1,11 +1,18 @@
 import axios from 'axios'
 import Vue from 'vue'
+import store from '@/store'
+import Cookie from 'js-cookie'
 // 创建axios实例
 const service = axios.create()
 
 // request拦截器
 service.interceptors.request.use(
   config => {
+    if (store.getters.loginSuccess) { //解决多用户登录问题，每次请求前设置登录后返回的cookie
+      Cookie.set("MUSIC_U", store.state.user.cookie.MUSIC_U);
+      Cookie.set("__csrf", store.state.user.cookie.__csrf);
+      Cookie.set("__remember_me", store.state.user.cookie.__remember_me);
+    }
     return config
   },
   error => {
@@ -18,6 +25,11 @@ service.interceptors.request.use(
 // response 拦截器
 service.interceptors.response.use(
   response => {
+    if (store.getters.loginSuccess) {//每次请求借宿后删除cookie
+      Cookie.remove("MUSIC_U");
+      Cookie.remove("__csrf");
+      Cookie.remove("__remember_me");
+    }
     const res = response.data
     return Promise.resolve(res);
   },
