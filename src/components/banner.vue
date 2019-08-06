@@ -2,13 +2,15 @@
   <div>
     <a-row>
       <a-col :span="14" :offset="5">
-        <div class="banner">
-          <a-carousel effect="fade" autoplay>
-            <div v-for="(item,index) in banner" :key="index">
-              <img v-lazy="item.imageUrl" width="100%" alt="banner" />
-            </div>
-          </a-carousel>
-        </div>
+        <a-skeleton active :loading="loading">
+          <div class="banner">
+            <a-carousel effect="fade" autoplay>
+              <div v-for="(item,index) in banner" :key="index">
+                <img :src="item.imageUrl" width="100%" alt="banner" />
+              </div>
+            </a-carousel>
+          </div>
+        </a-skeleton>
       </a-col>
     </a-row>
   </div>
@@ -22,7 +24,7 @@ export default {
   data() {
     return {
       banner: [],
-      recommendSongs: []
+      loading: true
     };
   },
 
@@ -37,6 +39,7 @@ export default {
   async mounted() {
     let banner = await getBanner();
     this.banner = banner.banners;
+    this.loading = false;
   },
 
   methods: {}

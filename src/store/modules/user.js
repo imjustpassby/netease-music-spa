@@ -19,15 +19,12 @@ const user = {
   mutations: {
     SET_ACCOUNT(state, account) {
       state.account = account;
-      window.sessionStorage.setItem('account', account);
     },
     SET_PROFILE(state, profile) {
       state.profile = profile;
-      window.sessionStorage.setItem('profile', profile);
     },
     SET_BINDINGS(state, bindings) {
       state.bindings = bindings;
-      window.sessionStorage.setItem('bindings', bindings);
     },
     SET_UID(state, uid) {
       state.uid = uid;
@@ -46,17 +43,13 @@ const user = {
       window.sessionStorage.setItem('loginSuccess', isSuccess);
     },
     INIT_STATE(state) {
-      window.sessionStorage.setItem('account', '');
-      window.sessionStorage.setItem('profile', '');
-      window.sessionStorage.setItem('bindings', '');
       window.sessionStorage.setItem('uid', '');
       window.sessionStorage.setItem('nickname', '');
       window.sessionStorage.setItem('avatarUrl', '');
       window.sessionStorage.setItem('loginSuccess', '');
-      window.sessionStorage.setItem('cookie', {});
+      window.sessionStorage.setItem('cookie', '');
       state.account = {},
       state.profile = {},
-      state.bindings = {},
       state.bindings = {},
       state.uid = null;
       state.nickname = "";
@@ -66,7 +59,7 @@ const user = {
     },
     SET_COOKIE(state, cookie) {
       state.cookie = cookie;
-      window.sessionStorage.setItem('cookie', cookie);
+      window.sessionStorage.setItem('cookie',  JSON.stringify(cookie));
     }
   },
   actions: {

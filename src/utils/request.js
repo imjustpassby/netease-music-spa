@@ -9,9 +9,10 @@ const service = axios.create()
 service.interceptors.request.use(
   config => {
     if (store.getters.loginSuccess) { //解决多用户登录问题，每次请求前设置登录后返回的cookie
-      Cookie.set("MUSIC_U", store.state.user.cookie.MUSIC_U);
-      Cookie.set("__csrf", store.state.user.cookie.__csrf);
-      Cookie.set("__remember_me", store.state.user.cookie.__remember_me);
+      let cookie = window.sessionStorage.getItem("cookie");
+      Cookie.set("MUSIC_U", JSON.parse(cookie).MUSIC_U);
+      Cookie.set("__csrf", JSON.parse(cookie).__csrf);
+      Cookie.set("__remember_me", JSON.parse(cookie).__remember_me);
     }
     return config
   },
