@@ -1,4 +1,5 @@
-import { getSongUrl, getLyric } from "@/api/song.js"
+import { getSongUrl, getLyric, checkMusic } from "@/api/song.js"
+import Vue from 'vue'
 const playlist = {
   state: {
     currentIndex: -1,
@@ -40,42 +41,50 @@ const playlist = {
     }
   },
   actions: {
-    SET_CURRENT_MUSIC_ACTION({ state,commit }, data) {
-      return  new Promise(async(resolve, reject) => {
-        //获取songUrl
-        let res = await getSongUrl(data.id);
-        let songList = res.data.map(item => {
-          return { url: item.url, id: item.id };
-        });
-        data.url = songList[0].url;
-        //获取歌词
-        if (data.type !== "program") {
-          let lyric = await getLyric(data.id);
-          if(lyric.hasOwnProperty('lrc')){
-            data.lrc = lyric.lrc.lyric;
+    SET_CURRENT_MUSIC_ACTION({ state,commit, dispatch }, data) {
+      return new Promise(async (resolve, reject) => {
+        //检查歌曲是否可用
+        checkMusic(data.id).then(async(result) => {
+          if (result.success) {
+            //获取songUrl
+            let res = await getSongUrl(data.id);
+            let songList = res.data.map(item => {
+              return { url: item.url, id: item.id };
+            });
+            data.url = songList[0].url;
+            //获取歌词
+            if (data.type !== "program") {
+              let lyric = await getLyric(data.id);
+              if(lyric.hasOwnProperty('lrc')){
+                data.lrc = lyric.lrc.lyric;
+              }
+            }
+            var colorThief = new ColorThief();
+            colorThief.getColorAsync(data.cover, (color) => {
+              data.theme = color;
+            });
+            let hasSong = false;
+            let length = state.playlist.length;
+            for (let i = 0; i < length; i++){
+              if (data.id === state.playlist[i].id) {
+                hasSong = true;
+                commit("SET_CURRENT_MUSIC", data);
+                commit("SET_CURRENT_INDEX", i);
+                resolve(data);
+                break;
+              }
+            }
+            if (!hasSong) {
+              commit("SET_CURRENT_MUSIC", data);
+              commit("ADD_PLAYLIST", data);
+              commit("SET_CURRENT_INDEX", length);
+              resolve(data);
+            }
           }
-        }
-        var colorThief = new ColorThief();
-        colorThief.getColorAsync(data.cover, (color) => {
-          data.theme = color;
+        }).catch((err) => {
+          Vue.prototype.$message.warning('亲爱的，暂无版权。')
+          reject("亲爱的，暂无版权");
         });
-        let hasSong = false;
-        let length = state.playlist.length;
-        for (let i = 0; i < length; i++){
-          if (data.id === state.playlist[i].id) {
-            hasSong = true;
-            commit("SET_CURRENT_MUSIC", data);
-            commit("SET_CURRENT_INDEX", i);
-            resolve(data);
-            break;
-          }
-        }
-        if (!hasSong) {
-          commit("SET_CURRENT_MUSIC", data);
-          commit("ADD_PLAYLIST", data);
-          commit("SET_CURRENT_INDEX", length);
-          resolve(data);
-        }
       })
     },
     NEXT_SONG({ state, commit, dispatch }) {

@@ -11,7 +11,7 @@
           </a-button>
         </div>
         <hr />
-        <a-table :dataSource="dailySongs" :pagination="pagination" :loading="loading">
+        <a-table :dataSource="dailySongs" :pagination="false" :loading="loading">
           <a-table-column title key="action" width="10%" align="center">
             <template slot-scope="text, record">
               <span>
@@ -67,7 +67,6 @@ export default {
   data() {
     return {
       dailySongs: [],
-      pagination: { defaultPageSize: 50 },
       loading: true
     };
   },

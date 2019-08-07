@@ -33,7 +33,7 @@ export function search(data) {
     withCredentials: true,
     params: {
       keywords: data.keywords,
-      limit: 50,
+      limit: 100,
       offset: data.offset ? data.offset : 0,
       type: data.type ? data.type : 1018
     }
