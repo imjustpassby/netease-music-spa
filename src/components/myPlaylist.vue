@@ -50,7 +50,7 @@
             <a-icon type="delete" class="actions-item" @click="deleteSong({song:item,idx:index})" />
           </a>
           <a-list-item-meta :description="item.artist">
-            <p slot="title" @click="goSongDetail(item)" style="cursor:pointer">{{item.name}}</p>
+            <p slot="title" class="title" @click="goSongDetail(item)">{{item.name}}</p>
             <a-avatar
               slot="avatar"
               class="cover-img"
@@ -200,6 +200,13 @@ export default {
     transition: all 0.1s ease-in-out;
     transform: scale(1.5);
   }
+}
+.title {
+  width: 140px;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .cover-img {
   width: 46px;
