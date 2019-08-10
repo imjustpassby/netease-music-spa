@@ -57,7 +57,7 @@ export default {
     return {
       songs: [],
       playlist: [],
-      locale: { emptyText: "" }
+      locale: { emptyText: "暂无" }
     };
   },
 
@@ -82,27 +82,29 @@ export default {
   methods: {
     async getSimilarSong(data) {
       let res = await getSimilarSong(data);
-      let ids = res.songs.map(item=>{
-        return item.id
-      })
-      let covers = await this.getCover(ids.join(','));
-      this.songs = res.songs.map((item,index) => {
-        let artist = [];
-        let artistId = item.artists[0].id;
-        for (const ar of item.artists) {
-          artist.push(ar.name);
-        }
-        return {
-          id: item.id,
-          name: item.name,
-          artist: artist.join("/"),
-          artistId: artistId,
-          cover: covers[index],
-          albumName: item.album.name,
-          albumId: item.album.id,
-          theme: [255, 255, 255]
-        };
-      });
+      if (res.songs.length > 1) {
+        let ids = res.songs.map(item => {
+          return item.id;
+        });
+        let covers = await this.getCover(ids.join(","));
+        this.songs = res.songs.map((item, index) => {
+          let artist = [];
+          let artistId = item.artists[0].id;
+          for (const ar of item.artists) {
+            artist.push(ar.name);
+          }
+          return {
+            id: item.id,
+            name: item.name,
+            artist: artist.join("/"),
+            artistId: artistId,
+            cover: covers[index],
+            albumName: item.album.name,
+            albumId: item.album.id,
+            theme: [255, 255, 255]
+          };
+        });
+      }
     },
     async getSimilarPlaylist(data) {
       let res = await getSimilarPlaylist(data);
@@ -117,7 +119,7 @@ export default {
     },
     async getCover(data) {
       let res = await getSongDetail(data);
-      let covers = res.songs.map(item=>{
+      let covers = res.songs.map(item => {
         return item.al.picUrl;
       });
       return covers;

@@ -24,11 +24,11 @@
       </a-col>
     </a-row>
 
-    <a-row>
+    <!-- <a-row>
       <a-col :span="14" :offset="5">
         <recommend-private-content></recommend-private-content>
       </a-col>
-    </a-row>
+    </a-row> -->
   </div>
 </template>
 

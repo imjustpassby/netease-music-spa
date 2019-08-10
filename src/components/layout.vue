@@ -304,13 +304,6 @@ export default {
     border-radius: 20px;
   }
 }
-.music-player {
-  position: fixed;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  z-index: 99;
-}
 .aplayer {
   position: fixed;
   left: 0;

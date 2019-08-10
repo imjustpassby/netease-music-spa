@@ -1,5 +1,6 @@
 <template>
   <div class="mv">
+    <a-back-top style="bottom: 100px;left:10%" />
     <a-row>
       <a-col :span="12" :offset="6">
         <mv-detail></mv-detail>
