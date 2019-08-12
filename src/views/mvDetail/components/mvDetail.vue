@@ -118,7 +118,6 @@ export default {
     }
   }
   #wrapper {
-    height: 460px;
     overflow: hidden;
     margin: 16px 0;
   }

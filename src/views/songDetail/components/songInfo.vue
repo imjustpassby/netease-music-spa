@@ -3,7 +3,9 @@
     <div class="song-detail">
       <a-row>
         <a-col :span="5">
-          <img v-lazy="songInfo.cover" class="album-cover" alt="歌曲" />
+          <div class="img-box">
+            <img v-lazy="songInfo.cover" class="album-cover" alt="歌曲" />
+          </div>
         </a-col>
         <a-col :span="18" :offset="1">
           <div style="margin-top:46px">
@@ -189,5 +191,19 @@ export default {
   cursor: pointer;
   color: blueviolet;
   background-color: rgba(255, 255, 255, 0);
+}
+.img-box {
+  width: 100%;
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
 }
 </style>

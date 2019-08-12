@@ -1,7 +1,7 @@
 <template>
   <div style="padding-top: 36px">
     <a-row>
-      <a-col>
+      <a-col v-if="songs.length > 0">
         <p class="title">相似歌曲</p>
         <hr />
         <a-list itemLayout="horizontal" :dataSource="songs" :locale="locale">
@@ -22,7 +22,7 @@
           </a-list-item>
         </a-list>
       </a-col>
-      <a-col style="margin-top: 30px">
+      <a-col style="margin-top: 30px" v-if="playlist.length > 0">
         <p class="title">包含这首歌的歌单</p>
         <hr />
         <a-list itemLayout="horizontal" :dataSource="playlist" :locale="locale">
