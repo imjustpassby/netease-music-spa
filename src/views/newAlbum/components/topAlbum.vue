@@ -1,20 +1,27 @@
 <template>
   <div>
-    <a-skeleton active :loading="loading">
-      <div class="album-list">
-        <div class="album-list-top-title">
-          <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-            <use xlink:href="#icon-circle" />
-          </svg>全部新碟
-        </div>
+    <div class="album-list">
+      <div class="album-list-top-title">
+        <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
+          <use xlink:href="#icon-circle" />
+        </svg>全部新碟
+      </div>
+      <a-skeleton active :loading="loading">
         <a-row type="flex" justify="space-around">
-          <a-col :span="5 " class="album-list-item" v-for="(item,index) in albums" :key="index" @click="goAlbumDetail(item.id)">
+          <a-col
+            :span="5"
+            class="album-list-item"
+            v-for="(item,index) in albums"
+            :key="index"
+            @click="goAlbumDetail(item.id)"
+          >
             <img v-lazy="item.picUrl" width="100%" alt="img" />
             <p class="album-list-title">{{item.name}}</p>
           </a-col>
         </a-row>
-      </div>
-    </a-skeleton>
+      </a-skeleton>
+    </div>
+
     <a-pagination
       @change="onChangePage"
       :current="currentPage"
@@ -65,13 +72,13 @@ export default {
       this.currentPage = cur;
       await this.getAlbums({ offset: (this.currentPage - 1) * 20 });
     },
-    goAlbumDetail(id){
+    goAlbumDetail(id) {
       this.$router.push({
-        path: '/album-detail',
+        path: "/album-detail",
         query: {
           id: id
         }
-      })
+      });
     }
   }
 };

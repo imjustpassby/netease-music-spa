@@ -6,10 +6,14 @@
           <use xlink:href="#icon-circle" />
         </svg>电台分类
       </div>
-      <a-col :span="2" style="margin: 6px 16px" v-for="(cate,index) in cateList" :key="index">
-        <img v-lazy="cate.pic56x56Url" width="40%" alt="img" @click="getDjRecommend(cate.id)" />
-        <p class="dj-cate-list-title">{{cate.name}}</p>
-      </a-col>
+      <a-skeleton active :loading="loading">
+        <div>
+          <a-col :span="2" style="margin: 6px 16px" v-for="(cate,index) in cateList" :key="index">
+            <img v-lazy="cate.pic56x56Url" width="40%" alt="img" @click="getDjRecommend(cate.id)" />
+            <p class="dj-cate-list-title">{{cate.name}}</p>
+          </a-col>
+        </div>
+      </a-skeleton>
     </a-row>
     <a-row type="flex" justify="start" style="padding: 14px 0 0 0" v-if="isShowRecommend">
       <div class="dj-cate-top-title">
@@ -125,8 +129,8 @@ export default {
   text-align: left;
   margin-top: 10px;
   font-size: 14px;
-  line-height:2em;
-  cursor:text;
+  line-height: 2em;
+  cursor: text;
 }
 .recommend-new-songs {
   border-bottom: 1px solid #ddd;

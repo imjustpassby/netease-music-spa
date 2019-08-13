@@ -1,12 +1,12 @@
 <template>
   <div>
-    <a-skeleton active :loading="loading">
-      <div class="dj-list">
-        <div class="dj-list-top-title">
-          <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-            <use xlink:href="#icon-circle" />
-          </svg>精选电台 - 订阅更精彩
-        </div>
+    <div class="dj-list">
+      <div class="dj-list-top-title">
+        <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
+          <use xlink:href="#icon-circle" />
+        </svg>精选电台 - 订阅更精彩
+      </div>
+      <a-skeleton active :loading="loading">
         <a-row type="flex" justify="space-around">
           <a-col
             :span="4"
@@ -20,8 +20,8 @@
             <p class="dj-list-title">{{item.name}}</p>
           </a-col>
         </a-row>
-      </div>
-    </a-skeleton>
+      </a-skeleton>
+    </div>
   </div>
 </template>
 
@@ -61,13 +61,13 @@ export default {
         };
       });
     },
-    goDjDetail(data){
+    goDjDetail(data) {
       this.$router.push({
-        path: '/dj-detail',
+        path: "/dj-detail",
         query: {
           rid: data.id
         }
-      })
+      });
     }
   }
 };

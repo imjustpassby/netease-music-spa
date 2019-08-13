@@ -1,12 +1,12 @@
 <template>
   <div>
-    <a-skeleton active :loading="loading">
-      <div class="album-list">
-        <div class="album-list-top-title">
-          <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-            <use xlink:href="#icon-circle" />
-          </svg>最新专辑
-        </div>
+    <div class="album-list">
+      <div class="album-list-top-title">
+        <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
+          <use xlink:href="#icon-circle" />
+        </svg>最新专辑
+      </div>
+      <a-skeleton active :loading="loading">
         <a-row type="flex" justify="space-around">
           <a-col
             :span="5"
@@ -20,8 +20,8 @@
             <p class="album-list-title">{{item.name}}</p>
           </a-col>
         </a-row>
-      </div>
-    </a-skeleton>
+      </a-skeleton>
+    </div>
   </div>
 </template>
 
@@ -61,13 +61,13 @@ export default {
         };
       });
     },
-    goAlbumDetail(id){
+    goAlbumDetail(id) {
       this.$router.push({
-        path: '/album-detail',
+        path: "/album-detail",
         query: {
           id: id
         }
-      })
+      });
     }
   }
 };

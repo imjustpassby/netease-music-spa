@@ -1,11 +1,11 @@
 <template>
-  <a-skeleton active :loading="loading">
-    <div class="dj-list" style="padding-bottom:100px;">
-      <div class="dj-list-top-title">
-        <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-          <use xlink:href="#icon-circle" />
-        </svg>今日优选
-      </div>
+  <div class="dj-list" style="padding-bottom:100px;">
+    <div class="dj-list-top-title">
+      <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
+        <use xlink:href="#icon-circle" />
+      </svg>今日优选
+    </div>
+    <a-skeleton active :loading="loading">
       <a-row type="flex" justify="space-around">
         <a-col
           :span="4"
@@ -19,8 +19,8 @@
           <p class="dj-list-title">{{item.name}}</p>
         </a-col>
       </a-row>
-    </div>
-  </a-skeleton>
+    </a-skeleton>
+  </div>
 </template>
 
 <script>
@@ -59,13 +59,13 @@ export default {
         };
       });
     },
-    goDjDetail(data){
+    goDjDetail(data) {
       this.$router.push({
-        path: '/dj-detail',
+        path: "/dj-detail",
         query: {
           rid: data.id
         }
-      })
+      });
     }
   }
 };
