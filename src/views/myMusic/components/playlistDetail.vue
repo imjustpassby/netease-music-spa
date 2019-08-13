@@ -22,7 +22,11 @@
                     <use xlink:href="#icon-play1" />
                   </svg>加入播放列表
                 </a-button>
-                <a-button v-if="showUnsubscribeBtn" @click="unsubscribe(playList.id)" style="margin-right: 20px">
+                <a-button
+                  v-if="showUnsubscribeBtn"
+                  @click="unsubscribe(playList.id)"
+                  style="margin-right: 20px"
+                >
                   <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
                     <use xlink:href="#icon-like1" />
                   </svg>取消收藏
@@ -66,16 +70,26 @@
                 </a-popover>
               </template>
             </a-table-column>
+
             <a-table-column title="歌手" align="center" width="25%" key="artist">
               <template slot-scope="text, record">
                 <a-popover placement="top">
                   <template slot="content">
-                    <span>{{record.artist}}</span>
+                    <span
+                      style="cursor:pointer"
+                      v-for="(ar,idx) in record.artists"
+                      :key="idx"
+                      @click="goArtistDetail(record.artistId[idx])"
+                    >
+                      {{ar}}
+                      <span v-show="idx !== record.artists.length -1">/</span>
+                    </span>
                   </template>
-                  <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                  <span>{{record.artist}}</span>
                 </a-popover>
               </template>
             </a-table-column>
+            
             <a-table-column title="专辑" key="albumName">
               <template slot-scope="text, record">
                 <a-popover placement="top">
@@ -99,7 +113,7 @@ import Bus from "@/utils/bus.js";
 import { mapActions } from "vuex";
 export default {
   name: "",
-  props: ["playList","showUnsubscribeBtn"],
+  props: ["playList", "showUnsubscribeBtn"],
   data() {
     return {
       pagination: { defaultPageSize: 40 }
@@ -131,10 +145,10 @@ export default {
           console.log(err);
         });
     },
-    async unsubscribe(data){
+    async unsubscribe(data) {
       await subscribePlaylist({ id: data, type: 2 });
       this.$message.success("已取消收藏！");
-      Bus.$emit("unsubscribe",data)
+      Bus.$emit("unsubscribe", data);
     },
     goSongDetail(song) {
       this.$router.push({
@@ -144,11 +158,11 @@ export default {
         }
       });
     },
-    goArtistDetail(song) {
+    goArtistDetail(data) {
       this.$router.push({
         path: "/artist-detail",
         query: {
-          id: song.artistId
+          id: data
         }
       });
     },

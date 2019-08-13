@@ -70,9 +70,17 @@
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
-                      <span>{{record.artist}}</span>
+                      <span
+                        style="cursor:pointer"
+                        v-for="(ar,idx) in record.artists"
+                        :key="idx"
+                        @click="goArtistDetail(record.artistId[idx])"
+                      >
+                        {{ar}}
+                        <span v-show="idx !== record.artists.length -1">/</span>
+                      </span>
                     </template>
-                    <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                    <span>{{record.artist}}</span>
                   </a-popover>
                 </template>
               </a-table-column>
@@ -158,7 +166,9 @@ export default {
       /* 获取专辑的歌曲 */
       this.albumInfo.tracks = res.songs.map(item => {
         let ars = [];
-        let artistId = item.ar[0].id;
+        let artistId = item.ar.map(a => {
+          return a.id;
+        });
         for (const art of item.ar) {
           ars.push(art.name);
         }
@@ -166,6 +176,7 @@ export default {
           id: item.id,
           name: item.name,
           artist: ars.join("/"),
+          artists: ars,
           artistId: artistId,
           cover: item.al.picUrl,
           albumName: item.al.name,
@@ -205,11 +216,11 @@ export default {
         }
       });
     },
-    goArtistDetail(song) {
+    goArtistDetail(data) {
       this.$router.push({
         path: "/artist-detail",
         query: {
-          id: song.artistId
+          id: data
         }
       });
     }

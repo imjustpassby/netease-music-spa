@@ -6,7 +6,7 @@
           <use xlink:href="#icon-circle" />
         </svg>电台分类
       </div>
-      <a-skeleton active :loading="loading">
+      <a-skeleton active :loading="loading1">
         <div>
           <a-col :span="2" style="margin: 6px 16px" v-for="(cate,index) in cateList" :key="index">
             <img v-lazy="cate.pic56x56Url" width="40%" alt="img" @click="getDjRecommend(cate.id)" />
@@ -22,7 +22,7 @@
         </svg>分类推荐
         <button class="more" @click="isShowRecommend = false">收起</button>
       </div>
-      <a-skeleton active :loading="loading">
+      <a-skeleton active :loading="loading2">
         <div>
           <a-col :span="12" v-for="(item,index) in djRecommend" :key="index">
             <a-row type="flex" justify="start" class="recommend-new-songs">
@@ -57,7 +57,8 @@ export default {
       cateList: [],
       djRecommend: [],
       isShowRecommend: false,
-      loading: true
+      loading1: true,
+      loading2: true
     };
   },
 
@@ -71,7 +72,8 @@ export default {
 
   async mounted() {
     await this.getDjCateList();
-    this.loading = false;
+    this.loading1 = false;
+    this.loading2 = false;
   },
 
   methods: {
@@ -81,10 +83,10 @@ export default {
     },
     async getDjRecommend(id) {
       this.isShowRecommend = true;
-      this.loading = true;
+      this.loading2 = true;
       let res = await getDjRecommendType(id);
       this.djRecommend = res.djRadios;
-      this.loading = false;
+      this.loading2 = false;
     },
     goDjDetail(data) {
       this.$router.push({

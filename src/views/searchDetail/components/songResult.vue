@@ -27,9 +27,17 @@
             <template slot-scope="text, record">
               <a-popover placement="top">
                 <template slot="content">
-                  <span>{{record.artist}}</span>
+                  <span
+                    style="cursor:pointer"
+                    v-for="(ar,idx) in record.artists"
+                    :key="idx"
+                    @click="goArtistDetail(record.artistId[idx])"
+                  >
+                    {{ar}}
+                    <span v-show="idx !== record.artists.length -1">/</span>
+                  </span>
                 </template>
-                <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                <span>{{record.artist}}</span>
               </a-popover>
             </template>
           </a-table-column>
@@ -70,7 +78,7 @@ export default {
   computed: {},
 
   watch: {
-    async keywords(val){
+    async keywords(val) {
       if (val !== "") {
         this.loading = true;
         await this.search(val);
@@ -95,7 +103,9 @@ export default {
       let res = await search({ keywords: data, type: 1 });
       this.exactSearch = res.result.songs.map(item => {
         let artist = [];
-        let artistId = item.artists[0].id;
+        let artistId = item.artists.map(a => {
+          return a.id;
+        });
         for (const ar of item.artists) {
           artist.push(ar.name);
         }
@@ -103,6 +113,7 @@ export default {
           id: item.id,
           name: item.name,
           artist: artist.join("/"),
+          artists: artist,
           artistId: artistId,
           cover:
             "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
@@ -149,7 +160,7 @@ export default {
       this.$router.push({
         path: "/artist-detail",
         query: {
-          id: data.artistId
+          id: data
         }
       });
     }

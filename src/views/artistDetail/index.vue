@@ -142,7 +142,9 @@ export default {
       /* 格式化热门歌曲 */
       this.hotSongs = res.hotSongs.map(item => {
         let artist = [];
-        let artistId = item.ar[0].id;
+        let artistId = item.ar.map(a=>{
+          return a.id
+        });
         for (const ar of item.ar) {
           artist.push(ar.name);
         }
@@ -150,6 +152,7 @@ export default {
           name: item.name,
           id: item.id,
           artist: artist.join("/"),
+          artists: artist,
           artistId: artistId,
           cover: item.al.picUrl,
           albumName: item.al.name,

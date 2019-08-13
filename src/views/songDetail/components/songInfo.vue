@@ -16,7 +16,18 @@
           </div>
 
           <div class="song-artist">
-            <span style="cursor:pointer" @click="goArtistDetail">歌手：{{songInfo.artist}}</span>
+            <span style="cursor:pointer">
+              歌手：
+              <span
+                style="cursor:pointer"
+                v-for="(ar,idx) in songInfo.artists"
+                :key="idx"
+                @click="goArtistDetail(songInfo.artistId[idx])"
+              >
+                {{ar}}
+                <span v-show="idx !== songInfo.artists.length -1">/</span>
+              </span>
+            </span>
             <a-button @click.once="addMusic" style="margin-left: 20px">
               <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
                 <use xlink:href="#icon-play1" />
@@ -51,7 +62,8 @@ export default {
         id: null,
         name: "",
         artist: "",
-        artistId: "",
+        artists: [],
+        artistId: [],
         cover: "",
         albumName: "",
         albumId: null,
@@ -87,13 +99,16 @@ export default {
       let res = await getSongDetail(data);
       let song = res.songs[0];
       let artist = [];
-      let artistId = song.ar[0].id;
+      let artistId = song.ar.map(a => {
+        return a.id;
+      });
       for (const ar of song.ar) {
         artist.push(ar.name);
       }
       this.songInfo.id = song.id;
       this.songInfo.name = song.name;
       this.songInfo.artist = artist.join("/");
+      this.songInfo.artists = artist;
       this.songInfo.artistId = artistId;
       this.songInfo.cover = song.al.picUrl;
       this.songInfo.albumName = song.al.name;
@@ -112,11 +127,11 @@ export default {
           console.log(err);
         });
     },
-    goArtistDetail() {
+    goArtistDetail(data) {
       this.$router.push({
         path: "/artist-detail",
         query: {
-          id: this.songInfo.artistId
+          id: data
         }
       });
     },

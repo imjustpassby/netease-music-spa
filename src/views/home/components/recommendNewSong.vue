@@ -35,8 +35,10 @@
               <span
                 class="recommend-title"
                 style="line-height:1.5em;cursor:pointer;color:#999"
-                @click="goArtistDetail(item)"
-              >{{item.artist}}</span>
+                v-for="(ar,idx) in item.artists"
+                :key="idx"
+                @click="goArtistDetail(item.artistId[idx])"
+              >{{ar}}<span v-show="idx !== item.artists.length -1">/</span></span>
             </a-col>
           </a-row>
         </a-col>
@@ -78,7 +80,9 @@ export default {
       let personalizedNewSong = await getPersonalizedNewSong();
       this.personalizedNewSong = personalizedNewSong.result.map(item => {
         let artist = [];
-        let artistId = item.song.artists[0].id;
+        let artistId = item.song.artists.map(a=>{
+          return a.id
+        });
         for (const ar of item.song.artists) {
           artist.push(ar.name);
         }
@@ -86,6 +90,7 @@ export default {
           name: item.name,
           id: item.id,
           artist: artist.join("/"),
+          artists: artist,
           artistId: artistId,
           cover: item.song.album.blurPicUrl,
           albumName: item.song.album.name,
@@ -111,11 +116,11 @@ export default {
         }
       });
     },
-    goArtistDetail(song) {
+    goArtistDetail(data) {
       this.$router.push({
         path: "/artist-detail",
         query: {
-          id: song.artistId
+          id: data
         }
       });
     }

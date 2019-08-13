@@ -81,9 +81,17 @@
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
-                      <span>{{record.artist}}</span>
+                      <span
+                        style="cursor:pointer"
+                        v-for="(ar,idx) in record.artists"
+                        :key="idx"
+                        @click="goArtistDetail(record.artistId[idx])"
+                      >
+                        {{ar}}
+                        <span v-show="idx !== record.artists.length -1">/</span>
+                      </span>
                     </template>
-                    <span @click="goArtistDetail(record)" style="cursor:pointer">{{record.artist}}</span>
+                    <span>{{record.artist}}</span>
                   </a-popover>
                 </template>
               </a-table-column>
@@ -162,7 +170,9 @@ export default {
       this.playList.trackIds = res.playlist.trackIds;
       this.playList.tracks = res.playlist.tracks.map(item => {
         let artist = [];
-        let artistId = item.ar[0].id;
+        let artistId = item.ar.map(a => {
+          return a.id;
+        });
         for (const ar of item.ar) {
           artist.push(ar.name);
         }
@@ -170,6 +180,7 @@ export default {
           name: item.name,
           id: item.id,
           artist: artist.join("/"),
+          artists: artist,
           artistId: artistId,
           cover: item.al.picUrl,
           albumName: item.al.name,
@@ -208,11 +219,11 @@ export default {
         }
       });
     },
-    goArtistDetail(song) {
+    goArtistDetail(data) {
       this.$router.push({
         path: "/artist-detail",
         query: {
-          id: song.artistId
+          id: data
         }
       });
     },
