@@ -36,11 +36,7 @@ export default {
 
   methods: {
     getSearchResult(val) {
-      Bus.$emit("searchSong", val);
-      Bus.$emit("searchArtist", val);
-      Bus.$emit("searchAlbum", val);
-      Bus.$emit("searchPlaylist", val);
-      Bus.$emit("searchMv", val);
+      this.$emit("search",val);
     }
   }
 };

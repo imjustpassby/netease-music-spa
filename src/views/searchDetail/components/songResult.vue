@@ -56,6 +56,7 @@ import { mapActions } from "vuex";
 import Bus from "@/utils/bus.js";
 export default {
   name: "",
+  props: ["keywords"],
   data() {
     return {
       locale: { emptyText: "" },
@@ -68,16 +69,24 @@ export default {
 
   computed: {},
 
-  watch: {},
+  watch: {
+    async keywords(val){
+      if (val !== "") {
+        this.loading = true;
+        await this.search(val);
+        this.loading = false;
+      }
+    }
+  },
 
   beforeMount() {},
 
-  mounted() {
-    Bus.$on("searchSong", async data => {
+  async mounted() {
+    if (this.keywords !== "") {
       this.loading = true;
-      await this.search(data);
+      await this.search(this.keywords);
       this.loading = false;
-    });
+    }
   },
 
   methods: {

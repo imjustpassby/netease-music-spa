@@ -7,9 +7,9 @@
             <div class="m-top">
               <a-col :span="8">
                 <div class="logo animation-class">
-                  <router-link to="/">
+                  <h1 @click="goHome">
                     <span>Coisin4Music</span>
-                  </router-link>
+                  </h1>
                 </div>
               </a-col>
               <a-col :span="8">
@@ -192,6 +192,15 @@ export default {
           });
         })
         .catch(err => {});
+    },
+    goHome() {
+      window.sessionStorage.setItem("checkedTopLink", 0);
+      window.sessionStorage.setItem("checkedSubLink", 0);
+      this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
+      this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
+      this.$router.push({
+        path: '/'
+      })
     }
   }
 };
