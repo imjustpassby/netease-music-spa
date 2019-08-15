@@ -133,17 +133,17 @@ export default {
   overflow: hidden;
 }
 .custom-slick-arrow {
-  width: 36px;
-  height: 36px;
-  font-size: 36px;
-  color: #242424;
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 36px !important;
+  color: #242424 !important;
   opacity: .3;
   background-color: transparent;
   &::before{
     display: none;
   }
   &:hover{
-    color: #c20c0c;
+    color: #c20c0c !important;
     opacity: 1;
   }
 }
