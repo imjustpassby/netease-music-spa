@@ -52,8 +52,10 @@ export default {
         name: item.name,
         id: item.program.mainSong.id,
         artist: item.program.dj.nickname,
+        artistId: item.program.radio.id,
         cover: item.picUrl,
-        theme: [255, 255, 255]
+        theme: [255, 255, 255],
+        songType: "dj"
       };
     });
     this.loading = false;
