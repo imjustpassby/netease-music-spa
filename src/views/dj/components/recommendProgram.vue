@@ -75,8 +75,10 @@ export default {
           name: item.name,
           id: item.mainSong.id,
           artist: item.dj.nickname,
+          artistId: item.radio.id,
           cover: item.coverUrl,
-          theme: [255, 255, 255]
+          theme: [255, 255, 255],
+          songType: "dj"
         };
       });
     },

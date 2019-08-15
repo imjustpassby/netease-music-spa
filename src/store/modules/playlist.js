@@ -53,7 +53,7 @@ const playlist = {
             });
             data.url = songList[0].url;
             //获取歌词
-            if (data.type !== "program") {
+            if (data.songType !== "dj") {
               let lyric = await getLyric(data.id);
               if(lyric.hasOwnProperty('lrc')){
                 data.lrc = lyric.lrc.lyric;

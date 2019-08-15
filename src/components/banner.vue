@@ -4,7 +4,21 @@
       <a-col :span="14" :offset="5">
         <a-skeleton active :loading="loading">
           <div class="banner">
-            <a-carousel effect="fade" autoplay>
+            <a-carousel effect="fade" autoplay arrows>
+              <div
+                slot="prevArrow" slot-scope="props"
+                class="custom-slick-arrow"
+                style="left: -50px;zIndex: 1"
+              >
+                <a-icon type="left-circle" />
+              </div>
+              <div
+                slot="nextArrow" slot-scope="props"
+                class="custom-slick-arrow"
+                style="right: -50px"
+              >
+                <a-icon type="right-circle" />
+              </div>
               <div v-for="(item,index) in banner" :key="index" @click="bannerClick(item)">
                 <img :src="item.imageUrl" width="100%" alt="banner" />
               </div>
@@ -113,13 +127,24 @@ export default {
 <style lang='scss' scoped>
 .ant-carousel >>> .slick-slide {
   text-align: center;
-  height: 400px;
-  line-height: 400px;
-  background: #364d79;
+  height: 160px;
+  line-height: 160px;
+  background: transparent;
   overflow: hidden;
 }
-
-.ant-carousel >>> .slick-slide h3 {
-  color: #fff;
+.custom-slick-arrow {
+  width: 36px;
+  height: 36px;
+  font-size: 36px;
+  color: #242424;
+  opacity: .3;
+  background-color: transparent;
+  &::before{
+    display: none;
+  }
+  &:hover{
+    color: #c20c0c;
+    opacity: 1;
+  }
 }
 </style>

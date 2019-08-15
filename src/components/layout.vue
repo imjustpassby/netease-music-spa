@@ -33,7 +33,7 @@
                   <button v-if="!loginSuccess" class="underline-btn" @click="showLoginForm">登录</button>
                   <div v-else>
                     <button class="underline-btn" @click="logout">登出</button>
-                    <button class="underline-btn">{{nickname}}</button>
+                    <button class="underline-btn" @click="goMyMusic">{{nickname}}</button>
                     <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
                   </div>
                 </div>
@@ -148,7 +148,6 @@ export default {
     window.sessionStorage.setItem("checkedTopLink", 0);
     window.sessionStorage.setItem("checkedSubLink", 0);
   },
-
   methods: {
     ...mapActions(["LOGOUT"]),
     clickTopLink(idx) {
@@ -187,9 +186,7 @@ export default {
       await this.LOGOUT()
         .then(result => {
           this.$message.success("已退出登录");
-          this.$router.push({
-            path: "/"
-          });
+          this.goHome();
         })
         .catch(err => {});
     },
@@ -199,8 +196,17 @@ export default {
       this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
       this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
       this.$router.push({
-        path: '/'
-      })
+        path: "/"
+      });
+    },
+    goMyMusic() {
+      window.sessionStorage.setItem("checkedTopLink", 1);
+      window.sessionStorage.setItem("checkedSubLink", -1);
+      this.checkedTopLink = window.sessionStorage.getItem("checkedTopLink");
+      this.checkedSubLink = window.sessionStorage.getItem("checkedSubLink");
+      this.$router.push({
+        path: "/my/daily-recommend"
+      });
     }
   }
 };
@@ -263,6 +269,7 @@ export default {
     }
     .underline-btn {
       float: right;
+      font-size: 14px;
       margin: 0 2px;
       height: 70px;
       line-height: 70px;

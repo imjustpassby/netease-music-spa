@@ -16,6 +16,7 @@
     "chimee-player": "^1.4.8",
     "hls.js": "^0.12.4",
     "js-cookie": "^2.2.0",
+    "mem": "^5.1.1",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "vue": "^2.5.2",

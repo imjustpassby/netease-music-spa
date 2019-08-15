@@ -1,28 +1,34 @@
 import request from "@/utils/request.js"
-
+const mem = require("mem");
 /* 电台推荐 */
-export function getDjRecommend() {
+export const getDjRecommend = mem(function () {
   return request({
     url: '/api/dj/recommend',
     withCredentials: true
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 /* 推荐节目 */
-export function getProgramRecommend() {
+export const getProgramRecommend = mem(function () {
   return request({
     url: '/api/program/recommend',
     withCredentials: true
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 /* 电台分类 */
-export function getDjCateList() {
+export const getDjCateList = mem(function () {
   return request({
     url: '/api/dj/catelist',
     withCredentials: true
   })
-}
+},{
+  maxAge: 1000 * 60 * 60
+})
 /* 电台分类推荐 */
-export function getDjRecommendType(data) {
+export const getDjRecommendType = mem(function (data) {
   return request({
     url: '/api/dj/recommend/type',
     withCredentials: true,
@@ -30,16 +36,20 @@ export function getDjRecommendType(data) {
       type: data
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 /* 今日电台推荐 */
-export function getTodayDj() {
+export const getTodayDj = mem(function () {
   return request({
     url: '/api/dj/today/perfered',
     withCredentials: true
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 /* 电台详情 */
-export function getDjDetail(data) {
+export const getDjDetail = mem(function (data) {
   return request({
     url: '/api/dj/detail',
     withCredentials: true,
@@ -47,9 +57,11 @@ export function getDjDetail(data) {
       rid: data
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 /* 电台节目 */
-export function getDjProgram(data) {
+export const getDjProgram = mem(function (data) {
   return request({
     url: '/api/dj/program',
     withCredentials: true,
@@ -58,4 +70,6 @@ export function getDjProgram(data) {
       limit: data.limit
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})

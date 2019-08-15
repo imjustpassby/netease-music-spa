@@ -1,5 +1,5 @@
 import request from "@/utils/request"
-
+const mem = require("mem");
 const list = [
   {
     title: '推荐',
@@ -107,7 +107,7 @@ export function getList() {
 }
 
 /* 歌手分类列表 */
-export function getArtistList(data) {
+export const getArtistList = mem(function (data) {
   return request({
     url: '/api/artist/list',
     withCredentials: true,
@@ -118,10 +118,12 @@ export function getArtistList(data) {
       initial: data.initial ? data.initial : ''
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 30
+})
 
 /* 热门歌手 */
-export function getTopArtists(data) {
+export const getTopArtists = mem(function(data) {
   return request({
     url: '/api/top/artists',
     withCredentials: true,
@@ -130,10 +132,12 @@ export function getTopArtists(data) {
       offset: data.offset ? data.offset : 0
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 
 /* 获取歌手单曲,传入歌手 id, 可获得歌手部分信息和热门歌曲  */
-export function getArtist(data) {
+export const getArtist = mem(function (data) {
   return request({
     url: '/api/artists',
     withCredentials: true,
@@ -141,10 +145,12 @@ export function getArtist(data) {
       id: data
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 
 /* 获取歌手专辑 */
-export function getArtistAlbum(data) {
+export const getArtistAlbum = mem(function (data) {
   return request({
     url: '/api//artist/album',
     withCredentials: true,
@@ -154,10 +160,12 @@ export function getArtistAlbum(data) {
       offset: data.offset ? data.offset : 0
     }
   })
-}
+},{
+  maxAge: 1000 * 60 * 60
+})
 
 /* 获取歌手描述 */
-export function getArtistDesc(data) {
+export const getArtistDesc = mem(function(data) {
   return request({
     url: '/api/artist/desc',
     withCredentials: true,
@@ -165,10 +173,12 @@ export function getArtistDesc(data) {
       id: data
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 
 /* 获取歌手MV */
-export function getArtistMv(data) {
+export const getArtistMv = mem(function (data) {
   return request({
     url: '/api/artist/mv',
     withCredentials: true,
@@ -176,4 +186,6 @@ export function getArtistMv(data) {
       id: data
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})

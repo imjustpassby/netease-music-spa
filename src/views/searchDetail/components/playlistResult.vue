@@ -22,7 +22,6 @@
 
 <script>
 import { search } from "@/api/search";
-import Bus from "@/utils/bus.js";
 export default {
   name: "",
   props: ["keywords"],

@@ -1,7 +1,7 @@
 import request from "@/utils/request"
- 
+const mem = require("mem");
 /* 新碟上架 */
-export function getTopAlbum(data) {
+export const getTopAlbum = mem(function (data) {
   return request({
     url: '/api/top/album',
     withCredentials: true,
@@ -10,18 +10,22 @@ export function getTopAlbum(data) {
       offset: data.offset ? data.offset : 0
     }
   })
-}
+},{
+  maxAge: 1000 * 60
+})
 
 /* 最新专辑 */
-export function getAlbumNewest() {
+export const getAlbumNewest = mem(function () {
   return request({
     url: '/api/album/newest',
     withCredentials: true
   })
-}
+}, {
+  maxAge: 1000 * 60
+})
 
 /* 获取专辑详情 */
-export function getAlbum(data) {
+export const getAlbum = mem(function (data) {
   return request({
     url: '/api/album',
     withCredentials: true,
@@ -29,4 +33,6 @@ export function getAlbum(data) {
       id: data
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})

@@ -26,7 +26,7 @@ service.interceptors.request.use(
 // response 拦截器
 service.interceptors.response.use(
   response => {
-    if (store.getters.loginSuccess) {//每次请求借宿后删除cookie
+    if (store.getters.loginSuccess) {//每次请求结束后删除cookie
       Cookie.remove("MUSIC_U");
       Cookie.remove("__csrf");
       Cookie.remove("__remember_me");

@@ -24,11 +24,20 @@
   color: #333333;
   font-size: 12px;
   background-color: #f5f5f5;
-  min-width: 1320px;
+  min-width: 1330px;
 }
 
-::-webkit-scrollbar{
-  display: none;
+::-webkit-scrollbar {/*滚动条整体样式*/
+  width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+  border-radius: 10px;
+  background: #c20c0c;
+}
+::-webkit-scrollbar-track {/*滚动条里面轨道*/
+  border-radius: 10px;
+  background: #f5f5f5;
 }
 
 .icon {

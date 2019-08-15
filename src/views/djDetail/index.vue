@@ -58,7 +58,7 @@
                   </span>
                 </template>
               </a-table-column>
-              <a-table-column title="节目标题" width="20%" key="title">
+              <a-table-column title="节目标题" width="25%" key="title">
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
@@ -70,8 +70,9 @@
               </a-table-column>
               <a-table-column
                 title="播放次数"
-                width="10%"
+                width="15%"
                 key="listenerCount"
+                align="center"
               >
                 <template slot-scope="text, record">
                   <a-popover placement="top">
@@ -82,7 +83,7 @@
                   </a-popover>
                 </template>
               </a-table-column>
-              <a-table-column title="节目描述" width="70%" key="description">
+              <a-table-column title="节目描述" key="description">
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
@@ -114,7 +115,8 @@ export default {
         picUrl: "",
         dj: {
           avatarUrl: "",
-          nickname: ""
+          nickname: "",
+          djId: ""
         },
         description: "",
         name: "",
@@ -161,6 +163,7 @@ export default {
       this.djRadio.picUrl = res.djRadio.picUrl;
       this.djRadio.dj.avatarUrl = res.djRadio.dj.avatarUrl;
       this.djRadio.dj.nickname = res.djRadio.dj.nickname;
+      this.djRadio.dj.djId = res.djRadio.id;
       this.djRadio.description = res.djRadio.desc;
       this.djRadio.name = res.djRadio.name;
       this.djRadio.id = res.djRadio.id;
@@ -187,11 +190,13 @@ export default {
           id: item.mainSong.id,
           name: item.mainSong.name,
           artist: this.djRadio.dj.nickname,
+          artistId: this.djRadio.id,
           cover: item.coverUrl,
           description: item.description,
           listenerCount: item.listenerCount,
           key: item.mainSong.id,
-          theme: [255, 255, 255]
+          theme: [255, 255, 255],
+          songType: "dj"
         };
       });
     },

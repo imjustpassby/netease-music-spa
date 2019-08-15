@@ -130,12 +130,21 @@ export default {
       Bus.$emit("clear");
     },
     goSongDetail(song) {
-      this.$router.push({
-        path: "/song-detail",
-        query: {
-          id: song.id
-        }
-      });
+      if (song.songType === "dj") {
+        this.$router.push({
+          path: "/dj-detail",
+          query: {
+            rid: song.artistId
+          }
+        });
+      } else {
+        this.$router.push({
+          path: "/song-detail",
+          query: {
+            id: song.id
+          }
+        });
+      }
     },
     goArtistDetail(song) {
       this.$router.push({
@@ -146,12 +155,21 @@ export default {
       });
     },
     goAlbumDetail(song) {
-      this.$router.push({
-        path: "/album-detail",
-        query: {
-          id: song.albumId
-        }
-      });
+      if (song.songType === "dj") {
+        this.$router.push({
+          path: "/dj-detail",
+          query: {
+            rid: song.artistId
+          }
+        });
+      } else {
+        this.$router.push({
+          path: "/album-detail",
+          query: {
+            id: song.albumId
+          }
+        });
+      }
     }
   }
 };

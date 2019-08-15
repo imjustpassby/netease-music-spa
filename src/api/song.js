@@ -1,4 +1,5 @@
 import request from "@/utils/request.js";
+const mem = require("mem");
 /* 获取歌曲URL */
 export function getSongUrl(data) {
   return request({
@@ -41,12 +42,14 @@ export function getCommentMusic(data) {
   })
 }
 /* 获取每日推荐歌曲(需要登录) */
-export function getRecommendSongs() {
+export const getRecommendSongs = mem(function () {
   return request({
     url: '/api/recommend/songs',
     withCredentials: true
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 /* 获取相似歌曲 */
 export function getSimilarSong(data) {
   return request({

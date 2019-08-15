@@ -26,6 +26,10 @@
             <span slot="tab">MV</span>
             <mv-result :keywords="keywords"></mv-result>
           </a-tab-pane>
+          <a-tab-pane key="6">
+            <span slot="tab">主播电台</span>
+            <program-result :keywords="keywords"></program-result>
+          </a-tab-pane>
         </a-tabs>
       </a-col>
     </a-row>
@@ -39,6 +43,7 @@ import ArtistResult from "./components/artistResult";
 import MvResult from "./components/mvResult";
 import PlaylistResult from "./components/playlistResult";
 import SongResult from "./components/songResult";
+import ProgramResult from "./components/programResult"
 export default {
   name: "",
   props: [""],
@@ -54,7 +59,8 @@ export default {
     ArtistResult,
     MvResult,
     PlaylistResult,
-    SongResult
+    SongResult,
+    ProgramResult
   },
 
   computed: {},

@@ -197,7 +197,7 @@ export default {
 .playlist-detail {
   text-align: left;
   margin-top: 16px;
-  padding-bottom: 100px;
+  padding-bottom: 20px;
   h1 {
     font-size: 24px;
     display: inline;
