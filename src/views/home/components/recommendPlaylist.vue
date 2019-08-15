@@ -49,7 +49,7 @@ export default {
 
   async mounted() {
     let personalized = await getPersonalized();
-    this.personalized = personalized.result.splice(10,10);
+    this.personalized = personalized.result;
     this.loading = false;
   },
 
