@@ -84,6 +84,10 @@
 ## NGINX部署
 
 ```
+gzip  on;
+
+gzip_types text/plain application/x-javascript application/javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+
 location ~ /api/{
 	rewrite ^/api/(.*)$ /$1 break;
 	proxy_pass xxx(后端地址);
