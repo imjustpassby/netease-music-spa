@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Chimee from "chimee";
+// import Chimee from "chimee";
 import { getMvUrl, getMvDetail, getCommentMv } from "@/api/mv.js";
 export default {
   name: "",

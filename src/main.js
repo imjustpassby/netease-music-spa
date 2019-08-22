@@ -44,7 +44,6 @@ Vue.use(Dropdown);
 Vue.use(Tabs);
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false
-
 Vue.use(VueLazyLoad, {
   error: require('../static/img/loading.gif'),
   loading: require('../static/img/loading.gif')

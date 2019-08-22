@@ -4,8 +4,8 @@
 
 <script>
 import { getLyric } from "@/api/song.js";
-import "APlayer/dist/APlayer.min.css";
-import APlayer from "APlayer";
+/* import "APlayer/dist/APlayer.min.css";
+import APlayer from "APlayer"; */
 import Bus from "@/utils/bus.js";
 import { mapMutations, mapActions } from "vuex";
 export default {
