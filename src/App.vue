@@ -6,7 +6,11 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  mounted() {
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('appLoading').style.display = 'none';
+  }
 };
 </script>
 
