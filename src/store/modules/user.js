@@ -4,7 +4,7 @@ import {
   logout,
   loginRefresh
 } from '@/api/user'
-import Cookie from "js-cookie"
+import Cookies from "js-cookie"
 const user = {
   state: {
     account: window.sessionStorage.getItem('account'),
@@ -76,7 +76,7 @@ const user = {
           commit('SET_PROFILE', res.profile);
           commit('SET_BINDINGS', res.bindings);
           commit('SET_LOGIN_SUCCESS', true);
-          commit('SET_COOKIE', Cookie.get());//保存登录后返回的cookie到vuex
+          commit('SET_COOKIE', Cookies.get());//保存登录后返回的cookie到vuex
           resolve(res)
         }).catch((err) => {
           reject(err)

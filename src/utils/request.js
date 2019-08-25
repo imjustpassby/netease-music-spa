@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Vue from 'vue'
 import store from '@/store'
-import Cookie from 'js-cookie'
+import Cookies from 'js-cookie'
 // 创建axios实例
 const service = axios.create()
 
@@ -10,9 +10,9 @@ service.interceptors.request.use(
   config => {
     if (store.getters.loginSuccess) { //解决多用户登录问题，每次请求前设置登录后返回的cookie
       let cookie = window.sessionStorage.getItem("cookie");
-      Cookie.set("MUSIC_U", JSON.parse(cookie).MUSIC_U);
-      Cookie.set("__csrf", JSON.parse(cookie).__csrf);
-      Cookie.set("__remember_me", JSON.parse(cookie).__remember_me);
+      Cookies.set("MUSIC_U", JSON.parse(cookie).MUSIC_U);
+      Cookies.set("__csrf", JSON.parse(cookie).__csrf);
+      Cookies.set("__remember_me", JSON.parse(cookie).__remember_me);
     }
     return config
   },
@@ -27,9 +27,9 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     if (store.getters.loginSuccess) {//每次请求结束后删除cookie
-      Cookie.remove("MUSIC_U");
-      Cookie.remove("__csrf");
-      Cookie.remove("__remember_me");
+      Cookies.remove("MUSIC_U");
+      Cookies.remove("__csrf");
+      Cookies.remove("__remember_me");
     }
     const res = response.data
     return Promise.resolve(res);

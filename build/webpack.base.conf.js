@@ -24,7 +24,12 @@ module.exports = {
   },
   externals: {
     'vue': 'Vue',
-    'vue-router': 'VueRouter'
+    'vue-router': 'VueRouter',
+    'vuex': 'Vuex',
+    'js-cookie': 'Cookies',
+    'axios': 'axios',
+    'vue-lazyload': 'VueLazyload',
+    'nprogress': 'NProgress'
 },
   resolve: {
     extensions: ['.js', '.vue', '.json'],

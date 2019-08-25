@@ -7,51 +7,26 @@
     <meta name="keywords" content="网易云音乐SPA,仿网易云音乐，SPA">
     <meta name="description" content="仿网易云音乐个人学习项目。" />
     <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
     <title>Coisin4Music</title>
   </head>
-  <style media="screen" type="text/css">
-    #appLoading { width: 100%; height: 100%; }
-    #appLoading span {
-      position: absolute;
-      display: block;
-      font-size: 50px;
-      line-height: 50px;
-      top: 50%;
-      text-align: center;
-      width: 100%;
-      -webkit-animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite alternate both;
-      animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite alternate both;
-    }
-    .slide-top {
-      height: 100%;
-      width: 100%;
-      background-image: linear-gradient(315deg,#cc6aa5,#3e91cc,#2dcca7);
-      background-size: 600% 600%;
-      background-repeat: repeat;
-      -webkit-animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite alternate both;
-      animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite alternate both;
-    }
-    @-webkit-keyframes slide-top{
-      0%{-webkit-transform:translateY(0);transform:translateY(0)}
-      100%{-webkit-transform:translateY(-100px);transform:translateY(-100px)}
-    }
-    @keyframes slide-top{
-      0%{-webkit-transform:translateY(0);transform:translateY(0)}
-      100%{-webkit-transform:translateY(-100px);transform:translateY(-100px)}
-    }
-
- </style>
   <body>
-      <div id="appLoading">
-        <div class="slide-top"></div>
-        <span>Loading Coisin4Music ...</span>
-      </div>
+    <div id="appLoading">
+      <div class="slide-top"></div>
+      <span>Loading Coisin4Music ...</span>
+    </div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.1.1/vuex.min.js"></script>
+    <script src="https://cdn.bootcss.com/js-cookie/2.2.1/js.cookie.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-lazyload/1.3.2/vue-lazyload.js"></script>
+    <script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
     <script defer src="https://cdn.bootcss.com/chimee/2.0.0-alpha.3/index.browser.js"></script>
-    <script defer src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
     <script defer src="//at.alicdn.com/t/font_837617_fpsy98v5wq.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/colorthief@2.0.2/src/color-thief.js"></script>
   </body>
