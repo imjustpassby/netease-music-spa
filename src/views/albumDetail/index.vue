@@ -20,7 +20,7 @@
                       {{art}}
                       <span v-if="idx!== albumInfo.artists.length-1">/</span>
                     </span>
-                    <a-button @click.once="addMusicList" class="add-playlist-btn">
+                    <a-button @click="addMusicList" class="add-playlist-btn">
                       <svg
                         class="icon"
                         aria-hidden="true"

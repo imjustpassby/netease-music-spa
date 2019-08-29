@@ -115,6 +115,7 @@ export default {
           this.loading = false;
         })
         .catch(err => {
+          if(err.response.status === 301) return;
           this.$message.error("因合作方要求，该资源不能评论");
         });
     }

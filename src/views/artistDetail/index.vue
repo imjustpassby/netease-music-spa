@@ -178,7 +178,6 @@ export default {
   padding: 16px 16px 100px 16px;
   margin-top: 16px;
   text-align: left;
-  background-color: #fafafa;
   font-size: 14px;
   h3 {
     display: inline;
@@ -208,7 +207,6 @@ export default {
       cursor: pointer;
     }
     .tab-option-item-active {
-      background-color: #fafafa;
       border-bottom: 2px solid #d81e06;
     }
   }
