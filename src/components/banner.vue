@@ -21,6 +21,7 @@
               </div>
               <div v-for="(item,index) in banner" :key="index" @click="bannerClick(item)">
                 <img :src="item.imageUrl" width="100%" alt="banner" />
+                <span class="banner-tag" v-bind:style="'background:'+ item.titleColor">{{item.typeTitle}}</span>
               </div>
             </a-carousel>
           </div>
@@ -146,5 +147,13 @@ export default {
     color: #c20c0c !important;
     opacity: 1;
   }
+}
+.banner-tag{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 1em;
+  padding: 0 6px;
+  color: #FFF;
 }
 </style>

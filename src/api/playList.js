@@ -70,7 +70,7 @@ export const getRecommendResource = mem(function () {
   maxAge: 1000 * 60 * 60
 })
 /* 获取相似歌单(包含这首歌的歌单) */
-export function getSimilarPlaylist(data) {
+export const getSimilarPlaylist = mem(function(data) {
   return request({
     url: '/api/simi/playlist',
     withCredentials: true,
@@ -78,7 +78,9 @@ export function getSimilarPlaylist(data) {
       id: data
     }
   })
-}
+},{
+  maxAge: 1000 * 60 * 60
+})
 /* 收藏、取消收藏歌单 */
 export function subscribePlaylist(data) {
   return request({

@@ -11,7 +11,7 @@ export function getSongUrl(data) {
   })
 }
 /* 获取歌词 */
-export function getLyric(data) {
+export const getLyric = mem(function(data) {
   return request({
     url: '/api/lyric',
     withCredentials: true,
@@ -19,7 +19,9 @@ export function getLyric(data) {
       id: data
     }
   })
-}
+},{
+  maxAge: 1000 * 60 * 60
+})
 /* 音乐是否可用 */
 export function checkMusic(data) {
   return request({
@@ -51,7 +53,7 @@ export const getRecommendSongs = mem(function () {
   maxAge: 1000 * 60 * 60
 })
 /* 获取相似歌曲 */
-export function getSimilarSong(data) {
+export const getSimilarSong = mem(function(data) {
   return request({
     url: '/api/simi/song',
     withCredentials: true,
@@ -59,9 +61,11 @@ export function getSimilarSong(data) {
       id: data
     }
   })
-}
+}, {
+  maxAge: 1000 * 60 * 60
+})
 /* 获取歌曲详情 */
-export function getSongDetail(data) {
+export const getSongDetail = mem(function(data) {
   return request({
     url: '/api/song/detail',
     withCredentials: true,
@@ -69,4 +73,6 @@ export function getSongDetail(data) {
       ids: data
     }
   })
-}
+},{
+  maxAge: 1000 * 60 * 60
+})

@@ -45,7 +45,7 @@ import PlaylistResult from "./components/playlistResult";
 import SongResult from "./components/songResult";
 import ProgramResult from "./components/programResult"
 export default {
-  name: "",
+  name: "search",
   props: [""],
   data() {
     return {

@@ -63,7 +63,10 @@
       </a-col>
     </a-row>
     <transition name="fade-transform" mode="out-in">
+    <keep-alive include="search">
       <router-view />
+    </keep-alive>
+      
     </transition>
   </div>
 </template>
