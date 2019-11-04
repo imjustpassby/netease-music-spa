@@ -4,11 +4,14 @@
     <a-row>
       <a-col>
         <a-table :dataSource="exactSearch" :loading="loading" v-show="exactSearch.length>0">
-          <a-table-column title key="action" width="10%" align="center">
+          <a-table-column title align="center" key="action" width="10%">
             <template slot-scope="text, record">
               <span>
-                <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                <svg class="icon play-icon" aria-hidden="true" @click.once="playMusic(record)">
                   <use xlink:href="#icon-play1" />
+                </svg>
+                <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                  <use xlink:href="#icon-add" />
                 </svg>
               </span>
             </template>
@@ -124,7 +127,7 @@ export default {
         };
       });
     },
-    async addMusic(song) {
+    async playMusic(song) {
       let cover = await this.getCover(song.id);
       song.cover = cover;
       this.SET_CURRENT_MUSIC_ACTION(song)
@@ -134,6 +137,12 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    async addMusic(song){
+      let cover = await this.getCover(song.id);
+      song.cover = cover;
+      Bus.$emit("add", { list: [song], type: "playlist" });
+      this.$message.success("已加入播放列表！");
     },
     async getCover(data) {
       let res = await getSongDetail(data);
@@ -182,7 +191,7 @@ export default {
   }
 }
 .play-icon {
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
 }
 </style>

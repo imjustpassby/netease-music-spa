@@ -1,11 +1,14 @@
 <template>
 <div>
   <a-table :dataSource="hotSongs">
-    <a-table-column title key="action" width="10%">
+    <a-table-column title align="center" key="action" width="10%">
       <template slot-scope="text, record">
         <span>
-          <svg class="icon play-icon" aria-hidden="true" @click="addMusic(record)">
+          <svg class="icon play-icon" aria-hidden="true" @click="playMusic(record)">
             <use xlink:href="#icon-play1" />
+          </svg>
+          <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+            <use xlink:href="#icon-add" />
           </svg>
         </span>
       </template>
@@ -79,7 +82,7 @@ export default {
 
   methods: {
     ...mapActions(["SET_CURRENT_MUSIC_ACTION"]),
-    async addMusic(song) {
+    async playMusic(song) {
       this.SET_CURRENT_MUSIC_ACTION(song)
         .then(result => {
           Bus.$emit("play", result);
@@ -87,6 +90,10 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    addMusic(song){
+      Bus.$emit("add", { list: [song], type: "playlist" });
+      this.$message.success("已加入播放列表！");
     },
     goSongDetail(data) {
       this.$router.push({
@@ -118,8 +125,7 @@ export default {
 
 <style lang="scss" scoped>
 .play-icon {
-  margin-left: 40%;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
 }
 </style>

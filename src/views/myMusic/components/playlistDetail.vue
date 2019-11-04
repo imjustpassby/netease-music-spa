@@ -51,16 +51,19 @@
             <span>共{{playList.tracks.length}}首</span>
           </div>
           <a-table :dataSource="playList.tracks" :pagination="pagination">
-            <a-table-column title key="action" width="10%">
+            <a-table-column title key="action" align="center" width="15%">
               <template slot-scope="text, record">
                 <span>
-                  <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                  <svg class="icon play-icon" aria-hidden="true" @click.once="playMusic(record)">
                     <use xlink:href="#icon-play1" />
+                  </svg>
+                  <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                    <use xlink:href="#icon-add" />
                   </svg>
                 </span>
               </template>
             </a-table-column>
-            <a-table-column title="歌曲标题" width="40%" key="name">
+            <a-table-column title="歌曲标题" width="35%" key="name">
               <template slot-scope="text, record">
                 <a-popover placement="top">
                   <template slot="content">
@@ -136,7 +139,7 @@ export default {
       Bus.$emit("add", { list: this.playList.tracks, type: "playlist" });
       this.$message.success("已加入播放列表！");
     },
-    async addMusic(song) {
+    async playMusic(song) {
       this.SET_CURRENT_MUSIC_ACTION(song)
         .then(result => {
           Bus.$emit("play", result);
@@ -144,6 +147,10 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    addMusic(song){
+      Bus.$emit("add", { list: [song], type: "playlist" });
+      this.$message.success("已加入播放列表！");
     },
     async unsubscribe(data) {
       await subscribePlaylist({ id: data, type: 2 });
@@ -182,8 +189,7 @@ export default {
   padding: 0 0 100px 16px;
   font-size: 14px;
   .play-icon {
-    margin-left: 40%;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
   }
   .list-title {

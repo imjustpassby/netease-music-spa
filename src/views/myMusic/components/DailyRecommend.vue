@@ -12,16 +12,19 @@
         </div>
         <hr />
         <a-table :dataSource="dailySongs" :pagination="false" :loading="loading">
-          <a-table-column title key="action" width="10%" align="center">
+          <a-table-column title key="action" width="15%" align="center">
             <template slot-scope="text, record">
               <span>
-                <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                <svg class="icon play-icon" aria-hidden="true" @click.once="playMusic(record)">
                   <use xlink:href="#icon-play1" />
+                </svg>
+                <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                  <use xlink:href="#icon-add" />
                 </svg>
               </span>
             </template>
           </a-table-column>
-          <a-table-column title="歌曲标题" width="40%" key="name">
+          <a-table-column title="歌曲标题" width="35%" key="name">
             <template slot-scope="text, record">
               <a-popover placement="top">
                 <template slot="content">
@@ -122,7 +125,7 @@ export default {
       Bus.$emit("add", { list: this.dailySongs, type: "playlist" });
       this.$message.success("已加入播放列表！");
     },
-    async addMusic(song) {
+    async playMusic(song) {
       this.SET_CURRENT_MUSIC_ACTION(song)
         .then(result => {
           Bus.$emit("play", result);
@@ -130,6 +133,10 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    addMusic(song){
+      Bus.$emit("add", { list: [song], type: "playlist" });
+      this.$message.success("已加入播放列表！");
     },
     goSongDetail(data) {
       this.$router.push({
@@ -163,7 +170,7 @@ export default {
   padding: 0 0 100px 16px;
   font-size: 14px;
   .play-icon {
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
   }
   .list-title {

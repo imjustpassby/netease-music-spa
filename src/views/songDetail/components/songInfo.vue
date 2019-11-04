@@ -28,10 +28,15 @@
                 <span v-show="idx !== songInfo.artists.length -1">/</span>
               </span>
             </span>
-            <a-button @click.once="addMusic" style="margin-left: 20px">
+            <a-button @click.once="playMusic" style="margin-left: 20px">
               <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
                 <use xlink:href="#icon-play1" />
               </svg>播放
+            </a-button>
+            <a-button @click.once="addMusic" style="margin-left: 20px">
+              <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
+                <use xlink:href="#icon-add" />
+              </svg>添加到列表
             </a-button>
           </div>
           <div :class="!expand ? 'album-detail-info' : ''">
@@ -118,7 +123,7 @@ export default {
       let res = await getLyric(data);
       this.lyric = res.lrc.lyric.replace(/[\[d{2}:d{2}\.\d{3}\]]/g, "");
     },
-    async addMusic() {
+    async playMusic() {
       this.SET_CURRENT_MUSIC_ACTION(this.songInfo)
         .then(result => {
           Bus.$emit("play", result);
@@ -126,6 +131,10 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    addMusic(){
+      Bus.$emit("add", { list: [this.songInfo], type: "playlist" });
+      this.$message.success("已加入播放列表！");
     },
     goArtistDetail(data) {
       this.$router.push({

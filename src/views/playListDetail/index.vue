@@ -33,7 +33,7 @@
                       aria-hidden="true"
                       style="font-size:16px; margin-right:16px;"
                     >
-                      <use xlink:href="#icon-like1" />
+                      <use xlink:href="#icon-like2" />
                     </svg>收藏歌单
                   </a-button>
                 </div>
@@ -58,11 +58,14 @@
               <span>共{{playList.tracks.length}}首</span>
             </div>
             <a-table :dataSource="playList.tracks">
-              <a-table-column title key="action" width="10%">
+              <a-table-column title align="center" key="action" width="10%">
                 <template slot-scope="text, record">
                   <span>
-                    <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                    <svg class="icon play-icon" aria-hidden="true" @click.once="playMusic(record)">
                       <use xlink:href="#icon-play1" />
+                    </svg>
+                    <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                      <use xlink:href="#icon-add" />
                     </svg>
                   </span>
                 </template>
@@ -77,7 +80,7 @@
                   </a-popover>
                 </template>
               </a-table-column>
-              <a-table-column title="歌手" width="25%" key="artist">
+              <a-table-column title="歌手" align="center" width="25%" key="artist">
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
@@ -198,7 +201,7 @@ export default {
       Bus.$emit("add", { list: this.playList.tracks, type: "playlist" });
       this.$message.success("已加入播放列表！");
     },
-    async addMusic(song) {
+    async playMusic(song) {
       this.SET_CURRENT_MUSIC_ACTION(song)
         .then(result => {
           Bus.$emit("play", result);
@@ -206,6 +209,10 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    addMusic(song){
+      Bus.$emit("add", { list: [song], type: "playlist" });
+      this.$message.success("已加入播放列表！");
     },
     async subscribe(data) {
       await subscribePlaylist({ id: data, type: 1 });
@@ -243,8 +250,7 @@ export default {
   padding-bottom: 100px;
   font-size: 14px;
   .play-icon {
-    margin-left: 40%;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
   }
   .list-title {
