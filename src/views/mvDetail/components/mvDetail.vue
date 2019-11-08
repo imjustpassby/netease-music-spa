@@ -37,7 +37,14 @@
 
 <script>
 // import Chimee from "chimee";
-import { getMvUrl, getMvDetail, getCommentMv } from "@/api/mv.js";
+import {formatTime} from "@/utils/index.js"
+import {
+  getMvUrl,
+  getMvDetail,
+  getCommentMv,
+  getVideoUrl,
+  getVideoDetail
+} from "@/api/mv.js";
 export default {
   name: "",
   props: [""],
@@ -63,6 +70,9 @@ export default {
   computed: {
     mvId() {
       return this.$route.query.id;
+    },
+    videoType() {
+      return this.$route.query.type;
     }
   },
 
@@ -71,8 +81,13 @@ export default {
   beforeMount() {},
 
   async mounted() {
-    await this.getMv();
-    await this.getMvDetail();
+    if (this.videoType == "mv") {
+      await this.getMv();
+      await this.getMvDetail();
+    } else if (this.videoType == "video") {
+      await this.getVideo();
+      await this.getVideoDetail();
+    }
     new Chimee({
       wrapper: "#wrapper",
       src: this.mv.url,
@@ -99,6 +114,22 @@ export default {
       this.mv.shareCount = res.data.shareCount;
       this.mv.commentCount = res.data.commentCount;
       this.mv.publishTime = res.data.publishTime;
+    },
+    async getVideo() {
+      let res = await getVideoUrl(this.mvId);
+      this.mv.id = res.urls[0].id;
+      this.mv.url = res.urls[0].url;
+    },
+    async getVideoDetail() {
+      let res = await getVideoDetail(this.mvId);
+      this.mv.artistId = res.data.creator.userId;
+      this.mv.name = res.data.title;
+      this.mv.artistName = res.data.creator.nickname;
+      this.mv.playCount = res.data.playTime;
+      this.mv.subCount = res.data.subscribeCount;
+      this.mv.shareCount = res.data.shareCount;
+      this.mv.commentCount = res.data.commentCount;
+      this.mv.publishTime = formatTime(res.data.publishTime,"{y}-{m}-{d}");
     }
   }
 };

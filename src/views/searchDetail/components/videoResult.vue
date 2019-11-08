@@ -11,9 +11,9 @@
           style="margin-bottom:16px"
         >
           <div class="img-box">
-            <img v-lazy="ar.cover" width="100%" alt="img" @click="goMvDetail(ar.id)" />
+            <img v-lazy="ar.coverUrl" width="100%" alt="img" @click="goMvDetail(ar.vid)" />
           </div>
-          <p class="artist-list-title">{{ar.name}}</p>
+          <p class="artist-list-title">{{ar.title}}</p>
         </a-col>
       </a-row>
     </a-skeleton>
@@ -40,8 +40,8 @@ export default {
     async keywords(val) {
       if (val !== "") {
         this.loading = true;
-        let res = await search({ keywords: val, type: 1004 });
-        this.exactSearch = res.result.mvs;
+        let res = await search({ keywords: val, type: 1014 });
+        this.exactSearch = res.result.videos;
         this.loading = false;
       }
     }
@@ -52,8 +52,8 @@ export default {
   async mounted() {
     if (this.keywords !== "") {
       this.loading = true;
-      let res = await search({ keywords: this.keywords, type: 1004 });
-      this.exactSearch = res.result.mvs;
+      let res = await search({ keywords: this.keywords, type: 1014 });
+      this.exactSearch = res.result.videos;
       this.loading = false;
     }
   },
@@ -64,7 +64,7 @@ export default {
         path: "/mv-detail",
         query: {
           id: id,
-          type: "mv"
+          type: "video"
         }
       });
     }

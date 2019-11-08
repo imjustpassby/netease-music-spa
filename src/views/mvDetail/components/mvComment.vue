@@ -19,31 +19,37 @@
 </template>
 
 <script>
-import { getCommentMv } from "@/api/mv.js";
+import { getCommentMv, getCommentVideo } from "@/api/mv.js";
 export default {
   name: "",
   props: [""],
   data() {
     return {
-      hotComments: []
+      hotComments: [],
     };
   },
 
-  components: {},
-
-  computed: {},
-
-  watch: {},
-
-  beforeMount() {},
+  computed: {
+    videoType(){
+      return this.$route.query.type;
+    }
+  },
 
   async mounted() {
-    await this.getCommentMv();
+    if(this.videoType == "mv"){
+      await this.getCommentMv();
+    } else if (this.videoType == "video") {
+      await this.getCommentVideo();
+    }
   },
 
   methods: {
     async getCommentMv() {
       let res = await getCommentMv(this.$route.query.id);
+      this.hotComments = [...res.hotComments,...res.comments];
+    },
+    async getCommentVideo() {
+      let res = await getCommentVideo(this.$route.query.id);
       this.hotComments = [...res.hotComments,...res.comments];
     }
   }

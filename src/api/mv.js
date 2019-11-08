@@ -34,3 +34,38 @@ export function getCommentMv(data) {
     }
   })
 }
+
+/* 获取视频地址 */
+export function getVideoUrl(data) {
+  return request({
+    url: '/api/video/url',
+    withCredentials: true,
+    params: {
+      id: data
+    }
+  })
+}
+
+/* 获取视频详情 */
+export function getVideoDetail(data) {
+  return request({
+    url: '/api/video/detail',
+    withCredentials: true,
+    params: {
+      id: data
+    }
+  })
+}
+
+/* 获取视频评论 */
+export function getCommentVideo(data) { 
+  return request({
+    url: '/api/comment/video',
+    withCredentials: true,
+    params: {
+      id: data,
+      limit: 20,
+      offset: 0
+    }
+  })
+}

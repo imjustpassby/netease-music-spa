@@ -27,6 +27,10 @@
             <mv-result :keywords="keywords"></mv-result>
           </a-tab-pane>
           <a-tab-pane key="6">
+            <span slot="tab">视频</span>
+            <video-result :keywords="keywords"></video-result>
+          </a-tab-pane>
+          <a-tab-pane key="7">
             <span slot="tab">主播电台</span>
             <program-result :keywords="keywords"></program-result>
           </a-tab-pane>
@@ -43,7 +47,8 @@ import ArtistResult from "./components/artistResult";
 import MvResult from "./components/mvResult";
 import PlaylistResult from "./components/playlistResult";
 import SongResult from "./components/songResult";
-import ProgramResult from "./components/programResult"
+import ProgramResult from "./components/programResult";
+import VideoResult from "./components/videoResult";
 export default {
   name: "search",
   props: [""],
@@ -60,16 +65,9 @@ export default {
     MvResult,
     PlaylistResult,
     SongResult,
-    ProgramResult
+    ProgramResult,
+    VideoResult
   },
-
-  computed: {},
-
-  watch: {},
-
-  beforeMount() {},
-
-  mounted() {},
 
   methods: {
     search(data){
