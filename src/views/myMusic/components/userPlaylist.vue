@@ -1,44 +1,86 @@
 <template>
   <div class="userPlayList">
     <a-row type="flex" justify="space-around">
-      <a-divider orientation="left" style="font-weight:bold">每日推荐</a-divider>
+      <a-divider orientation="left" style="font-weight:bold"
+        >每日推荐</a-divider
+      >
       <a-list itemLayout="horizontal" style="width:100%">
         <a-list-item>
           <a-list-item-meta description="根据你的口味生成，每天6:00更新">
-            <p slot="title" class="playlist-title" @click="goDailyRecommend">每日歌曲推荐</p>
-            <a-avatar slot="avatar" :src="avatarUrl" style="width:46px;height:46px" />
+            <p slot="title" class="playlist-title" @click="goDailyRecommend">
+              每日歌曲推荐
+            </p>
+            <a-avatar
+              slot="avatar"
+              :src="avatarUrl"
+              class="playlist-cover"
+              @click="goDailyRecommend"
+            />
           </a-list-item-meta>
         </a-list-item>
         <a-list-item>
           <a-list-item-meta :description="'for - ' + nickname">
-            <p slot="title" class="playlist-title" @click="goDailyPlaylist">每日歌单推荐</p>
-            <a-avatar slot="avatar" :src="avatarUrl" style="width:46px;height:46px" />
+            <p slot="title" class="playlist-title" @click="goDailyPlaylist">
+              每日歌单推荐
+            </p>
+            <a-avatar
+              slot="avatar"
+              :src="avatarUrl"
+              class="playlist-cover"
+              @click="goDailyPlaylist"
+            />
           </a-list-item-meta>
         </a-list-item>
       </a-list>
-      <a-divider orientation="left" style="font-weight:bold">创建的歌单</a-divider>
-      <a-list itemLayout="horizontal" :dataSource="userPlaylist" style="width:100%">
+      <a-divider orientation="left" style="font-weight:bold"
+        >创建的歌单</a-divider
+      >
+      <a-list
+        itemLayout="horizontal"
+        :dataSource="userPlaylist"
+        style="width:100%"
+      >
         <a-list-item slot="renderItem" slot-scope="item, index">
-          <a-list-item-meta :description="item.trackCount+'首'">
+          <a-list-item-meta :description="item.trackCount + '首'">
             <p
               slot="title"
               class="playlist-title"
-              @click="showPlaylist({playlist:item,type:'self'})"
-            >{{item.name}}</p>
-            <a-avatar slot="avatar" :src="item.coverImgUrl" style="width:46px;height:46px" />
+              @click="showPlaylist({ playlist: item, type: 'self' })"
+            >
+              {{ item.name }}
+            </p>
+            <a-avatar
+              slot="avatar"
+              :src="item.coverImgUrl"
+              class="playlist-cover"
+              @click="showPlaylist({ playlist: item, type: 'self' })"
+            />
           </a-list-item-meta>
         </a-list-item>
       </a-list>
-      <a-divider orientation="left" style="font-weight:bold">收藏的歌单</a-divider>
-      <a-list itemLayout="horizontal" :dataSource="subPlaylist" style="width:100%">
+      <a-divider orientation="left" style="font-weight:bold"
+        >收藏的歌单</a-divider
+      >
+      <a-list
+        itemLayout="horizontal"
+        :dataSource="subPlaylist"
+        style="width:100%"
+      >
         <a-list-item slot="renderItem" slot-scope="item, index">
-          <a-list-item-meta :description="item.trackCount+'首'">
+          <a-list-item-meta :description="item.trackCount + '首'">
             <p
               slot="title"
               class="playlist-title"
-              @click="showPlaylist({playlist:item,type:'other'})"
-            >{{item.name}}</p>
-            <a-avatar slot="avatar" :src="item.coverImgUrl" style="width:46px;height:46px" />
+              @click="showPlaylist({ playlist: item, type: 'other' })"
+            >
+              {{ item.name }}
+            </p>
+            <a-avatar
+              slot="avatar"
+              :src="item.coverImgUrl"
+              class="playlist-cover"
+              @click="showPlaylist({ playlist: item, type: 'other' })"
+            />
           </a-list-item-meta>
         </a-list-item>
       </a-list>
@@ -107,14 +149,18 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .userPlayList {
   padding: 36px 16px 100px 16px;
   text-align: left;
   border: 1px solid rgb(232, 232, 232);
   .playlist-title {
-    cursor: pointer;
     color: #333;
+  }
+  .playlist-cover {
+    cursor: pointer;
+    width: 46px;
+    height: 46px;
   }
 }
 </style>
