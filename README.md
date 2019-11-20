@@ -188,12 +188,17 @@
 >
 > [视频播放器chimee](http://chimee.org/)
 
-## NGINX部署
+## windows部署运行 - 使用nginx
 
++ 安装nginx
++ 配置nginx开启gzip，接口转发
++ npm run build
++ 拷贝dist目录下的文件到nginx项目启动目录
+  
 ```
 gzip  on;
 
-gzip_types text/plain application/x-javascript application/javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+gzip_types text/plain application/x-javascript application/javascript text/css application/xml text/javascript application/x-httpd-php;
 
 location ~ /api/{
    rewrite ^/api/(.*)$ /$1 break;
