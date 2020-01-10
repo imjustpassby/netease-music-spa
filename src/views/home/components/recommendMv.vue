@@ -58,7 +58,8 @@ export default {
       this.$router.push({
         path: "/mv-detail",
         query: {
-          id: id
+          id: id,
+          type: "mv"
         }
       });
     }
