@@ -3,20 +3,10 @@
     display: block;
     height: 70px;
     z-index: 1;
-    cursor: pointer;
-  }
-
-  h1:after {
-    content: '';
-    // background: linear-gradient(120deg, #6559ae, #ff7159, #6559ae);
-    // background-size: 100% 100%;
-    -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
-    -moz-animation: gradient 3s ease-in-out infinite, border 1s forwards ease-in-out reverse;
-    -webkit-animation: gradient 3s ease-in-out infinite, border 1s forwards ease-in-out reverse;
-    animation: gradient 3s ease-in-out infinite, border 1s forwards ease-in-out reverse;
   }
 
   h1>span {
+    cursor: pointer;
     display: block;
     width: 220px;
     float: right;
