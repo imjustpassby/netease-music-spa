@@ -3,7 +3,6 @@
     display: block;
     height: 70px;
     z-index: 1;
-    cursor: pointer;
   }
 
   h1:after {
@@ -17,6 +16,7 @@
   }
 
   h1>span {
+    cursor: pointer;
     display: block;
     width: 220px;
     float: right;
