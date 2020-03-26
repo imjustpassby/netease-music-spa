@@ -3,6 +3,7 @@
     display: block;
     height: 70px;
     z-index: 1;
+<<<<<<< HEAD
   }
 
   h1:after {
@@ -13,6 +14,8 @@
     -moz-animation: gradient 3s ease-in-out infinite, border 1s forwards ease-in-out reverse;
     -webkit-animation: gradient 3s ease-in-out infinite, border 1s forwards ease-in-out reverse;
     animation: gradient 3s ease-in-out infinite, border 1s forwards ease-in-out reverse;
+=======
+>>>>>>> 1c563db6002390ee300888cbe68fdefdc4532171
   }
 
   h1>span {

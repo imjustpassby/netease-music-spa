@@ -6,7 +6,7 @@
           <div class="g-topbar">
             <div class="m-top">
               <a-col :span="8">
-                <div class="logo animation-class">
+                <div class="logo">
                   <h1 @click="goHome">
                     <span>Coisin4Music</span>
                   </h1>
