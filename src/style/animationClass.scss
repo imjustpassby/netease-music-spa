@@ -3,19 +3,6 @@
     display: block;
     height: 70px;
     z-index: 1;
-<<<<<<< HEAD
-  }
-
-  h1:after {
-    content: '';
-    // background: linear-gradient(120deg, #6559ae, #ff7159, #6559ae);
-    // background-size: 100% 100%;
-    -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
-    -moz-animation: gradient 3s ease-in-out infinite, border 1s forwards ease-in-out reverse;
-    -webkit-animation: gradient 3s ease-in-out infinite, border 1s forwards ease-in-out reverse;
-    animation: gradient 3s ease-in-out infinite, border 1s forwards ease-in-out reverse;
-=======
->>>>>>> 1c563db6002390ee300888cbe68fdefdc4532171
   }
 
   h1>span {

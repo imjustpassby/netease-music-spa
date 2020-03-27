@@ -6,7 +6,7 @@
           <div class="g-topbar">
             <div class="m-top">
               <a-col :span="8">
-                <div class="logo">
+                <div class="logo animation-class">
                   <h1 @click="goHome">
                     <span>Coisin4Music</span>
                   </h1>
@@ -63,10 +63,9 @@
       </a-col>
     </a-row>
     <transition name="fade-transform" mode="out-in">
-    <keep-alive include="search">
-      <router-view />
-    </keep-alive>
-      
+      <keep-alive include="search">
+        <router-view />
+      </keep-alive>
     </transition>
   </div>
 </template>

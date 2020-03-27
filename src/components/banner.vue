@@ -6,14 +6,16 @@
           <div class="banner">
             <a-carousel effect="fade" autoplay arrows>
               <div
-                slot="prevArrow" slot-scope="props"
+                slot="prevArrow"
+                slot-scope="props"
                 class="custom-slick-arrow"
                 style="left: -50px;zIndex: 1"
               >
                 <a-icon type="left-circle" />
               </div>
               <div
-                slot="nextArrow" slot-scope="props"
+                slot="nextArrow"
+                slot-scope="props"
                 class="custom-slick-arrow"
                 style="right: -50px"
               >
@@ -21,7 +23,10 @@
               </div>
               <div v-for="(item,index) in banner" :key="index" @click="bannerClick(item)">
                 <img :src="item.imageUrl" width="100%" alt="banner" />
-                <span class="banner-tag" v-bind:style="'background:'+ item.titleColor">{{item.typeTitle}}</span>
+                <span
+                  class="banner-tag"
+                  v-bind:style="'background:'+ item.titleColor"
+                >{{item.typeTitle}}</span>
               </div>
             </a-carousel>
           </div>
@@ -58,7 +63,7 @@ export default {
   },
 
   methods: {
-    bannerClick(banner){
+    bannerClick(banner) {
       switch (banner.targetType) {
         case 1:
           this.goSongDetail(banner);
@@ -80,7 +85,7 @@ export default {
           break;
         default:
           break;
-      } 
+      }
     },
     goSongDetail(song) {
       this.$router.push({
@@ -103,7 +108,7 @@ export default {
         path: "/mv-detail",
         query: {
           id: mv.targetId,
-          type: 'mv'
+          type: "mv"
         }
       });
     },
@@ -129,8 +134,6 @@ export default {
 <style lang='scss' scoped>
 .ant-carousel >>> .slick-slide {
   text-align: center;
-  height: 160px;
-  line-height: 160px;
   background: transparent;
   overflow: hidden;
 }
@@ -139,22 +142,22 @@ export default {
   height: 36px !important;
   font-size: 36px !important;
   color: #242424 !important;
-  opacity: .3;
+  opacity: 0.3;
   background-color: transparent;
-  &::before{
+  &::before {
     display: none;
   }
-  &:hover{
+  &:hover {
     color: #c20c0c !important;
     opacity: 1;
   }
 }
-.banner-tag{
+.banner-tag {
   position: absolute;
   right: 20px;
   bottom: 20px;
   border-radius: 1em;
   padding: 0 6px;
-  color: #FFF;
+  color: #fff;
 }
 </style>

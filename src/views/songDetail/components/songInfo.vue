@@ -132,7 +132,7 @@ export default {
           console.log(err);
         });
     },
-    addMusic(){
+    addMusic() {
       Bus.$emit("add", { list: [this.songInfo], type: "playlist" });
       this.$message.success("已加入播放列表！");
     },
@@ -174,17 +174,6 @@ export default {
     height: 100%;
     margin-top: 30px;
     border-radius: 50%;
-    transition: all 0.3s ease-in-out;
-    transition-delay: 2s;
-    animation: spinDisc 30s linear infinite;
-    &:hover {
-      animation-play-state: paused;
-    }
-    @keyframes spinDisc {
-      100% {
-        transform: rotate(1turn);
-      }
-    }
   }
   h1 {
     font-size: 24px;
