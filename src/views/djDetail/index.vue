@@ -6,7 +6,9 @@
           <div class="playlist-detail">
             <a-row>
               <a-col :span="5">
-                <img v-lazy="djRadio.picUrl" width="100%" style="margin-top:24px" alt="电台" />
+                <div class="img-box">
+                  <img v-lazy="djRadio.picUrl" width="100%" style="margin-top:24px" alt="电台" />
+                </div>
               </a-col>
               <a-col :span="18" :offset="1">
                 <svg class="icon" aria-hidden="true" style="font-size:100px; margin-right:16px;">
@@ -68,12 +70,7 @@
                   </a-popover>
                 </template>
               </a-table-column>
-              <a-table-column
-                title="播放次数"
-                width="15%"
-                key="listenerCount"
-                align="center"
-              >
+              <a-table-column title="播放次数" width="15%" key="listenerCount" align="center">
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">

@@ -28,7 +28,7 @@
       <a-col :span="14" :offset="5">
         <recommend-private-content></recommend-private-content>
       </a-col>
-    </a-row> -->
+    </a-row>-->
   </div>
 </template>
 
@@ -68,20 +68,6 @@ export default {
 <style lang='scss'>
 .recommend {
   padding-bottom: 100px;
-}
-.img-box {
-  width: 100%;
-  position: relative;
-  height: 0;
-  padding-bottom: 100%;
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
 }
 .recommend-item {
   text-align: left;

@@ -13,7 +13,9 @@
           :key="index"
           style="margin-bottom: 16px"
         >
-          <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
+          <div class="img-box">
+            <img v-lazy="item.picUrl" alt="img" width="100%" style="cursor: pointer;" />
+          </div>
           <p class="recommend-title">{{item.name}}</p>
         </a-col>
       </a-row>
@@ -22,9 +24,7 @@
 </template>
 
 <script>
-import {
-  getPersonalizedPrivateContent
-} from "@/api/home.js";
+import { getPersonalizedPrivateContent } from "@/api/home.js";
 export default {
   name: "",
   props: [""],

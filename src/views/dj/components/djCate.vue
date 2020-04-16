@@ -28,12 +28,14 @@
             <a-row type="flex" justify="start" class="recommend-new-songs">
               <a-col :span="3" style="position:relative;">
                 <div @click="goDjDetail(item)">
-                  <img
-                    v-lazy="item.picUrl"
-                    width="100%"
-                    alt="img"
-                    style="margin:9px 0 0 9px;cursor: pointer;z-index:-1"
-                  />
+                  <div class="img-box">
+                    <img
+                      v-lazy="item.picUrl"
+                      width="100%"
+                      alt="img"
+                      style="margin:9px 0 0 9px;cursor: pointer;z-index:-1"
+                    />
+                  </div>
                 </div>
               </a-col>
               <a-col :span="18" :offset="1">

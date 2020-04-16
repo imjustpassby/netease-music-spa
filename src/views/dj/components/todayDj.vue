@@ -15,7 +15,9 @@
           :key="index"
           @click="goDjDetail(item)"
         >
-          <img v-lazy="item.picUrl" width="100%" alt="img" />
+          <div class="img-box">
+            <img v-lazy="item.picUrl" width="100%" alt="img" />
+          </div>
           <p class="dj-list-title">{{item.name}}</p>
         </a-col>
       </a-row>

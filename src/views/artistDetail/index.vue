@@ -7,7 +7,9 @@
             <a-row>
               <a-col :span="5">
                 <div class="artist-detail-pic-box">
-                  <img v-lazy="artist.img1v1Url" alt="artist" class="artist-detail-pic" />
+                  <div class="img-box">
+                    <img v-lazy="artist.img1v1Url" alt="artist" class="artist-detail-pic" />
+                  </div>
                 </div>
               </a-col>
               <a-col span="18" :offset="1">
@@ -83,7 +85,7 @@
               <a-col span="24">
                 <hot-song v-if="tabIndex === 1" :hotSongs="hotSongs"></hot-song>
                 <artist-album v-if="tabIndex === 2" :albumSize="artist.albumSize"></artist-album>
-                <artist-mv v-if="tabIndex === 3" ></artist-mv>
+                <artist-mv v-if="tabIndex === 3"></artist-mv>
                 <artist-description v-if="tabIndex === 4" :artistName="artist.name"></artist-description>
               </a-col>
             </a-row>
@@ -96,9 +98,9 @@
 
 <script>
 import HotSong from "./components/hotSong.vue";
-import ArtistAlbum from "./components/artistAlbum.vue"
-import ArtistMv from "./components/artistMv.vue"
-import ArtistDescription from "./components/artistDescription.vue"
+import ArtistAlbum from "./components/artistAlbum.vue";
+import ArtistMv from "./components/artistMv.vue";
+import ArtistDescription from "./components/artistDescription.vue";
 import { getArtist } from "@/api/artist.js";
 
 export default {
@@ -142,8 +144,8 @@ export default {
       /* 格式化热门歌曲 */
       this.hotSongs = res.hotSongs.map(item => {
         let artist = [];
-        let artistId = item.ar.map(a=>{
-          return a.id
+        let artistId = item.ar.map(a => {
+          return a.id;
         });
         for (const ar of item.ar) {
           artist.push(ar.name);
@@ -159,13 +161,13 @@ export default {
           albumId: item.al.id,
           pop: item.pop,
           key: item.id,
-          theme: [255,255,255]
+          theme: [255, 255, 255]
         };
       });
     },
-    clickTab(idx){
-      if (idx === this.tabIndex){
-        return
+    clickTab(idx) {
+      if (idx === this.tabIndex) {
+        return;
       } else {
         this.tabIndex = idx;
       }

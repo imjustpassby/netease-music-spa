@@ -5,7 +5,9 @@
         <div class="playlist-detail">
           <a-row>
             <a-col :span="5">
-              <img v-lazy="playList.picUrl" width="100%" style="margin-top:30px" alt="歌单" />
+              <div class="img-box">
+                <img v-lazy="playList.picUrl" width="100%" style="margin-top:30px" alt="歌单" />
+              </div>
             </a-col>
             <a-col :span="18" :offset="1">
               <svg class="icon" aria-hidden="true" style="font-size:100px; margin-right:16px;">
@@ -92,7 +94,7 @@
                 </a-popover>
               </template>
             </a-table-column>
-            
+
             <a-table-column title="专辑" key="albumName">
               <template slot-scope="text, record">
                 <a-popover placement="top">
@@ -148,7 +150,7 @@ export default {
           console.log(err);
         });
     },
-    addMusic(song){
+    addMusic(song) {
       Bus.$emit("add", { list: [song], type: "playlist" });
       this.$message.success("已加入播放列表！");
     },

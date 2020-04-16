@@ -4,10 +4,17 @@
       <a-col :span="14" :offset="5">
         <a-skeleton active :loading="loading">
           <a-row type="flex" justify="space-around">
-              <a-col :span="5" class="ranking-list-item" v-for="(item,index) in coverImgUrl" :key="index">
+            <a-col
+              :span="5"
+              class="ranking-list-item"
+              v-for="(item,index) in coverImgUrl"
+              :key="index"
+            >
+              <div class="img-box">
                 <img v-lazy="item.url" width="100%" alt="img" @click="goRankingDetail(index)" />
-                <p class="ranking-list-title">{{item.name}}</p>
-              </a-col>
+              </div>
+              <p class="ranking-list-title">{{item.name}}</p>
+            </a-col>
           </a-row>
         </a-skeleton>
       </a-col>
@@ -27,8 +34,7 @@ export default {
     };
   },
 
-  components: {
-  },
+  components: {},
 
   computed: {},
 
@@ -42,29 +48,29 @@ export default {
   },
 
   methods: {
-    goRankingDetail(idx){
+    goRankingDetail(idx) {
       this.$router.push({
-        path: '/ranking-detail',
+        path: "/ranking-detail",
         query: {
           idx: idx
         }
-      })
+      });
     }
   }
 };
 </script>
 <style lang='scss' scoped>
-.ranking-list{
+.ranking-list {
   font-size: 16px;
   margin-top: 16px;
   padding-bottom: 100px;
-  .ranking-list-item{
+  .ranking-list-item {
     margin-top: 16px;
-    img{
+    img {
       cursor: pointer;
     }
   }
-  .ranking-list-title{
+  .ranking-list-title {
     font-size: 14px;
     cursor: pointer;
     line-height: 1.5em;

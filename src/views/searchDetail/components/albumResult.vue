@@ -3,18 +3,18 @@
     <a-back-top style="bottom: 100px;left:10%" />
     <a-skeleton active :loading="loading" v-show="exactSearch.length >0">
       <a-row type="flex" justify="start" style="margin:16px 0">
-          <a-col
-            :span="4"
-            :offset="1"
-            v-for="(ar,idx) in exactSearch"
-            :key="idx"
-            style="margin-bottom:16px"
-          >
-            <div class="img-box">
-              <img v-lazy="ar.picUrl" width="100%" alt="img" @click="goAlbumDetail(ar.id)" />
-            </div>
-            <p class="artist-list-title">{{ar.name}}</p>
-          </a-col>
+        <a-col
+          :span="4"
+          :offset="1"
+          v-for="(ar,idx) in exactSearch"
+          :key="idx"
+          style="margin-bottom:16px"
+        >
+          <div class="img-box">
+            <img v-lazy="ar.picUrl" width="100%" alt="img" @click="goAlbumDetail(ar.id)" />
+          </div>
+          <p class="artist-list-title">{{ar.name}}</p>
+        </a-col>
       </a-row>
     </a-skeleton>
   </div>
@@ -73,20 +73,6 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.img-box {
-  width: 100%;
-  position: relative;
-  height: 0;
-  padding-bottom: 100%;
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-}
 .album-list-title {
   font-size: 14px;
   cursor: pointer;

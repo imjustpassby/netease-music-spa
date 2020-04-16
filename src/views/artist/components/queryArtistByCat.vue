@@ -74,7 +74,7 @@ export default {
       try {
         this.currentPage += 1;
         await this.getArtists();
-      } catch(err) {
+      } catch (err) {
         this.$message.error("没有更多了...");
       }
     },
@@ -99,20 +99,6 @@ export default {
     font-size: 14px;
     cursor: pointer;
     line-height: 1.5em;
-  }
-}
-.img-box {
-  width: 100%;
-  position: relative;
-  height: 0;
-  padding-bottom: 100%;
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
   }
 }
 </style>

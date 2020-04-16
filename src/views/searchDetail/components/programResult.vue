@@ -79,20 +79,6 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.img-box {
-  width: 100%;
-  position: relative;
-  height: 0;
-  padding-bottom: 100%;
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-}
 .artist-list-title {
   font-size: 14px;
   cursor: pointer;
