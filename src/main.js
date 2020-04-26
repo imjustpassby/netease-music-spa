@@ -4,7 +4,7 @@ import Vue from 'vue'
 import store from './store'
 import '@/permission.js'
 import VueLazyLoad from 'vue-lazyload'
-import 'ant-design-vue/dist/antd.css';
+// import 'ant-design-vue/dist/antd.css'; 打包会把这个打包进去 导致css文件过大，已经引用了cdn所以可以注释掉
 import antd from 'ant-design-vue';
 Vue.use(antd);
 /* import {
