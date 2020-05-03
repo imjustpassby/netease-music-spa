@@ -10,9 +10,7 @@
           :key="idx"
           style="margin-bottom:16px"
         >
-          <div class="img-box">
-            <img v-lazy="ar.cover" width="100%" alt="img" @click="goMvDetail(ar.id)" />
-          </div>
+          <img v-lazy="ar.cover" width="100%" alt="img" @click="goMvDetail(ar.id)" />
           <p class="artist-list-title">{{ar.name}}</p>
         </a-col>
       </a-row>
