@@ -16,13 +16,13 @@
                 <div class="m-nav">
                   <ul>
                     <li
-                      v-for="(item,index) in topLink"
+                      v-for="(item, index) in topLink"
                       :key="index"
-                      :class="checkedTopLink==index ?'isTopChecked' : ''"
+                      :class="checkedTopLink == index ? 'isTopChecked' : ''"
                       @click="clickTopLink(index)"
                     >
                       <router-link :to="item.link">
-                        <span>{{item.span}}</span>
+                        <span>{{ item.span }}</span>
                       </router-link>
                     </li>
                   </ul>
@@ -30,10 +30,18 @@
               </a-col>
               <a-col :span="4">
                 <div class="m-nav-login">
-                  <button v-if="!loginSuccess" class="underline-btn" @click="showLoginForm">登录</button>
+                  <button
+                    v-if="!loginSuccess"
+                    class="underline-btn"
+                    @click="showLoginForm"
+                  >
+                    登录
+                  </button>
                   <div v-else>
                     <button class="underline-btn" @click="logout">登出</button>
-                    <button class="underline-btn" @click="goMyMusic">{{nickname}}</button>
+                    <button class="underline-btn" @click="goMyMusic">
+                      {{ nickname }}
+                    </button>
                     <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
                   </div>
                 </div>
@@ -43,19 +51,22 @@
               <div class="m-subnav-list">
                 <ul>
                   <li
-                    v-for="(item,index) in subLink"
+                    v-for="(item, index) in subLink"
                     :key="index"
-                    :class="checkedSubLink==index ?'isSubChecked' : ''"
+                    :class="checkedSubLink == index ? 'isSubChecked' : ''"
                     @click="clickSubLink(index)"
                   >
                     <router-link :to="item.link">
-                      <em>{{item.span}}</em>
+                      <em>{{ item.span }}</em>
                     </router-link>
                   </li>
                 </ul>
               </div>
             </div>
-            <login-form v-if="loginShow" @confirmLogin="confirmLogin"></login-form>
+            <login-form
+              v-if="loginShow"
+              @confirmLogin="confirmLogin"
+            ></login-form>
             <aplayer class="aplayer"></aplayer>
             <my-playlist></my-playlist>
           </div>
@@ -71,7 +82,7 @@
 </template>
 
 <script>
-import "@/style/animationClass.scss";
+import "@/assets/style/animationClass.scss";
 import LoginForm from "./login.vue";
 import Aplayer from "./aplayer.vue";
 import MyPlaylist from "./myPlaylist.vue";
@@ -213,12 +224,22 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .g-topbar {
   position: relative;
   z-index: 99;
   width: 100%;
-  background-color: #242424;
+  background: #200122; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #242424,
+    #200122
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #242424,
+    #200122
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #333;
 }
 .m-top {
@@ -228,7 +249,17 @@ export default {
   min-width: 1000px;
   box-sizing: border-box;
   color: #ccc;
-  background: #242424;
+  background: #200122; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #242424,
+    #200122
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #242424,
+    #200122
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border-bottom: 1px solid #000;
   .logo {
     height: 70px;
@@ -292,7 +323,19 @@ export default {
   }
 }
 .m-subnav {
-  background-color: #c20c0c;
+  background: #833ab4; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #fcb045,
+    #fd1d1d,
+    #833ab4
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #fcb045,
+    #fd1d1d,
+    #833ab4
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   position: relative;
   min-width: 800px;
   height: 34px;
@@ -318,7 +361,17 @@ export default {
     }
   }
   .isSubChecked {
-    background-color: #9b0909;
+    background: #ff7e5f; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to left,
+      #feb47b,
+      #ff7e5f
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to left,
+      #feb47b,
+      #ff7e5f
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 20px;
   }
 }

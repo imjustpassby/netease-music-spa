@@ -1,11 +1,11 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import store from './store'
-import '@/permission.js'
-import VueLazyLoad from 'vue-lazyload'
+import Vue from "vue";
+import store from "./store";
+import "@/permission.js";
+import VueLazyLoad from "vue-lazyload";
 // import 'ant-design-vue/dist/antd.css'; 打包会把这个打包进去 导致css文件过大，已经引用了cdn所以可以注释掉
-import antd from 'ant-design-vue';
+import antd from "ant-design-vue";
 Vue.use(antd);
 /* import {
   Button,
@@ -61,22 +61,22 @@ Vue.use(Menu);
 Vue.use(Dropdown);
 Vue.use(Tabs);
 Vue.prototype.$message = Message; */
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 Vue.use(VueLazyLoad, {
-  error: require('../static/img/loading.gif'),
-  loading: require('../static/img/loading.gif')
-})
-import '@/style/index.scss'
-import App from './App'
-import router from './router'
+  error: require("../static/img/loading.gif"),
+  loading: require("../static/img/loading.gif")
+});
+import "@/assets/style/index.scss";
+import App from "./App";
+import router from "./router";
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  el: "#app",
   router,
   store,
   components: {
     App
   },
-  template: '<App/>'
-})
+  template: "<App/>"
+});

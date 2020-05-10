@@ -1,19 +1,21 @@
-@import './reset.scss';
-@import './transition.scss';
+@import "./reset.scss";
+@import "./transition.scss";
 
 @font-face {
   font-family: "webfont";
   font-display: swap;
   src: url("//at.alicdn.com/t/webfont_0k851y8ee3z.eot");
   /* IE9*/
-  src: url("//at.alicdn.com/t/webfont_0k851y8ee3z.eot?#iefix") format("embedded-opentype"),
-    /* IE6-IE8 */
-    url("//at.alicdn.com/t/webfont_0k851y8ee3z.woff2") format("woff2"),
+  src: url("//at.alicdn.com/t/webfont_0k851y8ee3z.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("//at.alicdn.com/t/webfont_0k851y8ee3z.woff2")
+      format("woff2"),
     url("//at.alicdn.com/t/webfont_0k851y8ee3z.woff") format("woff"),
-    /* chrome、firefox */
-    url("//at.alicdn.com/t/webfont_0k851y8ee3z.ttf") format("truetype"),
+    /* chrome、firefox */ url("//at.alicdn.com/t/webfont_0k851y8ee3z.ttf")
+      format("truetype"),
     /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-    url("//at.alicdn.com/t/webfont_0k851y8ee3z.svg#Alibaba-PuHuiTi-Regular") format("svg");
+      url("//at.alicdn.com/t/webfont_0k851y8ee3z.svg#Alibaba-PuHuiTi-Regular")
+      format("svg");
   /* iOS 4.1- */
 }
 
@@ -30,7 +32,18 @@ body {
   text-align: center;
   color: #333333;
   font-size: 12px;
-  background: #f5f5f5 url("../../static/img/concrete-texture.png") repeat;
+  background: #ece9e6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #ffffff,
+    #ece9e6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #ffffff,
+    #ece9e6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   min-width: 1330px;
   min-height: 100%;
 }
@@ -97,8 +110,10 @@ body {
   top: 50%;
   text-align: center;
   width: 100%;
-  -webkit-animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite alternate both;
-  animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite alternate both;
+  -webkit-animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    infinite alternate both;
+  animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite
+    alternate both;
 }
 
 .slide-top {
@@ -107,8 +122,10 @@ body {
   background-image: linear-gradient(315deg, #cc6aa5, #3e91cc, #2dcca7);
   background-size: 600% 600%;
   background-repeat: repeat;
-  -webkit-animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite alternate both;
-  animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite alternate both;
+  -webkit-animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    infinite alternate both;
+  animation: slide-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite
+    alternate both;
 }
 
 @-webkit-keyframes slide-top {
