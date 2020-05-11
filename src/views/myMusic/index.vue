@@ -3,10 +3,20 @@
     <a-back-top style="bottom: 100px;left:10%" />
     <a-row>
       <a-col :span="4" :offset="4">
-        <user-playlist @showPlaylist="showPlaylist" @closePlaylist="closePlaylist"></user-playlist>
+        <user-playlist
+          @showPlaylist="showPlaylist"
+          @closePlaylist="closePlaylist"
+        ></user-playlist>
       </a-col>
       <a-col :span="12">
-        <playlist-detail v-if="isShow" :playList="playList" :showUnsubscribeBtn="showUnsubscribeBtn"></playlist-detail>
+        <div class="spinning-container" v-if="spinning">
+          <a-spin :spinning="spinning" size="large" />
+        </div>
+        <playlist-detail
+          v-if="isShow && !spinning"
+          :playList="playList"
+          :showUnsubscribeBtn="showUnsubscribeBtn"
+        ></playlist-detail>
       </a-col>
       <a-col :span="12" v-if="!isShow">
         <transition name="fade-transform" mode="out-in">
@@ -40,7 +50,8 @@ export default {
         name: "",
         description: ""
       },
-      showUnsubscribeBtn: true
+      showUnsubscribeBtn: true,
+      spinning: false
     };
   },
 
@@ -61,13 +72,14 @@ export default {
 
   methods: {
     async showPlaylist(data) {
-      if(data.type === 'self'){
+      if (data.type === "self") {
         this.showUnsubscribeBtn = false;
-      } else if (data.type === 'other'){
+      } else if (data.type === "other") {
         this.showUnsubscribeBtn = true;
       }
-      await this.getListDetail(data.playlist.id);
       this.isShow = true;
+      this.spinning = true;
+      await this.getListDetail(data.playlist.id);
     },
     async getListDetail(data) {
       //获取歌单信息
@@ -104,12 +116,31 @@ export default {
       this.playList.picUrl = res.playlist.coverImgUrl;
       this.playList.name = res.playlist.name;
       this.playList.description = res.playlist.description;
+      this.spinning = false;
     },
-    closePlaylist(){
+    closePlaylist() {
       this.isShow = false;
     }
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
+.spinning-container {
+  text-align: center;
+  background: #ece9e6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #ffffff,
+    #ece9e6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #ffffff,
+    #ece9e6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-radius: 4px;
+  padding-top: 50%;
+  margin: 50px 0;
+  height: 100vh;
+}
 </style>
