@@ -1,7 +1,7 @@
 {
   "name": "netease-spa",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "web netease music build by Vue",
   "author": "imjustpassby <260809970@qq.com>",
   "private": true,
   "scripts": {

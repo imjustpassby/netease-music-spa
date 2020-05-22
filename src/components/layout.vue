@@ -8,7 +8,7 @@
               <a-col :span="8">
                 <div class="logo animation-class">
                   <h1 @click="goHome">
-                    <span>Coisin4Music</span>
+                    <span>ipassbyMusic</span>
                   </h1>
                 </div>
               </a-col>
