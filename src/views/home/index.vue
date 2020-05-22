@@ -3,37 +3,19 @@
     <a-back-top style="bottom: 100px;left:10%" />
     <banner></banner>
     <recommend></recommend>
-    <a-row>
-      <a-col :span="24" style="margin-top:-80px;padding-bottom: 100px;">
-        <router-link to="/copyright">免责声明</router-link>
-      </a-col>
-    </a-row>
+    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
 import Banner from "@/components/banner.vue";
-import Recommend from "./components/recommend.vue"
-var _this = this;
+import Recommend from "./components/recommend.vue";
+import PageFooter from "@/components/pageFooter.vue";
 export default {
-  name: "",
-  props: [""],
-  data() {
-    return {};
-  },
-
   components: {
     Banner,
-    Recommend
-  },
-
-  computed: {},
-
-  watch: {},
-
-  methods: {}
+    Recommend,
+    PageFooter
+  }
 };
 </script>
-<style lang='scss' scoped>
-
-</style>
