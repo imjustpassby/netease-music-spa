@@ -31,6 +31,7 @@
 import UserPlaylist from "./components/userPlaylist";
 import PlaylistDetail from "./components/playlistDetail";
 import { getPlaylistDetail } from "@/api/playList.js";
+import { getSongDetail } from "@/api/song.js";
 import { mapGetters } from "vuex";
 import { formatTime } from "@/utils/index";
 export default {
@@ -91,7 +92,12 @@ export default {
         "{y}-{m}-{d}"
       );
       this.playList.trackIds = res.playlist.trackIds;
-      this.playList.tracks = res.playlist.tracks.map(item => {
+      let ids = res.playlist.trackIds.map(item => {
+        return item.id;
+      });
+      let res1 = await getSongDetail(ids.join(","));
+      this.playList.tracks = res1.songs;
+      this.playList.tracks = this.playList.tracks.map(item => {
         let artist = [];
         let artistId = item.ar.map(a => {
           return a.id;
