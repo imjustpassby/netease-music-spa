@@ -6,7 +6,7 @@
           :span="5"
           style="margin:16px"
           class="album-list-item"
-          v-for="(item,index) in albums"
+          v-for="(item, index) in albums"
           :key="index"
         >
           <div class="img-box">
@@ -18,8 +18,8 @@
               @click="goAlbumDetail(item.id)"
             />
           </div>
-          <p class="album-list-title">{{item.name}}</p>
-          <p class="album-list-title">{{item.publishTime}}</p>
+          <p class="album-list-title">{{ item.name }}</p>
+          <p class="album-list-title">{{ item.publishTime }}</p>
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-around">
@@ -50,14 +50,6 @@ export default {
       loading: true
     };
   },
-
-  components: {},
-
-  computed: {},
-
-  watch: {},
-
-  beforeMount() {},
 
   async mounted() {
     await this.getAlbums();
@@ -97,5 +89,4 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

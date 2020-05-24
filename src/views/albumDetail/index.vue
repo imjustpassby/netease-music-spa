@@ -104,7 +104,7 @@ import Bus from "@/utils/bus.js";
 import { mapActions } from "vuex";
 import { formatTime } from "@/utils/index";
 export default {
-  name: "",
+  name: "album-detail",
   props: [""],
   data() {
     return {

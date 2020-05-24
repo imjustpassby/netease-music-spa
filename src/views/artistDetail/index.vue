@@ -8,7 +8,11 @@
               <a-col :span="5">
                 <div class="artist-detail-pic-box">
                   <div class="img-box">
-                    <img v-lazy="artist.img1v1Url" alt="artist" class="artist-detail-pic" />
+                    <img
+                      v-lazy="artist.img1v1Url"
+                      alt="artist"
+                      class="artist-detail-pic"
+                    />
                   </div>
                 </div>
               </a-col>
@@ -21,7 +25,7 @@
                   >
                     <use xlink:href="#icon-singer-copy" />
                   </svg>
-                  <h3>{{artist.name}}</h3>
+                  <h3>{{ artist.name }}</h3>
                   <p>
                     <svg
                       class="icon"
@@ -30,7 +34,7 @@
                     >
                       <use xlink:href="#icon-song" />
                     </svg>
-                    单曲数：{{artist.musicSize}}
+                    单曲数：{{ artist.musicSize }}
                   </p>
                   <p>
                     <svg
@@ -40,7 +44,7 @@
                     >
                       <use xlink:href="#icon-album" />
                     </svg>
-                    专辑数：{{artist.albumSize}}
+                    专辑数：{{ artist.albumSize }}
                   </p>
                   <p>
                     <svg
@@ -50,7 +54,7 @@
                     >
                       <use xlink:href="#icon-mv" />
                     </svg>
-                    mv数：{{artist.mvSize}}
+                    mv数：{{ artist.mvSize }}
                   </p>
                 </div>
               </a-col>
@@ -59,34 +63,44 @@
               <a-col
                 :span="5"
                 class="tab-option-item"
-                :class="tabIndex ===1 ? 'tab-option-item-active' : ''"
+                :class="tabIndex === 1 ? 'tab-option-item-active' : ''"
                 @click="clickTab(1)"
-              >热门单曲(TOP50)</a-col>
+                >热门单曲(TOP50)</a-col
+              >
               <a-col
                 :span="5"
                 class="tab-option-item"
-                :class="tabIndex ===2 ? 'tab-option-item-active' : ''"
+                :class="tabIndex === 2 ? 'tab-option-item-active' : ''"
                 @click="clickTab(2)"
-              >所有专辑</a-col>
+                >所有专辑</a-col
+              >
               <a-col
                 :span="5"
                 class="tab-option-item"
-                :class="tabIndex ===3 ? 'tab-option-item-active' : ''"
+                :class="tabIndex === 3 ? 'tab-option-item-active' : ''"
                 @click="clickTab(3)"
-              >MV</a-col>
+                >MV</a-col
+              >
               <a-col
                 :span="5"
                 class="tab-option-item"
-                :class="tabIndex ===4 ? 'tab-option-item-active' : ''"
+                :class="tabIndex === 4 ? 'tab-option-item-active' : ''"
                 @click="clickTab(4)"
-              >艺人介绍</a-col>
+                >艺人介绍</a-col
+              >
             </a-row>
             <a-row style="margin-top:16px">
               <a-col span="24">
                 <hot-song v-if="tabIndex === 1" :hotSongs="hotSongs"></hot-song>
-                <artist-album v-if="tabIndex === 2" :albumSize="artist.albumSize"></artist-album>
+                <artist-album
+                  v-if="tabIndex === 2"
+                  :albumSize="artist.albumSize"
+                ></artist-album>
                 <artist-mv v-if="tabIndex === 3"></artist-mv>
-                <artist-description v-if="tabIndex === 4" :artistName="artist.name"></artist-description>
+                <artist-description
+                  v-if="tabIndex === 4"
+                  :artistName="artist.name"
+                ></artist-description>
               </a-col>
             </a-row>
           </div>
@@ -175,7 +189,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .artist-detail {
   padding: 16px 16px 100px 16px;
   margin-top: 16px;

@@ -74,7 +74,7 @@
       </a-col>
     </a-row>
     <transition name="fade-transform" mode="out-in">
-      <keep-alive include="search">
+      <keep-alive include="search,artist-detail">
         <router-view />
       </keep-alive>
     </transition>
