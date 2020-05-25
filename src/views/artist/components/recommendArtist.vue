@@ -11,22 +11,31 @@
             border-bottom: 1px solid #dddddd;
             margin-bottom: 16px;"
         >
-          <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-            <use xlink:href="#icon-circle" />
-          </svg>入驻歌手
+          <svg
+            class="icon"
+            aria-hidden="true"
+            style="font-size:16px; margin-right:16px;"
+          >
+            <use xlink:href="#icon-circle" /></svg
+          >入驻歌手
         </div>
         <a-row type="flex" justify="space-around">
           <a-col
             :span="4"
             style="margin:0 2px 16px 0"
             class="artist-list-item"
-            v-for="(item,index) in residentSinger"
+            v-for="(item, index) in residentSinger"
             :key="index"
           >
             <div class="img-box">
-              <img v-lazy="item.picUrl" width="100%" alt="img" @click="goArtistDetail(item.id)" />
+              <img
+                v-lazy="item.picUrl + '?param=200y200'"
+                width="100%"
+                alt="img"
+                @click="goArtistDetail(item.id)"
+              />
             </div>
-            <p class="artist-list-title">{{item.name}}</p>
+            <p class="artist-list-title">{{ item.name }}</p>
           </a-col>
         </a-row>
       </div>
@@ -42,22 +51,31 @@
           border-bottom: 1px solid #dddddd;
           margin-bottom: 16px;"
         >
-          <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-            <use xlink:href="#icon-circle" />
-          </svg>热门歌手
+          <svg
+            class="icon"
+            aria-hidden="true"
+            style="font-size:16px; margin-right:16px;"
+          >
+            <use xlink:href="#icon-circle" /></svg
+          >热门歌手
         </div>
         <a-row type="flex" justify="space-around">
           <a-col
             :span="4"
             style="margin:0 2px 16px 0"
             class="artist-list-item"
-            v-for="(item,index) in hotSinger"
+            v-for="(item, index) in hotSinger"
             :key="index"
           >
             <div class="img-box">
-              <img v-lazy="item.picUrl" width="100%" alt="img" @click="goArtistDetail(item.id)" />
+              <img
+                v-lazy="item.picUrl + '?param=200y200'"
+                width="100%"
+                alt="img"
+                @click="goArtistDetail(item.id)"
+              />
             </div>
-            <p class="artist-list-title">{{item.name}}</p>
+            <p class="artist-list-title">{{ item.name }}</p>
           </a-col>
         </a-row>
       </div>
@@ -124,7 +142,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .artist {
   padding: 36px 16px 100px 16px;
   & .artist-list {

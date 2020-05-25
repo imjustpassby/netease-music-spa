@@ -2,35 +2,58 @@
   <div class="dj-cate">
     <a-row type="flex" justify="start">
       <div class="dj-cate-top-title">
-        <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-          <use xlink:href="#icon-circle" />
-        </svg>电台分类
+        <svg
+          class="icon"
+          aria-hidden="true"
+          style="font-size:16px; margin-right:16px;"
+        >
+          <use xlink:href="#icon-circle" /></svg
+        >电台分类
       </div>
       <a-skeleton active :loading="loading1">
         <div>
-          <a-col :span="2" style="margin: 6px 16px" v-for="(cate,index) in cateList" :key="index">
-            <img v-lazy="cate.pic56x56Url" width="40%" alt="img" @click="getDjRecommend(cate.id)" />
-            <p class="dj-cate-list-title">{{cate.name}}</p>
+          <a-col
+            :span="2"
+            style="margin: 6px 16px"
+            v-for="(cate, index) in cateList"
+            :key="index"
+          >
+            <img
+              v-lazy="cate.pic56x56Url"
+              width="40%"
+              alt="img"
+              @click="getDjRecommend(cate.id)"
+            />
+            <p class="dj-cate-list-title">{{ cate.name }}</p>
           </a-col>
         </div>
       </a-skeleton>
     </a-row>
-    <a-row type="flex" justify="start" style="padding: 14px 0 0 0" v-if="isShowRecommend">
+    <a-row
+      type="flex"
+      justify="start"
+      style="padding: 14px 0 0 0"
+      v-if="isShowRecommend"
+    >
       <div class="dj-cate-top-title">
-        <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-          <use xlink:href="#icon-circle" />
-        </svg>分类推荐
+        <svg
+          class="icon"
+          aria-hidden="true"
+          style="font-size:16px; margin-right:16px;"
+        >
+          <use xlink:href="#icon-circle" /></svg
+        >分类推荐
         <button class="more" @click="isShowRecommend = false">收起</button>
       </div>
       <a-skeleton active :loading="loading2">
         <div>
-          <a-col :span="12" v-for="(item,index) in djRecommend" :key="index">
+          <a-col :span="12" v-for="(item, index) in djRecommend" :key="index">
             <a-row type="flex" justify="start" class="recommend-new-songs">
               <a-col :span="3" style="position:relative;">
                 <div @click="goDjDetail(item)">
                   <div class="img-box">
                     <img
-                      v-lazy="item.picUrl"
+                      v-lazy="item.picUrl + '?param=200y200'"
                       width="100%"
                       alt="img"
                       style="margin:9px 0 0 9px;cursor: pointer;z-index:-1"
@@ -39,7 +62,7 @@
                 </div>
               </a-col>
               <a-col :span="18" :offset="1">
-                <p class="recommend-title">{{item.name}}</p>
+                <p class="recommend-title">{{ item.name }}</p>
               </a-col>
             </a-row>
           </a-col>
@@ -101,7 +124,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .dj-cate {
   padding: 14px 0;
 }

@@ -1,19 +1,24 @@
 <template>
   <div style="padding-bottom:100px;">
     <a-back-top style="bottom: 100px;left:10%" />
-    <a-skeleton active :loading="loading" v-show="exactSearch.length >0">
+    <a-skeleton active :loading="loading" v-show="exactSearch.length > 0">
       <a-row type="flex" justify="start" style="margin:16px 0">
         <a-col
           :span="4"
           :offset="1"
-          v-for="(ar,idx) in exactSearch"
+          v-for="(ar, idx) in exactSearch"
           :key="idx"
           style="margin-bottom:16px"
         >
           <div class="img-box">
-            <img v-lazy="ar.img1v1Url" width="100%" alt="img" @click="goArtistDetail(ar.id)" />
+            <img
+              v-lazy="ar.img1v1Url + '?param=200y200'"
+              width="100%"
+              alt="img"
+              @click="goArtistDetail(ar.id)"
+            />
           </div>
-          <p class="artist-list-title">{{ar.name}}</p>
+          <p class="artist-list-title">{{ ar.name }}</p>
         </a-col>
       </a-row>
     </a-skeleton>
@@ -72,7 +77,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .artist-list-title {
   font-size: 14px;
   cursor: pointer;

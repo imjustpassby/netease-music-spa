@@ -9,7 +9,7 @@
                 <div class="artist-detail-pic-box">
                   <div class="img-box">
                     <img
-                      v-lazy="artist.img1v1Url"
+                      v-lazy="artist.img1v1Url + '?param=200y200'"
                       alt="artist"
                       class="artist-detail-pic"
                     />

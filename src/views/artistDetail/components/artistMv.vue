@@ -8,12 +8,17 @@
             :span="5"
             style="margin:16px"
             class="album-list-item"
-            v-for="(item,index) in mvList"
+            v-for="(item, index) in mvList"
             :key="index"
             @click="goMvDetail(item.id)"
           >
-            <img v-lazy="item.imgurl16v9" width="100%" alt="img" style="cursor:pointer"/>
-            <p class="album-list-title">{{item.name}}</p>
+            <img
+              v-lazy="item.imgurl16v9 + '?param=200y200'"
+              width="100%"
+              alt="img"
+              style="cursor:pointer"
+            />
+            <p class="album-list-title">{{ item.name }}</p>
           </a-col>
         </a-row>
       </div>

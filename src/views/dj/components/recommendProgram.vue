@@ -2,13 +2,21 @@
   <div>
     <a-row type="flex" justify="start" style="padding: 14px 0 0 0">
       <div class="dj-cate-top-title">
-        <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-          <use xlink:href="#icon-circle" />
-        </svg>精彩节目推荐
+        <svg
+          class="icon"
+          aria-hidden="true"
+          style="font-size:16px; margin-right:16px;"
+        >
+          <use xlink:href="#icon-circle" /></svg
+        >精彩节目推荐
       </div>
       <a-skeleton active :loading="loading">
         <div>
-          <a-col :span="12" v-for="(item,index) in programRecommend" :key="index">
+          <a-col
+            :span="12"
+            v-for="(item, index) in programRecommend"
+            :key="index"
+          >
             <a-row type="flex" justify="start" class="recommend-new-songs">
               <a-col :span="3" style="position:relative;">
                 <div @click.once="addMusic(item)">
@@ -20,7 +28,7 @@
                     <use xlink:href="#icon-play" />
                   </svg>
                   <img
-                    v-lazy="item.cover"
+                    v-lazy="item.cover + '?param=200y200'"
                     width="100%"
                     alt="img"
                     style="margin:9px 0 0 9px;cursor: pointer;z-index:-1"
@@ -28,8 +36,10 @@
                 </div>
               </a-col>
               <a-col :span="18" :offset="1">
-                <p class="recommend-title">{{item.name}}</p>
-                <p class="recommend-title" style="color:#999">{{item.artist}}</p>
+                <p class="recommend-title">{{ item.name }}</p>
+                <p class="recommend-title" style="color:#999">
+                  {{ item.artist }}
+                </p>
               </a-col>
             </a-row>
           </a-col>
@@ -94,7 +104,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .dj-cate-top-title {
   text-align: left;
   width: 100%;

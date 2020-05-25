@@ -4,15 +4,23 @@
       <a-row>
         <a-col :span="5">
           <div class="img-box">
-            <img v-lazy="songInfo.cover" class="album-cover" alt="歌曲" />
+            <img
+              v-lazy="songInfo.cover + '?param=200y200'"
+              class="album-cover"
+              alt="歌曲"
+            />
           </div>
         </a-col>
         <a-col :span="18" :offset="1">
           <div style="margin-top:46px">
-            <svg class="icon" aria-hidden="true" style="font-size:46px; margin-right:16px;">
+            <svg
+              class="icon"
+              aria-hidden="true"
+              style="font-size:46px; margin-right:16px;"
+            >
               <use xlink:href="#icon-song-red" />
             </svg>
-            <h1>{{songInfo.name}}</h1>
+            <h1>{{ songInfo.name }}</h1>
           </div>
 
           <div class="song-artist">
@@ -20,33 +28,43 @@
               歌手：
               <span
                 style="cursor:pointer"
-                v-for="(ar,idx) in songInfo.artists"
+                v-for="(ar, idx) in songInfo.artists"
                 :key="idx"
                 @click="goArtistDetail(songInfo.artistId[idx])"
               >
-                {{ar}}
-                <span v-show="idx !== songInfo.artists.length -1">/</span>
+                {{ ar }}
+                <span v-show="idx !== songInfo.artists.length - 1">/</span>
               </span>
             </span>
             <a-button @click.once="playMusic" style="margin-left: 20px">
-              <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-                <use xlink:href="#icon-play1" />
-              </svg>播放
+              <svg
+                class="icon"
+                aria-hidden="true"
+                style="font-size:16px; margin-right:16px;"
+              >
+                <use xlink:href="#icon-play1" /></svg
+              >播放
             </a-button>
             <a-button @click.once="addMusic" style="margin-left: 20px">
-              <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-                <use xlink:href="#icon-add" />
-              </svg>添加到列表
+              <svg
+                class="icon"
+                aria-hidden="true"
+                style="font-size:16px; margin-right:16px;"
+              >
+                <use xlink:href="#icon-add" /></svg
+              >添加到列表
             </a-button>
           </div>
           <div :class="!expand ? 'album-detail-info' : ''">
             <div>
-              <span style="cursor:pointer" @click="goAlbumDetail">专辑：{{songInfo.albumName}}</span>
-              <button class="more" @click="showMore">{{expandText}}</button>
+              <span style="cursor:pointer" @click="goAlbumDetail"
+                >专辑：{{ songInfo.albumName }}</span
+              >
+              <button class="more" @click="showMore">{{ expandText }}</button>
             </div>
             <br />
             <p>歌词：</p>
-            <pre>{{lyric}}</pre>
+            <pre>{{ lyric }}</pre>
           </div>
         </a-col>
       </a-row>
@@ -164,7 +182,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .song-detail {
   font-size: 14px;
   text-align: left;

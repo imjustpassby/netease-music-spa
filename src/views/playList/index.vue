@@ -8,12 +8,17 @@
             <a-icon type="down" />
           </a>
           <a-menu slot="overlay">
-            <a-sub-menu v-for="(cate,index) in categories" :key="index" :title="cate.name">
+            <a-sub-menu
+              v-for="(cate, index) in categories"
+              :key="index"
+              :title="cate.name"
+            >
               <a-menu-item
-                v-for="(sub,idx) in cate.list"
+                v-for="(sub, idx) in cate.list"
                 :key="idx"
-                @click="getList({cat:sub.name},'cat')"
-              >{{sub.name}}</a-menu-item>
+                @click="getList({ cat: sub.name }, 'cat')"
+                >{{ sub.name }}</a-menu-item
+              >
             </a-sub-menu>
           </a-menu>
         </a-dropdown>
@@ -23,14 +28,18 @@
             <a-col
               :span="5"
               class="play-list-item"
-              v-for="(item,index) in playlists"
+              v-for="(item, index) in playlists"
               :key="index"
               @click="goPlaylistDetail(item.id)"
             >
               <div class="img-box">
-                <img v-lazy="item.coverImgUrl" width="100%" alt="img" />
+                <img
+                  v-lazy="item.coverImgUrl + '?param=200y200'"
+                  width="100%"
+                  alt="img"
+                />
               </div>
-              <p class="play-list-title">{{item.name}}</p>
+              <p class="play-list-title">{{ item.name }}</p>
             </a-col>
           </a-row>
         </a-skeleton>
@@ -135,7 +144,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .categories {
   margin-left: -88%;
   font-size: 18px;

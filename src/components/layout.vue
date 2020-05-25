@@ -42,7 +42,11 @@
                     <button class="underline-btn" @click="goMyMusic">
                       {{ nickname }}
                     </button>
-                    <img class="avatar" v-lazy="avatarUrl" alt="avatar" />
+                    <img
+                      class="avatar"
+                      v-lazy="avatarUrl + '?param=50y50'"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
               </a-col>

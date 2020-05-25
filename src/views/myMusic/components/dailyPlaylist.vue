@@ -11,14 +11,18 @@
               :span="5"
               :offset="1"
               class="play-list-item"
-              v-for="(item,index) in dailyPlaylist"
+              v-for="(item, index) in dailyPlaylist"
               :key="index"
               @click="goPlaylistDetail(item)"
             >
               <div class="img-box">
-                <img v-lazy="item.picUrl" width="100%" alt="img" />
+                <img
+                  v-lazy="item.picUrl + '?param=200y200'"
+                  width="100%"
+                  alt="img"
+                />
               </div>
-              <p class="play-list-title">{{item.name}}</p>
+              <p class="play-list-title">{{ item.name }}</p>
             </a-col>
           </a-row>
         </a-skeleton>
@@ -68,7 +72,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .play-list-item {
   margin-top: 16px;
   .play-list-title {

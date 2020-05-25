@@ -2,9 +2,13 @@
   <div>
     <div class="dj-list">
       <div class="dj-list-top-title">
-        <svg class="icon" aria-hidden="true" style="font-size:16px; margin-right:16px;">
-          <use xlink:href="#icon-circle" />
-        </svg>精选电台 - 订阅更精彩
+        <svg
+          class="icon"
+          aria-hidden="true"
+          style="font-size:16px; margin-right:16px;"
+        >
+          <use xlink:href="#icon-circle" /></svg
+        >精选电台 - 订阅更精彩
       </div>
       <a-skeleton active :loading="loading">
         <a-row type="flex" justify="space-around">
@@ -12,14 +16,18 @@
             :span="4"
             style="margin:0 2px 16px 0"
             class="dj-list-item"
-            v-for="(item,index) in djs"
+            v-for="(item, index) in djs"
             :key="index"
             @click="goDjDetail(item)"
           >
             <div class="img-box">
-              <img v-lazy="item.picUrl" width="100%" alt="img" />
+              <img
+                v-lazy="item.picUrl + '?param=200y200'"
+                width="100%"
+                alt="img"
+              />
             </div>
-            <p class="dj-list-title">{{item.name}}</p>
+            <p class="dj-list-title">{{ item.name }}</p>
           </a-col>
         </a-row>
       </a-skeleton>
@@ -74,5 +82,4 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

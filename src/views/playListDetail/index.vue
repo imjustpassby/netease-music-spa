@@ -8,7 +8,7 @@
               <a-col :span="5">
                 <div class="img-box">
                   <img
-                    v-lazy="playList.picUrl"
+                    v-lazy="playList.picUrl + '?param=200y200'"
                     style="margin-top:30px"
                     width="100%"
                     alt="歌单"
@@ -25,7 +25,11 @@
                 </svg>
                 <h1>{{ playList.name }}</h1>
                 <div class="playlist-creator">
-                  <img v-lazy="playList.creator.avatarUrl" width="36px" alt />
+                  <img
+                    v-lazy="playList.creator.avatarUrl + '?param=50y50'"
+                    width="36px"
+                    alt
+                  />
                   <span
                     >{{ playList.creator.nickname }}&nbsp;&nbsp;于&nbsp;&nbsp;{{
                       playList.createTime

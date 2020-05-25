@@ -7,30 +7,51 @@
             <a-row>
               <a-col :span="5">
                 <div class="img-box">
-                  <img v-lazy="playList.picUrl" width="100%" alt="歌单" />
+                  <img
+                    v-lazy="playList.picUrl + '?param=200y200'"
+                    width="100%"
+                    alt="歌单"
+                  />
                 </div>
               </a-col>
               <a-col :span="18" :offset="1">
-                <svg class="icon" aria-hidden="true" style="font-size:36px; margin-right:16px;">
+                <svg
+                  class="icon"
+                  aria-hidden="true"
+                  style="font-size:36px; margin-right:16px;"
+                >
                   <use xlink:href="#icon-paihangbang" />
                 </svg>
-                <h1>{{playList.name}}</h1>
+                <h1>{{ playList.name }}</h1>
                 <div class="playlist-creator">
-                  <img v-lazy="playList.creator.avatarUrl" width="36px" alt />
-                  <span>{{playList.creator.nickname}}&nbsp;&nbsp;最近更新&nbsp;&nbsp;{{playList.updateTime}}</span>
-                  <a-button @click.once="addMusicList" style="margin-left: 20px">
+                  <img
+                    v-lazy="playList.creator.avatarUrl + '?param=50y50'"
+                    width="36px"
+                    alt
+                  />
+                  <span
+                    >{{
+                      playList.creator.nickname
+                    }}&nbsp;&nbsp;最近更新&nbsp;&nbsp;{{
+                      playList.updateTime
+                    }}</span
+                  >
+                  <a-button
+                    @click.once="addMusicList"
+                    style="margin-left: 20px"
+                  >
                     <svg
                       class="icon"
                       aria-hidden="true"
                       style="font-size:16px; margin-right:16px;"
                     >
-                      <use xlink:href="#icon-play1" />
-                    </svg>加入播放列表
+                      <use xlink:href="#icon-play1" /></svg
+                    >加入播放列表
                   </a-button>
                 </div>
                 <div>
                   介绍：
-                  <p>{{playList.description}}</p>
+                  <p>{{ playList.description }}</p>
                 </div>
               </a-col>
             </a-row>
@@ -41,13 +62,17 @@
           <div>
             <div class="list-title">
               <span style="font-size:24px">歌曲列表</span>
-              <span>共{{playList.tracks.length}}首</span>
+              <span>共{{ playList.tracks.length }}首</span>
             </div>
             <a-table :dataSource="playList.tracks">
               <a-table-column title key="action" width="10%">
                 <template slot-scope="text, record">
                   <span>
-                    <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                    <svg
+                      class="icon play-icon"
+                      aria-hidden="true"
+                      @click.once="addMusic(record)"
+                    >
                       <use xlink:href="#icon-play1" />
                     </svg>
                   </span>
@@ -57,9 +82,13 @@
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
-                      <span>{{record.name}}</span>
+                      <span>{{ record.name }}</span>
                     </template>
-                    <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+                    <span
+                      @click="goSongDetail(record)"
+                      style="cursor:pointer"
+                      >{{ record.name }}</span
+                    >
                   </a-popover>
                 </template>
               </a-table-column>
@@ -69,15 +98,17 @@
                     <template slot="content">
                       <span
                         style="cursor:pointer"
-                        v-for="(ar,idx) in record.artists"
+                        v-for="(ar, idx) in record.artists"
                         :key="idx"
                         @click="goArtistDetail(record.artistId[idx])"
                       >
-                        {{ar}}
-                        <span v-show="idx !== record.artists.length -1">/</span>
+                        {{ ar }}
+                        <span v-show="idx !== record.artists.length - 1"
+                          >/</span
+                        >
                       </span>
                     </template>
-                    <span>{{record.artist}}</span>
+                    <span>{{ record.artist }}</span>
                   </a-popover>
                 </template>
               </a-table-column>
@@ -85,9 +116,13 @@
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
-                      <span>{{record.albumName}}</span>
+                      <span>{{ record.albumName }}</span>
                     </template>
-                    <span @click="goAlbumDetail(record)" style="cursor:pointer">{{record.albumName}}</span>
+                    <span
+                      @click="goAlbumDetail(record)"
+                      style="cursor:pointer"
+                      >{{ record.albumName }}</span
+                    >
                   </a-popover>
                 </template>
               </a-table-column>
@@ -220,7 +255,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .playlist-detail-container {
   padding-bottom: 100px;
   text-align: left;

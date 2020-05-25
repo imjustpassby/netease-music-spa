@@ -5,13 +5,18 @@
         :span="4"
         style="margin:0 2px 16px 0"
         class="artist-list-item"
-        v-for="(item,index) in artistList"
+        v-for="(item, index) in artistList"
         :key="index"
       >
         <div class="img-box">
-          <img v-lazy="item.picUrl" width="100%" alt="img" @click="goArtistDetail(item.id)" />
+          <img
+            v-lazy="item.picUrl + '?param=200y200'"
+            width="100%"
+            alt="img"
+            @click="goArtistDetail(item.id)"
+          />
         </div>
-        <p class="artist-list-title">{{item.name}}</p>
+        <p class="artist-list-title">{{ item.name }}</p>
       </a-col>
     </a-row>
     <a-row type="flex" justify="space-around">
@@ -89,7 +94,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .query-artist {
   padding: 36px 16px 100px 16px;
   & .artist-list {

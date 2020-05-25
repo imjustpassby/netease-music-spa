@@ -7,20 +7,29 @@
             <a-row>
               <a-col :span="5">
                 <div class="img-box">
-                  <img v-lazy="albumInfo.picUrl" style="margin-top:30px;" width="100%" alt="专辑" />
+                  <img
+                    v-lazy="albumInfo.picUrl + '?param=200y200'"
+                    style="margin-top:30px;"
+                    width="100%"
+                    alt="专辑"
+                  />
                 </div>
               </a-col>
               <a-col :span="18" :offset="1" style="margin-top:26px;">
-                <svg class="icon" aria-hidden="true" style="font-size:46px; margin-right:16px;">
+                <svg
+                  class="icon"
+                  aria-hidden="true"
+                  style="font-size:46px; margin-right:16px;"
+                >
                   <use xlink:href="#icon-zhuanji" />
                 </svg>
-                <h1>{{albumInfo.name}}</h1>
+                <h1>{{ albumInfo.name }}</h1>
                 <div :class="!expand ? 'album-detail-info' : ''">
                   <p>
                     歌手：
-                    <span v-for="(art,idx) in albumInfo.artists" :key="idx">
-                      {{art}}
-                      <span v-if="idx!== albumInfo.artists.length-1">/</span>
+                    <span v-for="(art, idx) in albumInfo.artists" :key="idx">
+                      {{ art }}
+                      <span v-if="idx !== albumInfo.artists.length - 1">/</span>
                     </span>
                     <a-button @click="addMusicList" class="add-playlist-btn">
                       <svg
@@ -28,14 +37,18 @@
                         aria-hidden="true"
                         style="font-size:16px; margin-right:16px;"
                       >
-                        <use xlink:href="#icon-play1" />
-                      </svg>加入播放列表
+                        <use xlink:href="#icon-play1" /></svg
+                      >加入播放列表
                     </a-button>
                   </p>
-                  <p>发行时间：{{albumInfo.publishTime}}</p>
-                  <p>发行公司：{{albumInfo.company}}</p>
-                  <button class="more" @click="showMore">{{expandText}}</button>
-                  <p style="white-space: pre-wrap;">介绍：{{albumInfo.description}}</p>
+                  <p>发行时间：{{ albumInfo.publishTime }}</p>
+                  <p>发行公司：{{ albumInfo.company }}</p>
+                  <button class="more" @click="showMore">
+                    {{ expandText }}
+                  </button>
+                  <p style="white-space: pre-wrap;">
+                    介绍：{{ albumInfo.description }}
+                  </p>
                 </div>
               </a-col>
             </a-row>
@@ -46,16 +59,24 @@
           <div>
             <div class="list-title">
               <span style="font-size:24px">歌曲列表</span>
-              <span>共{{albumInfo.tracks.length}}首</span>
+              <span>共{{ albumInfo.tracks.length }}首</span>
             </div>
             <a-table :dataSource="albumInfo.tracks">
               <a-table-column title align="center" key="action" width="10%">
                 <template slot-scope="text, record">
                   <span>
-                    <svg class="icon play-icon" aria-hidden="true" @click="playMusic(record)">
+                    <svg
+                      class="icon play-icon"
+                      aria-hidden="true"
+                      @click="playMusic(record)"
+                    >
                       <use xlink:href="#icon-play1" />
                     </svg>
-                    <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                    <svg
+                      class="icon play-icon"
+                      aria-hidden="true"
+                      @click.once="addMusic(record)"
+                    >
                       <use xlink:href="#icon-add" />
                     </svg>
                   </span>
@@ -65,9 +86,13 @@
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
-                      <span>{{record.name}}</span>
+                      <span>{{ record.name }}</span>
                     </template>
-                    <span @click="goSongDetail(record)" style="cursor:pointer">{{record.name}}</span>
+                    <span
+                      @click="goSongDetail(record)"
+                      style="cursor:pointer"
+                      >{{ record.name }}</span
+                    >
                   </a-popover>
                 </template>
               </a-table-column>
@@ -77,19 +102,25 @@
                     <template slot="content">
                       <span
                         style="cursor:pointer"
-                        v-for="(ar,idx) in record.artists"
+                        v-for="(ar, idx) in record.artists"
                         :key="idx"
                         @click="goArtistDetail(record.artistId[idx])"
                       >
-                        {{ar}}
-                        <span v-show="idx !== record.artists.length -1">/</span>
+                        {{ ar }}
+                        <span v-show="idx !== record.artists.length - 1"
+                          >/</span
+                        >
                       </span>
                     </template>
-                    <span>{{record.artist}}</span>
+                    <span>{{ record.artist }}</span>
                   </a-popover>
                 </template>
               </a-table-column>
-              <a-table-column title="专辑" key="albumName" data-index="albumName"></a-table-column>
+              <a-table-column
+                title="专辑"
+                key="albumName"
+                data-index="albumName"
+              ></a-table-column>
             </a-table>
           </div>
         </a-skeleton>
@@ -236,7 +267,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .album-detail-container {
   position: relative;
   padding-bottom: 100px;

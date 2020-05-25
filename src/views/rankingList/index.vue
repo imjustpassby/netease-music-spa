@@ -7,13 +7,18 @@
             <a-col
               :span="5"
               class="ranking-list-item"
-              v-for="(item,index) in coverImgUrl"
+              v-for="(item, index) in coverImgUrl"
               :key="index"
             >
               <div class="img-box">
-                <img v-lazy="item.url" width="100%" alt="img" @click="goRankingDetail(index)" />
+                <img
+                  v-lazy="item.url + '?param=200y200'"
+                  width="100%"
+                  alt="img"
+                  @click="goRankingDetail(index)"
+                />
               </div>
-              <p class="ranking-list-title">{{item.name}}</p>
+              <p class="ranking-list-title">{{ item.name }}</p>
             </a-col>
           </a-row>
         </a-skeleton>
@@ -59,7 +64,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .ranking-list {
   font-size: 16px;
   margin-top: 16px;

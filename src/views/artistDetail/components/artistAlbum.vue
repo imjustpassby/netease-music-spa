@@ -11,7 +11,7 @@
         >
           <div class="img-box">
             <img
-              v-lazy="item.picUrl"
+              v-lazy="item.picUrl + '?param=200y200'"
               width="100%"
               alt="img"
               style="cursor:pointer"

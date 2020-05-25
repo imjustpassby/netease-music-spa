@@ -7,37 +7,57 @@
             <a-row>
               <a-col :span="5">
                 <div class="img-box">
-                  <img v-lazy="djRadio.picUrl" width="100%" style="margin-top:24px" alt="电台" />
+                  <img
+                    v-lazy="djRadio.picUrl + '?param=200y200'"
+                    width="100%"
+                    style="margin-top:24px"
+                    alt="电台"
+                  />
                 </div>
               </a-col>
               <a-col :span="18" :offset="1">
-                <svg class="icon" aria-hidden="true" style="font-size:100px; margin-right:16px;">
+                <svg
+                  class="icon"
+                  aria-hidden="true"
+                  style="font-size:100px; margin-right:16px;"
+                >
                   <use xlink:href="#icon-zhubodiantaidaiditu" />
                 </svg>
-                <h1>{{djRadio.name}}</h1>
+                <h1>{{ djRadio.name }}</h1>
                 <div class="playlist-creator">
-                  <img v-lazy="djRadio.dj.avatarUrl" width="36px" alt />
-                  <span>{{djRadio.dj.nickname}}&nbsp;&nbsp;于&nbsp;&nbsp;{{djRadio.createTime}}&nbsp;&nbsp;创建</span>
-                  <a-button @click.once="addMusicList" style="margin-left: 20px">
+                  <img
+                    v-lazy="djRadio.dj.avatarUrl + '?param=50y50'"
+                    width="36px"
+                    alt
+                  />
+                  <span
+                    >{{ djRadio.dj.nickname }}&nbsp;&nbsp;于&nbsp;&nbsp;{{
+                      djRadio.createTime
+                    }}&nbsp;&nbsp;创建</span
+                  >
+                  <a-button
+                    @click.once="addMusicList"
+                    style="margin-left: 20px"
+                  >
                     <svg
                       class="icon"
                       aria-hidden="true"
                       style="font-size:16px; margin-right:16px;"
                     >
-                      <use xlink:href="#icon-play1" />
-                    </svg>加入播放列表
+                      <use xlink:href="#icon-play1" /></svg
+                    >加入播放列表
                   </a-button>
                 </div>
                 <div class="tag">
-                  <span>最近更新：{{djRadio.lastProgramCreateTime}}</span>
+                  <span>最近更新：{{ djRadio.lastProgramCreateTime }}</span>
                 </div>
                 <div class="tag">
                   <span>标签：</span>
-                  <a-tag color="pink">{{djRadio.category}}</a-tag>
+                  <a-tag color="pink">{{ djRadio.category }}</a-tag>
                 </div>
                 <div>
                   介绍：
-                  <p>{{djRadio.description}}</p>
+                  <p>{{ djRadio.description }}</p>
                 </div>
               </a-col>
             </a-row>
@@ -48,13 +68,17 @@
           <div>
             <div class="list-title">
               <span style="font-size:24px">节目列表</span>
-              <span>共{{djRadio.programCount}}首</span>
+              <span>共{{ djRadio.programCount }}首</span>
             </div>
             <a-table :dataSource="djRadio.tracks">
               <a-table-column title key="action" width="10%">
                 <template slot-scope="text, record">
                   <span>
-                    <svg class="icon play-icon" aria-hidden="true" @click.once="addMusic(record)">
+                    <svg
+                      class="icon play-icon"
+                      aria-hidden="true"
+                      @click.once="addMusic(record)"
+                    >
                       <use xlink:href="#icon-play1" />
                     </svg>
                   </span>
@@ -64,19 +88,24 @@
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
-                      <span>{{record.name}}</span>
+                      <span>{{ record.name }}</span>
                     </template>
-                    <span>{{record.name}}</span>
+                    <span>{{ record.name }}</span>
                   </a-popover>
                 </template>
               </a-table-column>
-              <a-table-column title="播放次数" width="15%" key="listenerCount" align="center">
+              <a-table-column
+                title="播放次数"
+                width="15%"
+                key="listenerCount"
+                align="center"
+              >
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
-                      <span>{{record.listenerCount}}</span>
+                      <span>{{ record.listenerCount }}</span>
                     </template>
-                    <span>{{record.listenerCount}}</span>
+                    <span>{{ record.listenerCount }}</span>
                   </a-popover>
                 </template>
               </a-table-column>
@@ -84,9 +113,9 @@
                 <template slot-scope="text, record">
                   <a-popover placement="top">
                     <template slot="content">
-                      <span>{{record.description}}</span>
+                      <span>{{ record.description }}</span>
                     </template>
-                    <span>{{record.description}}</span>
+                    <span>{{ record.description }}</span>
                   </a-popover>
                 </template>
               </a-table-column>
@@ -213,7 +242,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .playlist-detail-container {
   padding-bottom: 100px;
   font-size: 14px;
