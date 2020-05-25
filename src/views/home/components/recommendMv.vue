@@ -19,7 +19,7 @@
           style="margin-bottom: 16px"
         >
           <img
-            v-lazy="item.picUrl + '?param=200y200'"
+            v-lazy="item.picUrl"
             alt="img"
             width="100%"
             style="cursor: pointer;"

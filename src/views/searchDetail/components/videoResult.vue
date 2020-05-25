@@ -11,7 +11,7 @@
           style="margin-bottom:16px"
         >
           <img
-            v-lazy="ar.coverUrl + '?param=200y200'"
+            v-lazy="ar.coverUrl"
             width="100%"
             alt="img"
             @click="goMvDetail(ar.vid)"
