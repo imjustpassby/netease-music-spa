@@ -11,9 +11,11 @@ module.exports = {
     assetsPublicPath: "/",
     proxyTable: {
       "/api": {
-        target: "https://ipassby.cloud",
+        target: "http://localhost:3000",
         changeOrigin: true,
-        pathRewrite: {}
+        pathRewrite: {
+          "^/api": ""
+        }
       }
     },
 

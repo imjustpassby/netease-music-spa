@@ -5,16 +5,28 @@
       centered
       v-model="modalShow"
       :footer="false"
-      ：maskClosable="false"
+      :maskClosable="false"
       @cancel="onCancel"
     >
       <a-form layout="horizontal" :form="form" @submit="handleSubmit">
-        <a-form-item :validate-status="phoneError() ? 'error' : ''" :help="phoneError() || ''">
+        <a-form-item
+          :validate-status="phoneError() ? 'error' : ''"
+          :help="phoneError() || ''"
+        >
           <a-input
             v-decorator="[
-          'phone',
-          {rules: [{ required: true,len: 11, pattern: /^1(3|4|5|6|7|8|9)\d{9}$/, message: '请输入正确的手机号!' }]}
-        ]"
+              'phone',
+              {
+                rules: [
+                  {
+                    required: true,
+                    len: 11,
+                    pattern: /^1(3|4|5|6|7|8|9)\d{9}$/,
+                    message: '请输入正确的手机号!'
+                  }
+                ]
+              }
+            ]"
             placeholder="手机号"
           >
             <a-icon slot="prefix" type="phone" style="color:rgba(0,0,0,.25)" />
@@ -26,9 +38,9 @@
         >
           <a-input
             v-decorator="[
-          'password',
-          {rules: [{ required: true, message: '请输入密码!' }]}
-        ]"
+              'password',
+              { rules: [{ required: true, message: '请输入密码!' }] }
+            ]"
             type="password"
             placeholder="Password"
           >
@@ -42,7 +54,9 @@
             :disabled="hasErrors(form.getFieldsError())"
             @click="login"
             style="width:100%"
-          >登录</a-button>
+          >
+            登录
+          </a-button>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -132,5 +146,4 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

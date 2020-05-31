@@ -7,7 +7,7 @@ const service = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
       ? "https://ipassby.cloud"
-      : "http://localhost:3000"
+      : "http://localhost:8080"
 });
 
 // request拦截器
